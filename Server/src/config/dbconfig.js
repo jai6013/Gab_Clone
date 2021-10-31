@@ -13,7 +13,7 @@ const PASSWORD = "gabclone123";
 const PORT = process.env.PORT || 2345;
 
 //default connection url
-const DEFAULT_CONNECTION_STRING = `mongodb+srv://${USERNAME}:${PASSWORD}@yatra-clone.xrxnv.mongodb.net/${DATABASE}`; 
+const DEFAULT_CONNECTION_STRING = `mongodb+srv://${USERNAME}:${PASSWORD}@gab-clone.1lwve.mongodb.net/${DATABASE}`; 
 
 /* 
 //default connection url

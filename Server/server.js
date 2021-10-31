@@ -1,5 +1,5 @@
 //config data
-const {PORT, MONGOOSE_OPTIONS} = require("./src/config/dbconfig");
+const {DEFAULT_CONNECTION_STRING, PORT, MONGOOSE_OPTIONS} = require("./src/config/dbconfig");
 
 //connect to express
 const express = require("express");
@@ -13,7 +13,7 @@ app.use(express.json());
 
 //connect to mongoose
 const mongoose = require('mongoose');
-mongoose.connect(CONNECTION_STRING, MONGOOSE_OPTIONS);
+mongoose.connect(DEFAULT_CONNECTION_STRING, MONGOOSE_OPTIONS);
 mongoose.connection.on("error", err => {
   console.log("Connection Error. Gab Web App could not successfully connect to Mongoose.", err);
 });
