@@ -6,6 +6,7 @@ const cors = require("cors");
 const PORT = process.env.PORT || 5000;
 const userController = require("./controllers/user.controller");
 const postController = require("./controllers/post.controller");
+const groupController = require("./controllers/group.controller");
 require("dotenv").config();
 // -----------------------------------------
 
@@ -26,6 +27,7 @@ app.get("/", async (req, res) => {
 
 app.use("/users", userController);
 app.use("/posts", postController);
+app.use("/groups", groupController);
 
 // ------------------------------------------
 

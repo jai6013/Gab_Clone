@@ -106,10 +106,9 @@ router.get("/:id", authenticate, async (req, res) => {
 // get timeline posts
 router.get("/user/timeline", authenticate, async (req, res) => {
   try {
-    const page = req.query.page || 1;
-    const limit = req.query.limit || 20;
+    const page = +req.query.page || 1;
+    const limit = +req.query.limit || 20;
     const offset = (page - 1) * limit;
-
     const posts = await Post.find({ user_id: req?.user?._id })
       .skip(offset)
       .limit(limit)
