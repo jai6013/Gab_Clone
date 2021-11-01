@@ -27,14 +27,20 @@
           <code>/GET </code><br />
           <code>/GET </code><br />
           <code>/PATCH </code><br />
+          <code>/DELETE </code><br />
+          <code>/PATCH </code><br />
+          <code>/PATCH </code><br />
         </div>
         <div class="middle">
           <h4>Paths</h4>
           <code> /users/signup</code><br />
           <code> /users/signin</code><br />
           <code> /users</code><br />
-          <code> /users/[id]</code><br />
-          <code> /users/[id]</code><br />
+          <code> /users/:id</code><br />
+          <code> /users/:id</code><br />
+          <code> /users/:id</code><br />
+          <code> /users/:id/follow</code><br />
+          <code> /users/:id/unfollow</code><br />
         </div>
         <div class="right">
           <h4>Description</h4>
@@ -45,6 +51,9 @@
           <code>Returns all users</code><br />
           <code>Returns user by ID</code><br />
           <code>Updates the user and returns the user</code><br />
+          <code>Deletes the user</code><br />
+          <code>logged in user follows the userid in params</code><br />
+          <code>logged in user unfollows the userid in params</code><br />
         </div>
       </div>
 

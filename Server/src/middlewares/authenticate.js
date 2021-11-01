@@ -16,11 +16,11 @@ module.exports = async (req, res, next) => {
 
     if (!header)
       return res
-        .status(400)
+        .status(401)
         .json({ message: "authorization not found in headers" });
 
     if (!header.startsWith("Bearer"))
-      return res.status(400).json({ message: "Bearer token not found" });
+      return res.status(401).json({ message: "Bearer token not found" });
 
     const token = header.trim().split(" ")[1];
 

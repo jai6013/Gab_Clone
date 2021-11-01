@@ -4,6 +4,7 @@ const User = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { body, validationResult } = require("express-validator");
+const authenticate = require("../middlewares/authenticate");
 // -------------------------------------------------------------------
 
 // Token Generator
@@ -70,11 +71,11 @@ router.post(
       let user = await User.findOne({ email: req.body.email }).exec();
       if (!user)
         return res
-          .status(400)
+          .status(204)
           .json({ message: "No account found with the given email id" });
 
       if (!user.checkPassword(req.body.password))
-        return res.status(400).json({ message: "Invalid Password" });
+        return res.status(403).json({ message: "Invalid Password" });
 
       const token = newToken(user);
 
@@ -136,9 +137,43 @@ router.delete("/:id", async (req, res) => {
 });
 // -----------------------------------------------------------------------
 
-router.patch("/:id/follow", async (req, res) => {
+// To follow a user
+router.patch("/:id/follow", authenticate, async (req, res) => {
   try {
-  } catch (err) {}
+    if (req?.user?._id === req.params.id)
+      return res.status(403).send("You can't follow yourself");
+    const user = await User.findById(req.params.id);
+    const loggedInUser = await User.findById(req?.user?._id);
+    if (!user.followers.includes(req?.user?._id)) {
+      await user.updateOne({ $push: { followers: req?.user?._id } });
+      await loggedInUser.updateOne({ $push: { following: req?.params?.id } });
+      return res.status(200).send("User has been followed");
+    } else {
+      return res.status(403).send("You're already following this user");
+    }
+  } catch (err) {
+    return res.status(500).send(err);
+  }
 });
+// ---------------------------------------------------------------------------
 
+// To Unfollow a user
+router.patch("/:id/unfollow", authenticate, async (req, res) => {
+  try {
+    if (req?.user?._id === req.params.id)
+      return res.status(403).send("You can't unfollow yourself");
+    const user = await User.findById(req.params.id);
+    const loggedInUser = await User.findById(req?.user?._id);
+    if (user.followers.includes(req?.user?._id)) {
+      await user.updateOne({ $pull: { followers: req?.user?._id } });
+      await loggedInUser.updateOne({ $pull: { following: req?.params?.id } });
+      return res.status(200).send("User has been unfollowed");
+    } else {
+      return res.status(403).send("You're already not following this user");
+    }
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+});
+// ---------------------------------------------------------------------------
 module.exports = router;
