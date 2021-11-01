@@ -1,105 +1,144 @@
-//USER CONTROLLER
+// Imports
+const router = require("express").Router();
+const User = require("../models/user.model");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+const { body, validationResult } = require("express-validator");
+// -------------------------------------------------------------------
 
-//create a router
-const express = require("express");
-const router = express.Router();
+// Token Generator
+const newToken = (user) => jwt.sign({ user }, process.env.JWT_KEY);
+// -------------------------------------------------------------------
 
-//models
-const User = require("../models/user.model.js");
-
-//Http Verbs will come here GET, GET by id, POST, PATCH, DELETE
-
-//get all users
-router.get("/", async (request, response) => {
+// Signup route
+router.post(
+  "/signup",
+  body("username")
+    .exists()
+    .isLength({ min: 3 })
+    .isAlphanumeric()
+    .withMessage(
+      "username should be minimum 3 characters and should not contain special characters"
+    ),
+  body("email").exists().isEmail().withMessage("nor a valid email id"),
+  body("password")
+    .exists()
+    .isAlphanumeric()
+    .isLength({ min: 6 })
+    .withMessage("password should be alpha numeric with minimum 6 characters"),
+  async (req, res) => {
     try {
-        const results = await User.find().lean().exec();
-        return response.send(results);
+      const { errors } = validationResult(req);
+      console.log(errors);
+
+      if (errors.length > 0) return res.status(400).json({ errors });
+
+      let user = await User.findOne({ username: req.body.username })
+        .lean()
+        .exec();
+      if (user)
+        return res.status(403).json({ message: "username already exists" });
+      user = await User.findOne({ email: req.body.email }).lean().exec();
+      if (user)
+        return res.status(403).json({ message: "email already exists" });
+
+      user = await User.create(req.body);
+      const token = newToken(user);
+      return res.status(201).json({ token, user });
+    } catch (err) {
+      console.log(err);
+      return res.status(400).send(err);
     }
-    catch (err) {
-        response.status(401).send(err.message);
+  }
+);
+// ------------------------------------------------------------------
+
+// Signin route
+router.post(
+  "/signin",
+  body("email").exists().isEmail().withMessage("not a valid email id"),
+  body("password")
+    .exists()
+    .isAlphanumeric()
+    .isLength({ min: 6 })
+    .withMessage("password should be minimum 6 characters and alphanumeric"),
+  async (req, res) => {
+    try {
+      const { errors } = validationResult(req);
+      if (errors.length > 0) return res.status(403).json(errors);
+
+      let user = await User.findOne({ email: req.body.email }).exec();
+      if (!user)
+        return res
+          .status(400)
+          .json({ message: "No account found with the given email id" });
+
+      if (!user.checkPassword(req.body.password))
+        return res.status(400).json({ message: "Invalid Password" });
+
+      const token = newToken(user);
+
+      return res.status(200).json({ token, user });
+    } catch (err) {
+      console.log(err);
+      return res.status(400).send(err);
     }
+  }
+);
+
+// To get all users
+router.get("/", async (req, res) => {
+  try {
+    const users = await User.find({}).lean().exec();
+    return res.status(200).json({ data: users });
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+});
+// --------------------------------------------------------------------
+
+// To get a single user
+router.get("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).lean().exec();
+    return res.status(200).json(user);
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+});
+//
+
+// To patch a single user
+router.patch("/:id", async (req, res) => {
+  try {
+    const user = await User.findOneAndUpdate({ id: req.params.id }, req.body, {
+      new: true,
+    })
+      .lean()
+      .exec();
+
+    return res.status(201).json(user);
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+});
+// -----------------------------------------------------------------------
+
+// To delete a single user
+router.delete("/:id", async (req, res) => {
+  try {
+    const user = await User.findOneAndDelete({ id: req.params.id });
+
+    return res.status(201).json({ message: "user deleted" });
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+});
+// -----------------------------------------------------------------------
+
+router.patch("/:id/follow", async (req, res) => {
+  try {
+  } catch (err) {}
 });
 
-//get specific user by id
-router.get("/:id", async (request, response) => {
-    try {
-        const results = await User.findById(request.params.id);
-        console.log(results);
-        return response.send(results);
-    }
-    catch (err) {
-        response.status(401).send(err.message);
-    }
-});
-
-//get user by email
-router.get("/query/:email", async (request, response) => {
-    try {
-        const results = await User.find({ email: request.params.email }).lean().exec();
-        console.log(results);
-        return response.send(results);
-    }
-    catch (err) {
-        response.status(401).send(err.message);
-    }
-});
-
-//create user
-router.post("/", async (request, response) => {
-    try {
-        const results = await User.create(request.body);
-        return response.send(results);
-    }
-    catch (err) {
-        response.status(401).send(err.message);
-    }
-});
-
-//update user by id
-router.patch("/:id", async (request, response) => {
-    try {
-        const results = await User.findByIdAndUpdate(request.params.id, request.body, { new: true });
-        console.log(results);
-        return response.send(results);
-    }
-    catch (err) {
-        response.status(401).send(err.message);
-    }
-});
-
-//update user payment method or shipping details by id
-router.patch("/:query/:id", async (request, response) => {
-    try {
-        if(request.params.query == "updatePaymentMethod"){
-            
-            const results = await User.findByIdAndUpdate(request.params.id, {"paymentMethod":request.body}, { new: true });
-            console.log(results);
-            return response.send(results);
-        }
-        else if(request.params.query == "updateShippingDetails"){
-            const results = await User.findByIdAndUpdate(request.params.id, {"shippingDetails":request.body}, { new: true });
-            console.log(results);
-            return response.send(results);
-        }
-    }
-    catch (err) {
-        response.status(401).send(err.message);
-    }
-});
-
-router.delete("/:id", async (request, response) => {
-    try {
-        const results = await User.findByIdAndDelete(request.params.id);
-        console.log(results);
-        return response.send(results);
-    }
-    catch (err) {
-        response.status(401).send(err.message);
-    }
-});
-
-
-
-
-//export
 module.exports = router;
