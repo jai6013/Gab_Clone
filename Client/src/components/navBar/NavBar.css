@@ -1,0 +1,23 @@
+
+
+.navBox{
+    background-color: #000000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.leftAligned{
+    width:100%
+}
+
+.inputfield{
+    /* display: block; */
+    margin-left: 25px;
+    width:46%;
+    height: 31px;
+    padding: 7px 0px 7px 15px;
+    background-color: #2D3436;
+    color: white;
+}
