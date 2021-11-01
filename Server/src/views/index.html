@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gab Backend</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1>Welcome to Gab Backend API</h1>
+      <h2>Routes :</h2>
+      <br />
+      <h3>Users :</h3>
+      <div class="routes">
+        <div class="left">
+          <h4>Methods</h4>
+          <code>/POST </code><br />
+          <code>/POST </code><br />
+          <code>/GET </code><br />
+          <code>/GET </code><br />
+          <code>/PATCH </code><br />
+        </div>
+        <div class="middle">
+          <h4>Paths</h4>
+          <code> /users/signup</code><br />
+          <code> /users/signin</code><br />
+          <code> /users</code><br />
+          <code> /users/[id]</code><br />
+          <code> /users/[id]</code><br />
+        </div>
+        <div class="right">
+          <h4>Description</h4>
+          <code>Returns a json file which contains a token and user data</code
+          ><br />
+          <code>Returns a json file which contains a token and user data</code
+          ><br />
+          <code>Returns all users</code><br />
+          <code>Returns user by ID</code><br />
+          <code>Updates the user and returns the user</code><br />
+        </div>
+      </div>
+
+      <h3>Posts :</h3>
+      <div class="routes">
+        <div class="left">
+          <code>/GET </code><br /><br />
+          <code>/POST </code><br /><br />
+        </div>
+        <div class="middle">
+          <code> /posts</code><br /><br />
+          <code> /posts</code><br /><br />
+        </div>
+        <div class="right">
+          <code
+            >Returns all posts of logged in user. <br />
+            Request should be made with bearer token in headers</code
+          ><br />
+          <code
+            >To create a new post<br />
+            Request should be made with bearer token in headers</code
+          ><br />
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <hr />
+  </body>
+</html>

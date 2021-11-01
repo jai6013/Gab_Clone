@@ -1,24 +1,34 @@
-//USER MODEL
-
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
+const bcrypt = require("bcryptjs");
 
-//user schema
-const userSchema = new Schema({
-
-    //basic auth fields
-    firstName:{type:String, required: true},
-    lastName:{type:String, required: true},
-    phone:{type:String, required: true},
-    email: { type: String, required: true },
+const userSchema = new mongoose.Schema(
+  {
+    username: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    token : {type:String, required:true}
-}, {
-    timestamps: false, 
-    versionKey: false});
+    display_name: { type: String },
+    profile_pic: { type: String },
+    cover_pic: { type: String },
+    groups: { type: Array },
+    posts: { type: Array },
+    following: { type: Array },
+    followers: { type: Array },
+    bio: { type: String },
+  },
+  { versionKey: false, timestamps: true }
+);
 
-//creating model for user
-const User = mongoose.model("User", userSchema);
+userSchema.pre("save", function (next) {
+  console.log(this.isModified("password"));
+  if (!this.isModified("password")) return next();
 
-//export
-module.exports = User;
+  const hash = bcrypt.hashSync(this.password, 8);
+  this.password = hash;
+  return next();
+});
+
+userSchema.methods.checkPassword = function (password) {
+  return bcrypt.compareSync(password, this.password);
+};
+
+module.exports = mongoose.model("user", userSchema);
