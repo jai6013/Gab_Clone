@@ -17,71 +17,100 @@
     <div class="wrapper">
       <h1>Welcome to Gab Backend API</h1>
       <h2>Routes :</h2>
-      <br />
+
       <h3>Users :</h3>
       <div class="routes">
         <div class="left">
           <h4>Methods</h4>
-          <code>/POST </code><br />
-          <code>/POST </code><br />
-          <code>/GET </code><br />
-          <code>/GET </code><br />
-          <code>/PATCH </code><br />
-          <code>/DELETE </code><br />
-          <code>/PATCH </code><br />
-          <code>/PATCH </code><br />
+          <ol>
+            <li><code>/POST </code></li>
+            <li><code>/POST </code></li>
+            <li><code>/GET </code></li>
+            <li><code>/GET </code></li>
+            <li><code>/PATCH </code></li>
+            <li><code>/DELETE </code></li>
+            <li><code>/PATCH </code></li>
+            <li><code>/PATCH </code></li>
+          </ol>
         </div>
         <div class="middle">
           <h4>Paths</h4>
-          <code> /users/signup</code><br />
-          <code> /users/signin</code><br />
-          <code> /users</code><br />
-          <code> /users/:id</code><br />
-          <code> /users/:id</code><br />
-          <code> /users/:id</code><br />
-          <code> /users/:id/follow</code><br />
-          <code> /users/:id/unfollow</code><br />
+          <ol>
+            <li><code> /users/signup</code></li>
+            <li><code> /users/signin</code></li>
+            <li><code> /users</code></li>
+            <li><code> /users/:id</code></li>
+            <li><code> /users/:id</code></li>
+            <li><code> /users/:id</code></li>
+            <li><code> /users/:id/follow</code></li>
+            <li><code> /users/:id/unfollow</code></li>
+          </ol>
         </div>
         <div class="right">
           <h4>Description</h4>
-          <code>Returns a json file which contains a token and user data</code
-          ><br />
-          <code>Returns a json file which contains a token and user data</code
-          ><br />
-          <code>Returns all users</code><br />
-          <code>Returns user by ID</code><br />
-          <code>Updates the user and returns the user</code><br />
-          <code>Deletes the user</code><br />
-          <code>logged in user follows the userid in params</code><br />
-          <code>logged in user unfollows the userid in params</code><br />
+          <ol>
+            <li>
+              <code
+                >Returns a json file which contains a token and user data</code
+              >
+            </li>
+            <li>
+              <code
+                >Returns a json file which contains a token and user data</code
+              >
+            </li>
+            <li><code>Returns all users</code></li>
+            <li><code>Returns user by ID</code></li>
+            <li><code>Updates the user and returns the user</code></li>
+            <li><code>Deletes the user</code></li>
+            <li><code>logged in user follows the userid in params</code></li>
+            <li><code>logged in user unfollows the userid in params</code></li>
+          </ol>
         </div>
       </div>
 
       <h3>Posts :</h3>
       <div class="routes">
         <div class="left">
-          <code>/GET </code><br /><br />
-          <code>/POST </code><br /><br />
+          <h4>Methods</h4>
+          <ol>
+            <li><code>/POST </code></li>
+            <li><code>/PATCH </code></li>
+            <li><code>/PATCH </code></li>
+            <li><code>/PATCH </code></li>
+            <li><code>/GET </code></li>
+            <li><code>/GET </code></li>
+            <li><code>/GET </code></li>
+          </ol>
         </div>
         <div class="middle">
-          <code> /posts</code><br /><br />
-          <code> /posts</code><br /><br />
+          <h4>Paths</h4>
+          <ol>
+            <li><code> /posts</code></li>
+            <li><code> /posts/:id</code></li>
+            <li><code> /posts/:id</code></li>
+            <li><code> /posts/:id/like</code></li>
+            <li><code> /posts/:id</code></li>
+            <li><code> /posts/user/timeline</code></li>
+            <li><code> /posts/user/feed</code></li>
+          </ol>
         </div>
         <div class="right">
-          <code
-            >Returns all posts of logged in user. <br />
-            Request should be made with bearer token in headers</code
-          ><br />
-          <code
-            >To create a new post<br />
-            Request should be made with bearer token in headers</code
-          ><br />
+          <h4>Description</h4>
+          <ol>
+            <li><code>To create a new post</code></li>
+            <li><code>To update a post</code></li>
+            <li><code>To delete a post</code></li>
+            <li><code>To like or dislike a post</code></li>
+            <li><code>To get a post</code></li>
+            <li><code>To get all posts of logged in user</code></li>
+            <li>
+              <code>To get all posts of followings of logged in user</code>
+            </li>
+          </ol>
         </div>
       </div>
     </div>
-    <br />
-    <br />
-    <br />
     <hr />
   </body>
 </html>
