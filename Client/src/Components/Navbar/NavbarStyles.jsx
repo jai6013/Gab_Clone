@@ -15,13 +15,13 @@ export const NavContainer = styled.div`
   flex-direction: row;
 `;
 export const NavLogoDiv = styled.div`
-  width: 70px;
-  height: 80%;
+  width: 100px;
+  height: 60%;
   padding: 10px;
 `;
 
 export const NavLogo = styled.img`
-  width: 70%;
+  width: 80%;
 `;
 
 export const SearchBar = styled.div`
@@ -31,7 +31,7 @@ export const SearchBar = styled.div`
 
   background: ${(props) => props.theme.colors.background1};
   margin: 10px 0 10px 0;
-  width: 350px;
+  width: ${(props) => (props.isLoggedIn ? "350px" : "700px")};
   display: flex;
   flex-direction: row;
   border-radius: 10px;
@@ -42,13 +42,15 @@ export const SearchInp = styled.input`
   outline: none;
   border: none;
   margin: 0 10px 0 10px;
-  width: 290px;
+  width: ${(props) => (props.isLoggedIn ? "290px" : "640px")};
   color: ${(props) => props.theme.colors.input};
 `;
 
 export const SearchIcon = styled.div`
   height: 80%;
-  margin-top: 5px;
+  margin: 9px 9px 9px;0
+  
+  padding-right: 10px;
 
   &:hover {
     cursor: pointer;
@@ -68,7 +70,7 @@ export const NavMenuContainer = styled.div`
 export const NavMenuItem = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 10px 0 10px;
+  margin: 7px 10px 0 10px;
 
   border-bottom: ${(props) =>
     props.isSelected ? "3px solid #21cf7a" : "none"};
@@ -88,6 +90,7 @@ export const EmptyDiv = styled.div`
   @media ${(props) => props.theme.breakpoints.lg} {
     display: none;
   }
+
   width: 300px;
 `;
 
@@ -109,7 +112,7 @@ export const NavMenuRoundedItem = styled.div`
   background: ${(props) => props.theme.colors.background1};
   height: 40px;
   width: 40px;
-  margin: 0 5px 0 5px;
+  margin: 7px 5px 0 5px;
 
   &:hover {
     cursor: pointer;
@@ -118,9 +121,43 @@ export const NavMenuRoundedItem = styled.div`
 
 export const NavRoundedDiv = styled.div`
   padding: 7px 0 0 0;
+  margin-left: 7px;
 `;
 
 export const NavUserPic = styled.img`
   width: 100%;
   border-radius: 50%;
+`;
+
+export const NavLogin = styled.button`
+  outline: none;
+  border: 1px solid ${(props) => props.theme.colors.primary};
+  background: #ffffff;
+  width: 150px;
+  height: 40px;
+  border-radius: 25px;
+  margin: 10px 10px 0 10px;
+  color: ${(props) => props.theme.colors.primary};
+
+  &:hover {
+    cursor: pointer;
+    background: ${(props) => props.theme.colors.primary};
+    color: #ffffff;
+  }
+`;
+
+export const NavSignup = styled.button`
+  outline: none;
+  border: 1px solid ${(props) => props.theme.colors.primary};
+  background: ${(props) => props.theme.colors.primary};
+  width: 150px;
+  height: 40px;
+  border-radius: 25px;
+  margin: 10px 10px 0 0;
+  color: #ffffff;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 50%;
+  }
 `;

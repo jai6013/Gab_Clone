@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { ThemeContext } from "../../Contexts/ThemeContext";
+import { AuthContext } from "../../Contexts/AuthContext";
 import { AiOutlineSearch, AiFillHome } from "react-icons/ai";
 import { MdNotifications, MdGroups, MdLightbulb } from "react-icons/md";
 import { BsGlobe2 } from "react-icons/bs";
@@ -21,10 +22,14 @@ import {
   NavMenuRoundedItem,
   NavRoundedDiv,
   NavUserPic,
+  NavLogin,
+  NavSignup,
 } from "./NavbarStyles";
 
 export const Navbar = () => {
   const { handleTheme, theme } = useContext(ThemeContext);
+  const { isLoggedIn, handleLogin } = useContext(AuthContext);
+  console.log(isLoggedIn, handleLogin);
   return (
     <>
       <NavDiv>
@@ -36,7 +41,7 @@ export const Navbar = () => {
             />
           </NavLogoDiv>
 
-          <SearchBar>
+          <SearchBar isLoggedIn={isLoggedIn}>
             <SearchInp placeholder="Search for people or groups on gab" />
             <SearchIcon>
               <AiOutlineSearch
@@ -45,11 +50,11 @@ export const Navbar = () => {
               />
             </SearchIcon>
           </SearchBar>
-          <EmptyDiv />
 
           {/* Pass Is logged in  falg */}
+          {isLoggedIn && <EmptyDiv isLoggedIn={isLoggedIn} />}
 
-          <NavMenuContainer isLoggedIn={true}>
+          <NavMenuContainer isLoggedIn={isLoggedIn}>
             {/* Pass is Selected flag */}
 
             <NavMenuItem isSelected={true}>
@@ -117,13 +122,21 @@ export const Navbar = () => {
               <VerticalSeparater />
             </NavMenuItemText>
 
-            <NavMenuRoundedItem>
+            <NavMenuRoundedItem onClick={handleLogin}>
               <NavUserPic
                 src="https://gab.com/avatars/original/missing.png"
                 alt="user"
               />
             </NavMenuRoundedItem>
           </NavMenuContainer>
+          {!isLoggedIn && (
+            <>
+              <NavLogin isLoggedIn={isLoggedIn} onClick={handleLogin}>
+                Login
+              </NavLogin>
+              <NavSignup isLoggedIn={isLoggedIn}>Signup</NavSignup>
+            </>
+          )}
         </NavContainer>
       </NavDiv>
     </>

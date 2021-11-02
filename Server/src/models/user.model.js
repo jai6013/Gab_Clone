@@ -14,6 +14,8 @@ const userSchema = new mongoose.Schema(
     following: { type: Array },
     followers: { type: Array },
     bio: { type: String },
+    isVerified: { type: Boolean, default: false },
+    notifications: { type: Array },
   },
   { versionKey: false, timestamps: true }
 );

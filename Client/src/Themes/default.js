@@ -8,8 +8,9 @@ export const lightTheme = {
     primary: "#21CF7A",
     background2: "#FFFFFF",
     background1: "#F0F2F5",
-    text: "#CCCBCB",
+    text: "#000000",
     input: "#000000",
+    inverted: "#FFFFFF",
   },
 
   breakpoints: {
@@ -18,6 +19,7 @@ export const lightTheme = {
     lg: "screen and (max-width: 1024px)",
     xl: "screen and (max-width: 1280px)",
   },
+  boxshadow: " 0 1px 2px rgb(0 0 0 / 10%)",
 };
 
 export const darkTheme = {
@@ -28,8 +30,9 @@ export const darkTheme = {
     primary: "#21CF7A",
     background2: "#000000",
     background1: "#333333",
-    text: "#2D3436",
+    text: "#FFFFFF",
     input: "#FFFFFF",
+    inverted: "#000000",
   },
 
   breakpoints: {
@@ -38,4 +41,5 @@ export const darkTheme = {
     lg: "screen and (max-width: 1024px)",
     xl: "screen and (max-width: 1280px)",
   },
+  boxshadow: " 0 1px 2px rgb(34 34 34 / 10%)",
 };

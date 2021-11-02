@@ -21,9 +21,10 @@ ${normalize};
 
   body {
     font-family: "Roboto", sans-serif;
-    background: ${(props) => props.theme.colors.background1};
+    background-color:${(props) => props.theme.colors.background1};
     color: ${(props) => props.theme.colors.text};
-   
+    
+  
   }
 
 `;
