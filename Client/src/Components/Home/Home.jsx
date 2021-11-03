@@ -1,12 +1,6 @@
 import React from "react";
-import { AiFillHome, AiFillLike, AiOutlineLike } from "react-icons/ai";
-import { BsArrowClockwise } from "react-icons/bs";
-import {
-  MdNotifications,
-  MdOutlineModeComment,
-  MdFormatQuote,
-  MdIosShare,
-} from "react-icons/md";
+import { AiFillHome } from "react-icons/ai";
+import { MdNotifications } from "react-icons/md";
 import { IoChatbubblesSharp } from "react-icons/io5";
 import { BsGlobe2 } from "react-icons/bs";
 import { TiDocumentText } from "react-icons/ti";
@@ -18,23 +12,229 @@ import {
   LeftNavDiv,
   LeftNavItem,
   LeftPanelHeading,
+  LeftSmallHeading,
   Middle,
   OffsetNav,
   PostDiv,
-  ReactionBar,
-  ReactionIcon,
-  ReactionItem,
-  ReactionText,
+  PostInput,
+  PostPic,
+  PostPicDiv,
+  PostPicDivider,
+  PostPicTop,
+  ProfileCard,
+  ProfileCardDiv,
+  ProfileCardName,
+  ProfileCardNameDiv,
+  ProfileCardPic,
+  ProfileCardPicDiv,
+  ProfileCardStat,
+  ProfileCardStatDiv,
+  ProfileCardStatName,
+  ProfileCardUsernameDiv,
   Right,
+  RightSideCard,
 } from "./HomeStyles";
+import { Post } from "../Post/Post";
 
-export const Home = () => {
+export const Home = ({
+  profile_pic = "https://gab.com/avatars/original/missing.png",
+  name = "bvsrtemp",
+  username = "bvsr",
+}) => {
+  const posts = [
+    {
+      isLiked: true,
+      name: "name here",
+      username: "username",
+      profile_pic: "https://gab.com/avatars/original/missing.png",
+      time: "1 hr .",
+      postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
+      Ipsum has been the industry's standard dummy text ever since the 1500s,
+      when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries, but also
+      the leap into electronic typesetting, remaining essentially unchanged.
+      It was popularised in the 1960s with the release of Letraset sheets
+      containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem
+      Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+      Ipsum has been the industry's standard dummy text ever since the 1500s,
+      when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries, but also
+      the leap into electronic typesetting, remaining essentially unchanged.
+      It was popularised in the 1960s with the release of Letraset sheets
+      containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem
+      Ipsum.`,
+    },
+    {
+      isLiked: false,
+      name: "name here",
+      username: "username",
+      profile_pic: "https://gab.com/avatars/original/missing.png",
+      time: "1 hr .",
+      postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
+      Ipsum has been the industry's standard dummy text ever since the 1500s,
+      when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries, but also
+      the leap into electronic typesetting, remaining essentially unchanged.
+      It was popularised in the 1960s with the release of Letraset sheets
+      containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem
+      Ipsum.`,
+    },
+    {
+      isLiked: true,
+      name: "name here",
+      username: "username",
+      profile_pic: "https://gab.com/avatars/original/missing.png",
+      time: "1 hr .",
+      postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
+      Ipsum has been the industry's standard dummy text ever since the 1500s,
+      when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries, but also
+      the leap into electronic typesetting, remaining essentially unchanged.
+      It was popularised in the 1960s with the release of Letraset sheets
+      containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem
+      Ipsum.`,
+    },
+    {
+      isLiked: true,
+      name: "name here",
+      username: "username",
+      profile_pic: "https://gab.com/avatars/original/missing.png",
+      time: "1 hr .",
+      postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
+      Ipsum has been the industry's standard dummy text ever since the 1500s,
+      when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries, but also
+      the leap into electronic typesetting, remaining essentially unchanged.
+      It was popularised in the 1960s with the release of Letraset sheets
+      containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem
+      Ipsum.`,
+    },
+    {
+      isLiked: false,
+      name: "name here",
+      username: "username",
+      profile_pic: "https://gab.com/avatars/original/missing.png",
+      time: "1 hr .",
+      postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
+      Ipsum has been the industry's standard dummy text ever since the 1500s,
+      when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries, but also
+      the leap into electronic typesetting, remaining essentially unchanged.
+      It was popularised in the 1960s with the release of Letraset sheets
+      containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem
+      Ipsum.`,
+    },
+    {
+      isLiked: true,
+      name: "name here",
+      username: "username",
+      profile_pic: "https://gab.com/avatars/original/missing.png",
+      time: "1 hr .",
+      postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
+      Ipsum has been the industry's standard dummy text ever since the 1500s,
+      when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries, but also
+      the leap into electronic typesetting, remaining essentially unchanged.
+      It was popularised in the 1960s with the release of Letraset sheets
+      containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem
+      Ipsum.`,
+    },
+    {
+      isLiked: false,
+      name: "name here",
+      username: "username",
+      profile_pic: "https://gab.com/avatars/original/missing.png",
+      time: "1 hr .",
+      postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
+      Ipsum has been the industry's standard dummy text ever since the 1500s,
+      when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries, but also
+      the leap into electronic typesetting, remaining essentially unchanged.
+      It was popularised in the 1960s with the release of Letraset sheets
+      containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem
+      Ipsum.`,
+    },
+    {
+      isLiked: true,
+      name: "name here",
+      username: "username",
+      profile_pic: "https://gab.com/avatars/original/missing.png",
+      time: "1 hr .",
+      postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
+      Ipsum has been the industry's standard dummy text ever since the 1500s,
+      when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries, but also
+      the leap into electronic typesetting, remaining essentially unchanged.
+      It was popularised in the 1960s with the release of Letraset sheets
+      containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem
+      Ipsum.`,
+    },
+    {
+      isLiked: true,
+      name: "name here",
+      username: "username",
+      profile_pic: "https://gab.com/avatars/original/missing.png",
+      time: "1 hr .",
+      postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
+      Ipsum has been the industry's standard dummy text ever since the 1500s,
+      when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries, but also
+      the leap into electronic typesetting, remaining essentially unchanged.
+      It was popularised in the 1960s with the release of Letraset sheets
+      containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem
+      Ipsum.`,
+    },
+    {
+      isLiked: true,
+      name: "name here",
+      username: "username",
+      profile_pic: "https://gab.com/avatars/original/missing.png",
+      time: "1 hr .",
+      postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
+      Ipsum has been the industry's standard dummy text ever since the 1500s,
+      when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries, but also
+      the leap into electronic typesetting, remaining essentially unchanged.
+      It was popularised in the 1960s with the release of Letraset sheets
+      containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem
+      Ipsum.`,
+    },
+    {
+      isLiked: true,
+      name: "name here",
+      username: "username",
+      profile_pic: "https://gab.com/avatars/original/missing.png",
+      time: "1 hr .",
+      postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
+      Ipsum has been the industry's standard dummy text ever since the 1500s,
+      when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries, but also
+      the leap into electronic typesetting, remaining essentially unchanged.
+      It was popularised in the 1960s with the release of Letraset sheets
+      containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem
+      Ipsum.`,
+    },
+  ];
+
   return (
     <div>
       <OffsetNav />
       <Container>
         <Left>
           <LeftPanelHeading>Home</LeftPanelHeading>
+          <LeftSmallHeading>Menu</LeftSmallHeading>
           <LeftNavDiv>
             <LeftNavItem>
               <IconDiv>
@@ -82,49 +282,60 @@ export const Home = () => {
 
         <Middle>
           <PostDiv>
-            <ReactionBar>
-              <ReactionItem>
-                <ReactionIcon>
-                  <AiOutlineLike />
-                </ReactionIcon>
-                <ReactionText>Like</ReactionText>
-              </ReactionItem>
-
-              <ReactionItem>
-                <ReactionIcon>
-                  <MdOutlineModeComment />
-                </ReactionIcon>
-                <ReactionText>Comment</ReactionText>
-              </ReactionItem>
-
-              <ReactionItem>
-                <ReactionIcon>
-                  <BsArrowClockwise />
-                </ReactionIcon>
-                <ReactionText>Repost</ReactionText>
-              </ReactionItem>
-
-              <ReactionItem>
-                <ReactionIcon>
-                  <MdFormatQuote />
-                </ReactionIcon>
-                <ReactionText>Quote</ReactionText>
-              </ReactionItem>
-
-              <ReactionItem>
-                <ReactionIcon>
-                  <MdIosShare />
-                </ReactionIcon>
-                <ReactionText>Share</ReactionText>
-              </ReactionItem>
-            </ReactionBar>
-            <br />
-            <hr />
+            <PostPicTop>
+              <PostPicDiv>
+                <PostPic src={profile_pic} />
+              </PostPicDiv>
+            </PostPicTop>
+            <PostPicDivider />
+            <PostInput placeholder="What's on your mind?" />
           </PostDiv>
-          <PostDiv>a</PostDiv>
+          {posts.map((post) => (
+            <Post
+              isLiked={post.isLiked}
+              name={post.name}
+              username={post.username}
+              postBody={post.postBody}
+              time={post.time}
+              profile_pic={post.profile_pic}
+            />
+          ))}
         </Middle>
 
-        <Right>Right section</Right>
+        <Right>
+          <RightSideCard>
+            <ProfileCard>
+              <ProfileCardDiv background></ProfileCardDiv>
+
+              <ProfileCardDiv>
+                <ProfileCardPicDiv>
+                  <ProfileCardPic src={profile_pic} />
+                </ProfileCardPicDiv>
+                <ProfileCardName>
+                  <ProfileCardNameDiv>{name}</ProfileCardNameDiv>
+                  <ProfileCardUsernameDiv>@{username}</ProfileCardUsernameDiv>
+                </ProfileCardName>
+              </ProfileCardDiv>
+
+              <ProfileCardDiv>
+                <ProfileCardStatDiv>
+                  <ProfileCardStat>2</ProfileCardStat>
+                  <ProfileCardStatName>Gabs</ProfileCardStatName>
+                </ProfileCardStatDiv>
+
+                <ProfileCardStatDiv>
+                  <ProfileCardStat>2</ProfileCardStat>
+                  <ProfileCardStatName>Followers</ProfileCardStatName>
+                </ProfileCardStatDiv>
+
+                <ProfileCardStatDiv>
+                  <ProfileCardStat>2</ProfileCardStat>
+                  <ProfileCardStatName>Following</ProfileCardStatName>
+                </ProfileCardStatDiv>
+              </ProfileCardDiv>
+            </ProfileCard>
+          </RightSideCard>
+        </Right>
       </Container>
     </div>
   );

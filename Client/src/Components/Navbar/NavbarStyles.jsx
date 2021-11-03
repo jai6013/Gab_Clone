@@ -5,6 +5,7 @@ export const NavDiv = styled.div`
   color: ${(props) => props.theme.colors.text};
   box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
   min-height: 53px;
+  // max-height: 53px;
   width: 100%;
   position: fixed;
   z-index: 3;
@@ -41,7 +42,9 @@ export const SearchInp = styled.input`
   background: ${(props) => props.theme.colors.background1};
   outline: none;
   border: none;
-  margin: 0 10px 0 10px;
+  margin: 5px 10px 0 10px;
+  font-size: 12px;
+  height: 80%;
   width: ${(props) => (props.isLoggedIn ? "290px" : "640px")};
   color: ${(props) => props.theme.colors.input};
 `;
@@ -82,7 +85,7 @@ export const NavMenuItem = styled.div`
 export const NavMenuItemText = styled.div`
   color: ${(props) =>
     props.theme.colors.background2 === "#FFFFFF" ? "#000000" : "#FFFFFF"};
-  font-size: small;
+  font-size: 10px;
   font-weight: lighter;
 `;
 

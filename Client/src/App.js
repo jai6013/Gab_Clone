@@ -1,16 +1,18 @@
-import "./App.css";
-import { Home } from "./Components/Home/Home";
-import { Navbar } from "./Components/Navbar/Navbar";
-import { Theme } from "./Styles/Theme";
+// import "./App.css";
+import { HomePage } from "./Pages/HomePage";
+import { Switch, Route } from "react-router-dom";
+import { ErrorPage } from "./Pages/ErrorPage";
 
 function App() {
   return (
-    <div className="App">
-      <Theme>
-        <Navbar />
-        <Home />
-      </Theme>
-    </div>
+    <Switch>
+      <Route exact path="/">
+        <HomePage />
+      </Route>
+      <Route>
+        <ErrorPage />
+      </Route>
+    </Switch>
   );
 }
 

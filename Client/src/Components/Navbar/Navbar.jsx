@@ -122,7 +122,12 @@ export const Navbar = () => {
               <VerticalSeparater />
             </NavMenuItemText>
 
-            <NavMenuRoundedItem onClick={handleLogin}>
+            <NavMenuRoundedItem
+              onClick={() => {
+                theme === "dark" && handleTheme();
+                handleLogin();
+              }}
+            >
               <NavUserPic
                 src="https://gab.com/avatars/original/missing.png"
                 alt="user"
