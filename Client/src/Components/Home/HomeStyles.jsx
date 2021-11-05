@@ -117,7 +117,6 @@ export const PostPicDiv = styled.div`
 export const PostPicDivider = styled.div`
   width: 100%;
   height: 1px;
-  // margin: 5px 0 5px 0;
   background: ${(props) => props.theme.colors.background1};
 `;
 
@@ -125,7 +124,6 @@ export const PostPicTop = styled.div`
   display: flex;
   flex-direction: row;
   height: 40px;
-  //   border: 1px solid #21cf7a;
 `;
 
 export const PostInput = styled.input`
@@ -145,15 +143,16 @@ export const ProfileCard = styled.div`
   height: 150px;
   display: flex;
   flex-direction: column;
+  border-radius: 10px;
 `;
 export const ProfileCardDiv = styled.div`
   height: 50px;
   display: flex;
   flex-direction: row;
-  background: ${(props) =>
+  ${(props) =>
     props.background
-      ? props.theme.colors.background1
-      : props.theme.colors.background2};
+      ? `background-image:url(${props.background});`
+      : `background: ${props.theme.colors.background2};`}
 `;
 
 export const ProfileCardPicDiv = styled.div`

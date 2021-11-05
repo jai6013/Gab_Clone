@@ -36,6 +36,7 @@ import {
 } from "./HomeStyles";
 import { Post } from "../Post/Post";
 import { AuthContext } from "../../Contexts/AuthContext";
+import { useHistory } from "react-router";
 export const Home = ({
   profile_pic = "https://gab.com/avatars/original/missing.png",
   name = "bvsrtemp",
@@ -228,7 +229,8 @@ export const Home = ({
   //   },
   // ];
   const { user, posts, isLoggedIn } = useContext(AuthContext);
-  console.log(posts);
+  const history = useHistory();
+  console.log(user?.cover_pic);
   return (
     <div>
       <OffsetNav />
@@ -315,7 +317,7 @@ export const Home = ({
           <Right>
             <RightSideCard>
               <ProfileCard>
-                <ProfileCardDiv background></ProfileCardDiv>
+                <ProfileCardDiv background={user?.cover_pic}></ProfileCardDiv>
 
                 <ProfileCardDiv>
                   <ProfileCardPicDiv>
@@ -338,7 +340,7 @@ export const Home = ({
 
                 <ProfileCardDiv>
                   <ProfileCardStatDiv>
-                    <ProfileCardStat>2</ProfileCardStat>
+                    <ProfileCardStat>{user?.posts?.length}</ProfileCardStat>
                     <ProfileCardStatName>Gabs</ProfileCardStatName>
                   </ProfileCardStatDiv>
 
