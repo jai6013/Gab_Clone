@@ -26,6 +26,15 @@ router.post(
 );
 // -------------------------------------------------------------------------
 
+router.get("/top20", async (req, res) => {
+  try {
+    const posts = await Post.find().limit(20).populate("user_id").lean().exec();
+    return res.status(200).json({ posts });
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+});
+
 // To update post
 router.patch("/:id", authenticate, async (req, res) => {
   try {
@@ -126,10 +135,12 @@ router.get("/user/timeline", authenticate, async (req, res) => {
 router.get("/user/feed", authenticate, async (req, res) => {
   try {
     const { following } = await User.findById(req?.user?._id).lean().exec();
+    console.log(req.user);
     const posts = await Promise.all(
-      following.map((id) => Post.find({ user_id: id }))
+      following.map((id) => Post.find({ user_id: id }).populate("user_id"))
     );
-    return res.status(200).json(posts);
+    const merged = [].concat.apply([], posts);
+    return res.status(200).json(merged);
   } catch (err) {
     console.log(err);
     return res.status(500).send(err);

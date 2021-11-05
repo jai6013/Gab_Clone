@@ -28,10 +28,11 @@ import {
   MdOutlineModeComment,
   MdFormatQuote,
   MdIosShare,
+  MdVerified,
 } from "react-icons/md";
 
 import { IoMdGlobe } from "react-icons/io";
-
+import { useHistory } from "react-router-dom";
 export const Post = ({
   isLiked = true,
   name = "name here",
@@ -42,17 +43,41 @@ export const Post = ({
   likes = 1,
   comments = 2,
   shares = 3,
+  isVerified = false,
+  id,
+  userid,
 }) => {
+  const handleLike = (e, post_id) => {
+    alert(post_id, e);
+  };
+  const history = useHistory();
   return (
     <PostDiv>
-      <PostTopSection>
+      <PostTopSection onClick={() => history.push(`/${userid}`)}>
         <PostUserPicDiv>
           <PostUserPic src={profile_pic} alt="user" />
         </PostUserPicDiv>
 
         <PostUserNameDiv>
           <div>
-            <PostUser>{name}</PostUser>
+            <PostUser>
+              {name}
+              {isVerified && (
+                <span
+                  style={{
+                    marginLeft: "5px",
+                    marginTop: "8px",
+                    paddingTop: "5px",
+                  }}
+                >
+                  <MdVerified
+                    style={{ paddingTop: "5px" }}
+                    size="1.2em"
+                    color="#3E99ED"
+                  />
+                </span>
+              )}
+            </PostUser>
             <PostUserName>@{username}</PostUserName>
           </div>
           <TimeStamp>
@@ -75,14 +100,14 @@ export const Post = ({
 
       <ReactionBar>
         {isLiked ? (
-          <ReactionItem>
+          <ReactionItem onClick={(e) => handleLike(e, id)}>
             <ReactionIcon>
               <AiFillLike color="#21CF7A" />
             </ReactionIcon>
             <ReactionText color="#21CF7A">Like</ReactionText>
           </ReactionItem>
         ) : (
-          <ReactionItem>
+          <ReactionItem onClick={(e) => handleLike(e, id)}>
             <ReactionIcon>
               <AiOutlineLike />
             </ReactionIcon>

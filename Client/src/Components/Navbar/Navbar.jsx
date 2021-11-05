@@ -25,16 +25,18 @@ import {
   NavLogin,
   NavSignup,
 } from "./NavbarStyles";
+import { useHistory } from "react-router";
 
 export const Navbar = () => {
   const { handleTheme, theme } = useContext(ThemeContext);
-  const { isLoggedIn, handleLogin } = useContext(AuthContext);
-  console.log(isLoggedIn, handleLogin);
+  const { isLoggedIn, handleLogin, handleSignup, user } =
+    useContext(AuthContext);
+  const history = useHistory();
   return (
     <>
       <NavDiv>
         <NavContainer>
-          <NavLogoDiv>
+          <NavLogoDiv onClick={() => history.push("/")}>
             <NavLogo
               alt="logo"
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Gab_text_logo.svg/1200px-Gab_text_logo.svg.png"
@@ -57,7 +59,7 @@ export const Navbar = () => {
           <NavMenuContainer isLoggedIn={isLoggedIn}>
             {/* Pass is Selected flag */}
 
-            <NavMenuItem isSelected={true}>
+            <NavMenuItem onClick={() => history.push("/")} isSelected={true}>
               <div>
                 <AiFillHome
                   size="1.3rem"
@@ -128,10 +130,7 @@ export const Navbar = () => {
                 handleLogin();
               }}
             >
-              <NavUserPic
-                src="https://gab.com/avatars/original/missing.png"
-                alt="user"
-              />
+              <NavUserPic src={user?.profile_pic} alt="user" />
             </NavMenuRoundedItem>
           </NavMenuContainer>
           {!isLoggedIn && (
@@ -139,7 +138,9 @@ export const Navbar = () => {
               <NavLogin isLoggedIn={isLoggedIn} onClick={handleLogin}>
                 Login
               </NavLogin>
-              <NavSignup isLoggedIn={isLoggedIn}>Signup</NavSignup>
+              <NavSignup isLoggedIn={isLoggedIn} onClick={handleSignup}>
+                Signup
+              </NavSignup>
             </>
           )}
         </NavContainer>

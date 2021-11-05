@@ -42,7 +42,15 @@ router.post(
       if (user)
         return res.status(403).json({ message: "email already exists" });
 
+      // const newUser = {
+      //   ...req.body,
+      //   bio: "Default bio",
+      //   cover_pic: "https://picsum.photos/820/312",
+      //   profile_pic: "https://picsum.photos/200",
+      // };
+
       user = await User.create(req.body);
+
       const token = newToken(user);
       return res.status(201).json({ token, user });
     } catch (err) {
@@ -65,7 +73,7 @@ router.post(
   async (req, res) => {
     try {
       const { errors } = validationResult(req);
-      if (errors.length > 0) return res.status(403).json(errors);
+      if (errors.length > 0) return res.status(403).json({ errors });
 
       let user = await User.findOne({ email: req.body.email }).exec();
       if (!user)
@@ -76,6 +84,9 @@ router.post(
       if (!user.checkPassword(req.body.password))
         return res.status(403).json({ message: "Invalid Password" });
 
+      user = await User.findOne({ email: req.body.email })
+        .select("-password")
+        .exec();
       const token = newToken(user);
 
       return res.status(200).json({ token, user });
@@ -96,6 +107,14 @@ router.get("/", async (req, res) => {
   }
 });
 // --------------------------------------------------------------------
+
+router.get("/me", authenticate, async (req, res) => {
+  try {
+    return res.status(200).json(req.user);
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+});
 
 // To get a single user
 router.get("/:id", async (req, res) => {
@@ -175,4 +194,5 @@ router.patch("/:id/unfollow", authenticate, async (req, res) => {
   }
 });
 // ---------------------------------------------------------------------------
+
 module.exports = router;
