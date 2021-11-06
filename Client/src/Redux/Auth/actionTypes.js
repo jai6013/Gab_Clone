@@ -1,3 +1,4 @@
-export const SIGNIN = "SIGNIN";
-export const SIGNUP = "SIGNUP";
-export const SIGNOUT = "SIGNOUT";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILURE = "LOGIN_FAILURE";
+export const LOGIN_REQUEST = "LOGIN_REQUEST";
+export const LOGOUT = "LOGOUT";

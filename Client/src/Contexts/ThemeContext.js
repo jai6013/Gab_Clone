@@ -8,7 +8,6 @@ export const ThemeContextProvider = ({ children }) => {
   const [theme, setTheme] = useState("light");
 
   const handleTheme = () => {
-    console.log(theme);
     setTheme(theme === "light" ? "dark" : "light");
   };
 

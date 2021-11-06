@@ -22,3 +22,11 @@ export const loadData = (key) => {
 export const saveData = (key, data = "") => {
   localStorage.setItem(key, JSON.stringify(data));
 };
+
+/**
+ *
+ * @param {key} key
+ */
+export const deleteData = (key) => {
+  localStorage.removeItem(key);
+};

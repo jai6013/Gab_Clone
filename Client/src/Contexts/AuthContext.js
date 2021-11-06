@@ -1,82 +1,70 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signin, signout, signup } from "../Redux/Auth/actions";
-import axios from "axios";
+import {
+  loginUser,
+  logoutUser,
+  registerUser,
+  getLoggedinUser,
+} from "../Redux/Auth/actions";
+import { getHotPosts, getFeedPosts, likeapost } from "../Redux/Posts/actions";
+
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const [user, setUser] = useState();
-  const [posts, setPosts] = useState([]);
-  const { isLoggedIn, token } = useSelector((state) => state);
+  const { userState, postState } = useSelector((state) => state);
+  const { isLoggedIn, token, user } = userState;
+  const { posts } = postState;
+
+  console.log(user, "used redux");
+
   const dispatch = useDispatch();
+  // handle like dispatches like/dislike action
+
+  const handleLike = (id) => {
+    const action = likeapost({ id, token });
+    dispatch(action);
+  };
+
+  // handleLogin dispatches login action
 
   const handleLogin = async () => {
-    const res = await axios.post(
-      "https://secure-ravine-45527.herokuapp.com/users/signin",
-      {
-        email: "srikanth@gab.com",
-        password: "srikanth",
-      }
-    );
-    console.log(res);
-    const action = signin(res.data.token);
-    setUser(res.data.user);
-    dispatch(action);
-    fetchPosts();
+    const data = { email: "srikanth@gab.com", password: "srikanth" };
+    const loginAction = loginUser(data);
+    dispatch(loginAction);
   };
 
-  const handleSignup = async () => {
-    const res = await axios.post(
-      "https://secure-ravine-45527.herokuapp.com/users/signup",
-      {
-        email: "srikanth@gab.com",
-        username: "srikanth",
-        password: "srikanth",
-        display_name: "Srikanth Reddy",
-      }
-    );
-
-    const action = signup(res.data.token);
-    setUser(res.data.user);
-    dispatch(action);
+  // handleSignup dispatches signup action
+  const handleSignup = async (data) => {
+    const signupAction = registerUser(data);
+    dispatch(signupAction);
   };
 
+  // handleSignout dispatches signout action
   const handleSignout = async () => {
-    const action = signout();
-    dispatch(action);
+    const logoutAction = logoutUser();
+    dispatch(logoutAction);
   };
+
+  // fetchUser dispatches user fetch action
 
   const fetchUser = async () => {
-    await axios
-      .get("https://secure-ravine-45527.herokuapp.com/users/me", {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-      .then((res) => {
-        setUser(res.data);
-      });
+    const action = getLoggedinUser(token);
+    dispatch(action);
   };
+
+  // fetchPosts dispatches posts fetching action
 
   const fetchPosts = async () => {
     if (!isLoggedIn) {
-      await axios
-        .get("https://secure-ravine-45527.herokuapp.com/posts/top20")
-        .then((res) => {
-          console.log(res.data.posts);
-          setPosts(res.data.posts);
-        });
+      const action = getHotPosts();
+      dispatch(action);
     } else {
-      await axios
-        .get("https://secure-ravine-45527.herokuapp.com/posts/user/feed", {
-          headers: { Authorization: "Bearer " + token },
-        })
-        .then((res) => {
-          console.log(res.data);
-          setPosts(res.data);
-        });
+      console.log(token, "in context");
+      const action = getFeedPosts(token);
+      dispatch(action);
     }
   };
+
   useEffect(() => {
     if (isLoggedIn) {
       fetchUser();
@@ -96,6 +84,7 @@ export const AuthContextProvider = ({ children }) => {
         token,
         handleSignout,
         posts,
+        handleLike,
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   CommentBar,
   CommentInput,
@@ -33,6 +33,7 @@ import {
 
 import { IoMdGlobe } from "react-icons/io";
 import { useHistory } from "react-router-dom";
+import { AuthContext } from "../../Contexts/AuthContext";
 export const Post = ({
   isLiked = true,
   name = "name here",
@@ -47,9 +48,7 @@ export const Post = ({
   id,
   userid,
 }) => {
-  const handleLike = (e, post_id) => {
-    alert(post_id, e);
-  };
+  const { handleLike } = useContext(AuthContext);
   const history = useHistory();
   return (
     <PostDiv>
@@ -100,14 +99,14 @@ export const Post = ({
 
       <ReactionBar>
         {isLiked ? (
-          <ReactionItem onClick={(e) => handleLike(e, id)}>
+          <ReactionItem onClick={() => handleLike(id)}>
             <ReactionIcon>
               <AiFillLike color="#21CF7A" />
             </ReactionIcon>
             <ReactionText color="#21CF7A">Like</ReactionText>
           </ReactionItem>
         ) : (
-          <ReactionItem onClick={(e) => handleLike(e, id)}>
+          <ReactionItem onClick={() => handleLike(id)}>
             <ReactionIcon>
               <AiOutlineLike />
             </ReactionIcon>

@@ -1,40 +1,77 @@
-import { SIGNIN, SIGNOUT, SIGNUP } from "./actionTypes";
+import {
+  LOGOUT,
+  LOGIN_FAILURE,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+} from "./actionTypes";
+import axios from "axios";
 
-/**
- *
- * @param {*} data
- * @returns JSON
- */
+export const addLoginRequest = () => {
+  return { type: LOGIN_REQUEST };
+};
 
-export const signin = (data) => {
+export const addLoginSuccess = (data) => {
   return {
-    type: SIGNIN,
+    type: LOGIN_SUCCESS,
     payload: data,
   };
 };
 
-/**
- *
- * @param {*} data
- * @returns JSON
- */
-
-export const signup = (data) => {
+export const addLoginFailure = (err) => {
   return {
-    type: SIGNUP,
-    payload: data,
+    type: LOGIN_FAILURE,
+    payload: err,
   };
 };
 
-/**
- *
- * @param {*} data
- * @returns JSON
- */
-
-export const signout = (data) => {
+export const logoutUser = () => {
   return {
-    type: SIGNOUT,
-    payload: data,
+    type: LOGOUT,
   };
+};
+
+export const registerUser = (payload) => (dispatch) => {};
+
+export const loginUser = (payload) => (dispatch) => {
+  const { email, password } = payload;
+  const reqAction = addLoginRequest();
+  dispatch(reqAction);
+  axios
+    .post("https://secure-ravine-45527.herokuapp.com/users/signin", {
+      email,
+      password,
+    })
+    .then((res) => {
+      console.log(res.data.user);
+      const sucAction = addLoginSuccess({
+        token: res.data.token,
+        user: res.data.user,
+      });
+      dispatch(sucAction);
+    })
+    .catch((err) => {
+      console.log(err);
+      const errAction = addLoginFailure(err);
+      dispatch(errAction);
+    });
+};
+
+export const getLoggedinUser = (payload) => (dispatch) => {
+  axios
+    .get("https://secure-ravine-45527.herokuapp.com/users/me", {
+      headers: { Authorization: "Bearer " + payload },
+    })
+    .then((res) => {
+      console.log(res.data);
+      const sucAction = addLoginSuccess({
+        token: payload,
+        user: res.data,
+      });
+      dispatch(sucAction);
+    })
+    .catch((err) => {
+      console.log(err);
+      const errAction = addLoginFailure(err);
+      dispatch(errAction);
+    });
 };

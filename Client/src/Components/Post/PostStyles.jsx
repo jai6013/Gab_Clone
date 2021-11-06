@@ -48,14 +48,15 @@ export const PostTopSection = styled.div`
 `;
 
 export const PostUserPicDiv = styled.div`
-  width: 8%;
-  height: 90%;
+  width: 50px;
+  height: 50px;
   &:hover {
     cursor: pointer;
   }
 `;
 export const PostUserPic = styled.img`
   width: 100%;
+  height: 100%;
   border-radius: 50%;
 `;
 
@@ -113,12 +114,13 @@ export const CommentBar = styled.div`
 
 export const CommentUserPicDiv = styled.div`
   margin: 5px 5px 0 5px;
-  width: 6%;
-  height: 90%;
+  width: 30px;
+  height: 30px;
 `;
 
 export const CommentUserPic = styled.img`
   width: 100%;
+  height: 100%;
   border-radius: 50%;
 `;
 

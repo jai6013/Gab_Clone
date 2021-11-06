@@ -1,3 +1,3 @@
-export const LIKE_A_POST = "LIKE_A_POST";
-export const DISLIKE_A_POST = "DISLIKE_A_POST";
-export const GET_POSTS = "GET_POSTS";
+export const GET_POSTS_REQUEST = "GET_POSTS_REQUEST";
+export const GET_POSTS_SUCCESS = "GET_POSTS_SUCCESS";
+export const GET_POSTS_FAILURE = "GET_POSTS_FAILURE";
