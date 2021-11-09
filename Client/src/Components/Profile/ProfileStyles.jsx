@@ -178,3 +178,55 @@ export const ProfileBodyRightDiv = styled.div`
     padding: 1%;
   }
 `;
+
+export const LeftPanelDiv = styled.div`
+  background: ${(props) => props.theme.colors.inverted};
+  padding: 10px;
+  margin: 10px 0 10px 0;
+  border-radius: 10px;
+`;
+
+export const StatsDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+`;
+
+export const Stat = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const StatName = styled.div`
+  font-size: 12px;
+`;
+
+export const StatCount = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  color: ${(props) => props.theme.colors.primary};
+  @media ${(props) => props.theme.breakpoints.md} {
+    font-size: 12px;
+  }
+`;
+
+export const BioHead = styled.div`
+  font-size: 16px;
+  margin: 0 0 20px 0;
+`;
+
+export const Bio = styled.div`
+  font-size: 12px;
+`;
+
+export const Hr = styled.div`
+  margin: 10px 0 10px 0;
+  background: ${(props) => props.theme.colors.background1};
+  height: 2px;
+  width: 100%;
+`;
+
+export const MemberSince = styled.div`
+  font-size: 12px;
+  color: ${(props) => props.theme.colors.text2};
+`;

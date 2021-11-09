@@ -3,6 +3,7 @@ import {
   GET_POSTS_FAILURE,
   GET_POSTS_REQUEST,
   GET_POSTS_SUCCESS,
+  LIKE_SUCCESS,
 } from "./actionTypes";
 
 export const addGetPostsRequest = () => {
@@ -18,7 +19,12 @@ export const addGetPostsFailure = () => {
     type: GET_POSTS_FAILURE,
   };
 };
-
+export const addLikeSuccess = (id) => {
+  return {
+    type: LIKE_SUCCESS,
+    payload: id,
+  };
+};
 export const likeapost = (payload) => (dispatch) => {
   const { id, token } = payload;
   axios
@@ -32,8 +38,8 @@ export const likeapost = (payload) => (dispatch) => {
       }
     )
     .then((res) => {
-      console.log(res);
-      getFeedPosts(token);
+      const getAction = getFeedPosts(token);
+      dispatch(getAction);
     })
     .catch((err) => {
       console.log(err);

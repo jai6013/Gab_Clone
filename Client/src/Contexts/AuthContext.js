@@ -13,16 +13,14 @@ export const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const { userState, postState } = useSelector((state) => state);
   const { isLoggedIn, token, user } = userState;
-  const { posts } = postState;
-
-  console.log(user, "used redux");
+  const { posts, isLoading } = postState;
 
   const dispatch = useDispatch();
   // handle like dispatches like/dislike action
 
-  const handleLike = (id) => {
-    const action = likeapost({ id, token });
-    dispatch(action);
+  const handleLike = async (id) => {
+    const likeAction = likeapost({ id, token });
+    dispatch(likeAction);
   };
 
   // handleLogin dispatches login action
@@ -59,7 +57,6 @@ export const AuthContextProvider = ({ children }) => {
       const action = getHotPosts();
       dispatch(action);
     } else {
-      console.log(token, "in context");
       const action = getFeedPosts(token);
       dispatch(action);
     }
@@ -85,6 +82,7 @@ export const AuthContextProvider = ({ children }) => {
         handleSignout,
         posts,
         handleLike,
+        isLoading,
       }}
     >
       {children}

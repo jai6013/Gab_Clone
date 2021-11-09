@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
+  Bio,
+  BioHead,
   CoverContainer,
   CoverPic,
   HeadSection,
+  Hr,
+  LeftPanelDiv,
+  MemberSince,
   OutlineBtn,
   ProfileBody,
   ProfileBodyLeftDiv,
@@ -16,9 +21,14 @@ import {
   ProfileNavRight,
   ProfilePic,
   ProfilePicDiv,
+  Stat,
+  StatCount,
+  StatName,
+  StatsDiv,
 } from "./ProfileStyles";
 import { MdVerified } from "react-icons/md";
 import { Post } from "../Post/Post";
+import { AuthContext } from "../../Contexts/AuthContext";
 
 export const Profile = ({
   cover_pic,
@@ -27,7 +37,14 @@ export const Profile = ({
   username,
   isVerified,
   posts,
+  followers,
+  following,
+  bio,
+  createdAt,
+  isMyProfile,
 }) => {
+  const { user } = useContext(AuthContext);
+  console.log(followers, user);
   return (
     <>
       <HeadSection>
@@ -60,19 +77,64 @@ export const Profile = ({
             <ProfileNavLeftItem>Likes</ProfileNavLeftItem>
             <ProfileNavLeftItem>Bookmarks</ProfileNavLeftItem>
           </ProfileNavLeft>
-          <ProfileNavRight>
-            <OutlineBtn>Edit Profile</OutlineBtn>
-          </ProfileNavRight>
+          {isMyProfile ? (
+            <ProfileNavRight>
+              <OutlineBtn>Edit Profile</OutlineBtn>
+            </ProfileNavRight>
+          ) : followers?.some((friend) => friend === user?._id) ? (
+            <ProfileNavRight>
+              <OutlineBtn>Following</OutlineBtn>
+            </ProfileNavRight>
+          ) : (
+            <ProfileNavRight>
+              <OutlineBtn>Follow</OutlineBtn>
+            </ProfileNavRight>
+          )}
         </ProfileNav>
       </HeadSection>
 
       <ProfileBody>
         <ProfileBodyLeftDiv>
-          <Post />
+          <LeftPanelDiv>
+            <StatsDiv>
+              <Stat>
+                <StatCount>{posts?.length}</StatCount>
+                <StatName>Gabs</StatName>
+              </Stat>
+              <Stat>
+                <StatCount>{followers?.length}</StatCount>
+                <StatName>Followers</StatName>
+              </Stat>
+              <Stat>
+                <StatCount>{following?.length}</StatCount>
+                <StatName>Following</StatName>
+              </Stat>
+            </StatsDiv>
+          </LeftPanelDiv>
+          <LeftPanelDiv>
+            <BioHead>About</BioHead>
+            <Bio>{bio}</Bio>
+            <Hr />
+            <MemberSince>Member since {createdAt?.slice(0, 4)}</MemberSince>
+            <Hr />
+          </LeftPanelDiv>
         </ProfileBodyLeftDiv>
+
         <ProfileBodyRightDiv>
           {posts?.map((post) => (
-            <Post />
+            <Post
+              key={post?._id}
+              name={post?.user_id?.display_name}
+              username={post?.user_id?.username}
+              postBody={post?.content}
+              time={"2hr ."}
+              profile_pic={post?.user_id?.profile_pic}
+              isVerified={post?.user_id?.isVerified}
+              likes={post?.likes?.length}
+              comments={post?.comments?.length}
+              id={post?._id}
+              userid={post?.user_id?._id}
+            />
           ))}
         </ProfileBodyRightDiv>
       </ProfileBody>

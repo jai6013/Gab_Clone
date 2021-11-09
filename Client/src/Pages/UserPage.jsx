@@ -1,16 +1,16 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Navbar } from "../Components/Navbar/Navbar";
 import { Profile } from "../Components/Profile/Profile";
-import { AuthContext } from "../Contexts/AuthContext";
 import { Theme } from "../Styles/Theme";
 
 export const UserPage = () => {
   const { userid } = useParams();
   const [user, setUser] = useState();
-  const { posts } = useContext(AuthContext);
-  const fetchUserDetails = async () => {
+  const [timeline, setTimeline] = useState();
+
+  const fetchData = async () => {
     await axios
       .get(`https://secure-ravine-45527.herokuapp.com/users/${userid}`)
       .then((res) => {
@@ -20,9 +20,11 @@ export const UserPage = () => {
   };
 
   useEffect(() => {
-    fetchUserDetails();
+    fetchData();
   }, []);
-  return (
+  return !user ? (
+    <></>
+  ) : (
     <Theme>
       <Navbar />
       <Profile
@@ -31,7 +33,12 @@ export const UserPage = () => {
         display_name={user?.display_name}
         username={user?.username}
         isVerified={user?.isVerified}
-        posts={posts}
+        posts={user?.posts}
+        followers={user?.followers}
+        following={user?.following}
+        bio={user?.bio}
+        createdAt={user?.createdAt}
+        isMyProfile={false}
       />
     </Theme>
   );

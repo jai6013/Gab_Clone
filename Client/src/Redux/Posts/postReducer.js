@@ -2,6 +2,7 @@ import {
   GET_POSTS_FAILURE,
   GET_POSTS_REQUEST,
   GET_POSTS_SUCCESS,
+  LIKE_SUCCESS,
 } from "./actionTypes";
 
 const initState = {
@@ -25,7 +26,7 @@ export const postReducer = (state = initState, { type, payload }) => {
         ...state,
         isLoading: false,
         isFailed: false,
-        posts: payload,
+        posts: [...payload],
       };
     }
 
@@ -36,7 +37,11 @@ export const postReducer = (state = initState, { type, payload }) => {
         isLoading: false,
       };
     }
-
+    case LIKE_SUCCESS: {
+      return {
+        ...state,
+      };
+    }
     default: {
       return state;
     }

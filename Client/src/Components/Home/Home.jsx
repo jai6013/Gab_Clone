@@ -230,7 +230,7 @@ export const Home = ({
   // ];
   const { user, posts, isLoggedIn } = useContext(AuthContext);
   const history = useHistory();
-  console.log(user?.cover_pic);
+
   return (
     <div>
       <OffsetNav />
@@ -320,7 +320,7 @@ export const Home = ({
                 <ProfileCardDiv background={user?.cover_pic}></ProfileCardDiv>
 
                 <ProfileCardDiv>
-                  <ProfileCardPicDiv>
+                  <ProfileCardPicDiv onClick={() => history.push("/me")}>
                     <ProfileCardPic
                       src={
                         user?.profile_pic ||
@@ -328,7 +328,7 @@ export const Home = ({
                       }
                     />
                   </ProfileCardPicDiv>
-                  <ProfileCardName>
+                  <ProfileCardName onClick={() => history.push("/me")}>
                     <ProfileCardNameDiv>
                       {user?.display_name}
                     </ProfileCardNameDiv>
@@ -340,18 +340,30 @@ export const Home = ({
 
                 <ProfileCardDiv>
                   <ProfileCardStatDiv>
-                    <ProfileCardStat>{user?.posts?.length}</ProfileCardStat>
-                    <ProfileCardStatName>Gabs</ProfileCardStatName>
+                    <ProfileCardStat onClick={() => history.push("/me")}>
+                      {user?.posts?.length}
+                    </ProfileCardStat>
+                    <ProfileCardStatName onClick={() => history.push("/me")}>
+                      Gabs
+                    </ProfileCardStatName>
                   </ProfileCardStatDiv>
 
                   <ProfileCardStatDiv>
-                    <ProfileCardStat>{user?.followers?.length}</ProfileCardStat>
-                    <ProfileCardStatName>Followers</ProfileCardStatName>
+                    <ProfileCardStat onClick={() => history.push("/me")}>
+                      {user?.followers?.length}
+                    </ProfileCardStat>
+                    <ProfileCardStatName onClick={() => history.push("/me")}>
+                      Followers
+                    </ProfileCardStatName>
                   </ProfileCardStatDiv>
 
                   <ProfileCardStatDiv>
-                    <ProfileCardStat>{user?.following?.length}</ProfileCardStat>
-                    <ProfileCardStatName>Following</ProfileCardStatName>
+                    <ProfileCardStat onClick={() => history.push("/me")}>
+                      {user?.following?.length}
+                    </ProfileCardStat>
+                    <ProfileCardStatName onClick={() => history.push("/me")}>
+                      Following
+                    </ProfileCardStatName>
                   </ProfileCardStatDiv>
                 </ProfileCardDiv>
               </ProfileCard>

@@ -15,10 +15,32 @@ router.post(
   async (req, res) => {
     try {
       const { errors } = validationResult(req);
+      // Validation for content
       if (errors.length > 0) return res.status(403).json({ errors });
-      req.body.user_id = req?.user?._id;
-      const post = await Post.create(req.body);
-      return res.status(201).json(post);
+
+      // new post with the used id as logged in user
+      const newPost = {
+        user_id: req?.user?._id,
+        content: req?.body?.content,
+      };
+      // new post created
+      const post = await Post.create(newPost);
+      // created post pushed into logged in user's posts array
+      const user = await User.findByIdAndUpdate(
+        req?.user?._id,
+        {
+          $push: { posts: post?._id.toString() },
+        },
+        { new: true }
+      )
+        .populate("posts")
+        .lean()
+        .exec();
+
+      return res
+        .status(201)
+        .send("new post created and pushed into user posts")
+        .json(post);
     } catch (err) {
       return res.status(500).json(err);
     }
@@ -76,8 +98,12 @@ router.delete("/:id", authenticate, async (req, res) => {
 router.patch("/:id/like", authenticate, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id).lean().exec();
+    // checking whether the user is already liked
+    const isAlreadyLiked = post.likes.some((likedUser) =>
+      likedUser.equals(req?.user?._id)
+    );
 
-    if (!post.likes.includes(req?.user?._id)) {
+    if (!isAlreadyLiked) {
       await Post.findByIdAndUpdate(
         req.params.id,
         { $push: { likes: req?.user?._id } },
@@ -102,7 +128,12 @@ router.patch("/:id/like", authenticate, async (req, res) => {
 // get a post
 router.get("/:id", authenticate, async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id).lean().exec();
+    const post = await Post.findById(req.params.id)
+      .populate("user_id")
+      .populate("likes")
+      .populate("comments")
+      .lean()
+      .exec();
 
     return res.status(200).json(post);
   } catch (err) {
@@ -121,6 +152,9 @@ router.get("/user/timeline", authenticate, async (req, res) => {
     const posts = await Post.find({ user_id: req?.user?._id })
       .skip(offset)
       .limit(limit)
+      .populate("likes")
+      .populate("comments")
+      .populate("user_id")
       .lean()
       .exec();
 

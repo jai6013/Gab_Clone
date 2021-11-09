@@ -48,11 +48,19 @@ export const Post = ({
   id,
   userid,
 }) => {
-  const { handleLike } = useContext(AuthContext);
+  const { handleLike, isLoggedIn, isLoading } = useContext(AuthContext);
   const history = useHistory();
   return (
     <PostDiv>
-      <PostTopSection onClick={() => history.push(`/${userid}`)}>
+      <PostTopSection
+        onClick={() => {
+          if (isLoggedIn) {
+            history.push(`/users/${userid}`);
+          } else {
+            history.push(`/login`);
+          }
+        }}
+      >
         <PostUserPicDiv>
           <PostUserPic src={profile_pic} alt="user" />
         </PostUserPicDiv>
@@ -99,14 +107,30 @@ export const Post = ({
 
       <ReactionBar>
         {isLiked ? (
-          <ReactionItem onClick={() => handleLike(id)}>
+          <ReactionItem
+            onClick={() => {
+              if (isLoggedIn) {
+                handleLike(id);
+              } else {
+                history.push("/login");
+              }
+            }}
+          >
             <ReactionIcon>
               <AiFillLike color="#21CF7A" />
             </ReactionIcon>
             <ReactionText color="#21CF7A">Like</ReactionText>
           </ReactionItem>
         ) : (
-          <ReactionItem onClick={() => handleLike(id)}>
+          <ReactionItem
+            onClick={() => {
+              if (isLoggedIn) {
+                handleLike(id);
+              } else {
+                history.push("/login");
+              }
+            }}
+          >
             <ReactionIcon>
               <AiOutlineLike />
             </ReactionIcon>
