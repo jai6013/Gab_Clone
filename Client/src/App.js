@@ -3,6 +3,9 @@ import { Switch, Route } from "react-router-dom";
 import { ErrorPage } from "./Pages/ErrorPage";
 import { UserPage } from "./Pages/UserPage";
 import { MyPage } from "./Pages/MyPage";
+import { NewsPage } from "./Pages/NewsPage";
+import { GroupsPage } from "./Pages/GroupsPage";
+import { ExplorePage } from "./Pages/ExplorePage";
 
 function App() {
   return (
@@ -15,6 +18,15 @@ function App() {
       </Route>
       <Route exact path="/me">
         <MyPage />
+      </Route>
+      <Route exact path="/news">
+        <NewsPage />
+      </Route>
+      <Route exact path="/explore">
+        <ExplorePage />
+      </Route>
+      <Route exact path="/groups">
+        <GroupsPage />
       </Route>
       <Route>
         <ErrorPage />

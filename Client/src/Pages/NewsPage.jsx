@@ -3,11 +3,11 @@ import { Home } from "../Components/Home/Home";
 import { Navbar } from "../Components/Navbar/Navbar";
 import { Theme } from "../Styles/Theme";
 
-export const HomePage = () => {
+export const NewsPage = () => {
   return (
     <Theme>
-      <Navbar page="home" />
-      <Home page="home" />
+      <Navbar page="news" />
+      <Home />
     </Theme>
   );
 };

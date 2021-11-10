@@ -119,7 +119,12 @@ router.get("/me", authenticate, async (req, res) => {
 // To get a single user
 router.get("/:id", async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).lean().exec();
+    const user = await User.findById(req.params.id)
+      .populate("posts")
+      .populate("following")
+      .populate("followers")
+      .lean()
+      .exec();
     return res.status(200).json(user);
   } catch (err) {
     return res.status(400).send(err);
@@ -162,7 +167,7 @@ router.patch("/:id/follow", authenticate, async (req, res) => {
       return res.status(403).send("You can't follow yourself");
     const user = await User.findById(req.params.id);
     const loggedInUser = await User.findById(req?.user?._id);
-    if (!user.followers.includes(req?.user?._id)) {
+    if (!user?.followers.includes(loggedInUser?._id)) {
       await user.updateOne({ $push: { followers: req?.user?._id } });
       await loggedInUser.updateOne({ $push: { following: req?.params?.id } });
       return res.status(200).send("User has been followed");
@@ -182,7 +187,7 @@ router.patch("/:id/unfollow", authenticate, async (req, res) => {
       return res.status(403).send("You can't unfollow yourself");
     const user = await User.findById(req.params.id);
     const loggedInUser = await User.findById(req?.user?._id);
-    if (user.followers.includes(req?.user?._id)) {
+    if (user?.followers.includes(loggedInUser?._id)) {
       await user.updateOne({ $pull: { followers: req?.user?._id } });
       await loggedInUser.updateOne({ $pull: { following: req?.params?.id } });
       return res.status(200).send("User has been unfollowed");

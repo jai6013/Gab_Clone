@@ -11,7 +11,7 @@ export const MyPage = () => {
 
   const fetchData = async () => {
     await axios
-      .get(`http://localhost:2222/posts/user/timeline`, {
+      .get(`https://secure-ravine-45527.herokuapp.com/posts/user/timeline`, {
         headers: { Authorization: "Bearer " + token },
       })
       .then((res) => {
@@ -36,11 +36,11 @@ export const MyPage = () => {
           display_name={user?.display_name}
           username={user?.username}
           isVerified={user?.isVerified}
-          followers={user?.followers?.length}
-          following={user?.following?.length}
+          followers={user?.followers}
+          following={user?.following}
           bio={user?.bio}
           createdAt={user?.createdAt}
-          posts={timeline}
+          posts={user?.posts}
           isMyProfile={true}
         />
       </Theme>

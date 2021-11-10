@@ -37,11 +37,7 @@ import {
 import { Post } from "../Post/Post";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { useHistory } from "react-router";
-export const Home = ({
-  profile_pic = "https://gab.com/avatars/original/missing.png",
-  name = "bvsrtemp",
-  username = "bvsr",
-}) => {
+export const Home = () => {
   // const posts = [
   //   {
   //     isLiked: true,
