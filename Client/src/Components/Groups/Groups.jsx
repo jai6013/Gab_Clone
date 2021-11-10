@@ -34,7 +34,7 @@ import {
   Right,
   RightSideCard,
 } from "./GroupStyles";
-import { Post } from "../Post/Post";
+import { GroupPost } from "../GroupPost/GroupPost";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { useHistory } from "react-router";
 export const Groups = ({
@@ -297,7 +297,7 @@ export const Groups = ({
           )}
 
           {posts?.map((post) => (
-            <Post
+            <GroupPost
               key={post?._id}
               isLiked={post?.likes?.includes(user?._id)}
               name={post?.user_id?.display_name}
