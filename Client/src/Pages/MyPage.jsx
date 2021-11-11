@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Navbar } from "../Components/Navbar/Navbar";
+import { Navbar } from "../Components/Navbar/NavBar";
 import BottomNav from "../Components/Navbar/BottomNav";
 import { Profile } from "../Components/Profile/Profile";
 import { AuthContext } from "../Contexts/AuthContext";
@@ -31,7 +31,7 @@ export const MyPage = () => {
     <>
       <Theme>
         <Navbar />
-        <BottomNav/>
+        <BottomNav />
         <Profile
           cover_pic={user?.cover_pic}
           profile_pic={user?.profile_pic}
