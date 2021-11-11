@@ -1,6 +1,7 @@
 
 import React, { useContext } from "react";
 import { NoGroupInstructions } from "./NoGroupInstructions";
+import { FeaturedGroupNames } from "./NoGroupInstructions";
 import {
   CommentBar,
   CommentInput,
@@ -187,7 +188,7 @@ export const NoGroupJoined=()=>{
     return (
         <div style={{backgroundColor:"white", width:"100%", borderRadius:"5px", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", paddingTop:"15px"}}>
         {isLoggedIn && <NoGroupInstructions/>}
-        
+        <FeaturedGroupNames />
         </div>
     )
 }

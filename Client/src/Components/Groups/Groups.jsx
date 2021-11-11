@@ -294,20 +294,7 @@ export const Groups = ({
 
 
           <NoGroupJoined/>
-          {
-              
-              isLoggedIn && (
-            <PostDiv>
-              <PostPicTop>
-                <PostPicDiv>
-                  <PostPic src={user?.profile_pic} />
-                </PostPicDiv>
-              </PostPicTop>
-              <PostPicDivider />
-              <PostInput placeholder="What's on your mind?" />
-            </PostDiv>
-          )
-        }
+        
 
           {posts?.map((post) => (
             <GroupPost
@@ -328,58 +315,25 @@ export const Groups = ({
         </Middle>
         {isLoggedIn ? (
           <Right>
-            <RightSideCard>
-              <ProfileCard>
-                <ProfileCardDiv background={user?.cover_pic}></ProfileCardDiv>
-
-                <ProfileCardDiv>
-                  <ProfileCardPicDiv onClick={() => history.push("/me")}>
-                    <ProfileCardPic
-                      src={
-                        user?.profile_pic ||
-                        "https://gab.com/avatars/original/missing.png"
-                      }
-                    />
-                  </ProfileCardPicDiv>
-                  <ProfileCardName onClick={() => history.push("/me")}>
-                    <ProfileCardNameDiv>
-                      {user?.display_name}
-                    </ProfileCardNameDiv>
-                    <ProfileCardUsernameDiv>
-                      @{user?.username}
-                    </ProfileCardUsernameDiv>
-                  </ProfileCardName>
-                </ProfileCardDiv>
-
-                <ProfileCardDiv>
-                  <ProfileCardStatDiv>
-                    <ProfileCardStat onClick={() => history.push("/me")}>
-                      {user?.posts?.length}
-                    </ProfileCardStat>
-                    <ProfileCardStatName onClick={() => history.push("/me")}>
-                      Gabs
-                    </ProfileCardStatName>
-                  </ProfileCardStatDiv>
-
-                  <ProfileCardStatDiv>
-                    <ProfileCardStat onClick={() => history.push("/me")}>
-                      {user?.followers?.length}
-                    </ProfileCardStat>
-                    <ProfileCardStatName onClick={() => history.push("/me")}>
-                      Followers
-                    </ProfileCardStatName>
-                  </ProfileCardStatDiv>
-
-                  <ProfileCardStatDiv>
-                    <ProfileCardStat onClick={() => history.push("/me")}>
-                      {user?.following?.length}
-                    </ProfileCardStat>
-                    <ProfileCardStatName onClick={() => history.push("/me")}>
-                      Following
-                    </ProfileCardStatName>
-                  </ProfileCardStatDiv>
-                </ProfileCardDiv>
-              </ProfileCard>
+            <RightSideCard style={{marginLeft:"0",paddingLeft:"0", marginRight:"0",paddingRight:"0", paddingBottom:"0"}}>
+           
+              <h1 style={{marginLeft:"8px"}}>Sponsored</h1>
+              <div style={{backgroundColor:"rgb(240,242,245)",marginTop:"8px", marginLeft:"0", paddingLeft:"0"}}>
+              <ul >
+              <li  style={{display:"inline", marginRight:"2px"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">Help</a></li>
+              <li  style={{display:"inline"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">Security</a></li>
+              <li  style={{display:"inline"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">About</a></li>
+              <li  style={{display:"inline"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">Investors</a></li>
+              <li  style={{display:"inline"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">Terms of Sale</a></li>
+              <li  style={{display:"inline"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">DMCA</a></li>
+              <li  style={{display:"inline"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">Terms of Service</a></li>
+              <li  style={{display:"inline"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">Privacy Policy</a></li>
+              <li  style={{display:"inline"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">Status</a></li>
+              <li  style={{display:"inline"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">Logout</a></li>
+           </ul>
+              </div>
+             
+              
             </RightSideCard>
           </Right>
         ) : (
