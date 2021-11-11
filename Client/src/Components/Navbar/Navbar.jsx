@@ -27,7 +27,7 @@ import {
 } from "./NavbarStyles";
 import { useHistory } from "react-router";
 
-export const Navbar = () => {
+export const Navbar = ({ page }) => {
   const { handleTheme, theme } = useContext(ThemeContext);
   const { isLoggedIn, handleLogin, handleSignup, user } =
     useContext(AuthContext);
@@ -59,7 +59,10 @@ export const Navbar = () => {
           <NavMenuContainer isLoggedIn={isLoggedIn}>
             {/* Pass is Selected flag */}
 
-            <NavMenuItem onClick={() => history.push("/")} isSelected={true}>
+            <NavMenuItem
+              onClick={() => history.push("/")}
+              isSelected={"home" === page}
+            >
               <div>
                 <AiFillHome
                   size="1.3rem"
@@ -69,7 +72,10 @@ export const Navbar = () => {
               <NavMenuItemText>Home</NavMenuItemText>
             </NavMenuItem>
 
-            <NavMenuItem>
+            <NavMenuItem
+              onClick={() => history.push("/explore")}
+              isSelected={"explore" === page}
+            >
               <div>
                 <BsGlobe2
                   size="1.3rem"
@@ -78,7 +84,10 @@ export const Navbar = () => {
               </div>
               <NavMenuItemText>Explore</NavMenuItemText>
             </NavMenuItem>
-            <NavMenuItem>
+            <NavMenuItem
+              onClick={() => history.push("/news")}
+              isSelected={"news" === page}
+            >
               <div>
                 <TiDocumentText
                   size="1.3rem"
@@ -88,7 +97,10 @@ export const Navbar = () => {
               <NavMenuItemText>News</NavMenuItemText>
             </NavMenuItem>
 
-            <NavMenuItem>
+            <NavMenuItem
+              onClick={() => history.push("/groups")}
+              isSelected={"groups" === page}
+            >
               <div>
                 <MdGroups
                   size="1.3rem"

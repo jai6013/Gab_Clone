@@ -44,7 +44,7 @@ export const Profile = ({
   isMyProfile,
 }) => {
   const { user } = useContext(AuthContext);
-  console.log(followers, user);
+
   return (
     <>
       <HeadSection>
@@ -124,12 +124,12 @@ export const Profile = ({
           {posts?.map((post) => (
             <Post
               key={post?._id}
-              name={post?.user_id?.display_name}
-              username={post?.user_id?.username}
+              name={display_name}
+              username={username}
               postBody={post?.content}
               time={"2hr ."}
-              profile_pic={post?.user_id?.profile_pic}
-              isVerified={post?.user_id?.isVerified}
+              profile_pic={profile_pic}
+              isVerified={isVerified}
               likes={post?.likes?.length}
               comments={post?.comments?.length}
               id={post?._id}

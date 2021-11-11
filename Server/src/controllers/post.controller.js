@@ -39,10 +39,9 @@ router.post(
 
       return res
         .status(201)
-        .send("new post created and pushed into user posts")
-        .json(post);
+        .send("new post created and pushed into user posts");
     } catch (err) {
-      return res.status(500).json(err);
+      return res.status(500).send(err);
     }
   }
 );

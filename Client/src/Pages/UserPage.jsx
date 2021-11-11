@@ -21,6 +21,7 @@ export const UserPage = () => {
 
   useEffect(() => {
     fetchData();
+    console.log(user);
   }, []);
   return !user ? (
     <></>
