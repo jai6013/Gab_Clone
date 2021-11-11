@@ -31,6 +31,7 @@ export const LoginPage = () => {
   if (isLoggedIn) return <Redirect to="/" />;
 
   return (
+    <div style={{background:"#E5E8E8"}}>
     <Container>
       <Box>
         <Logo>
@@ -89,5 +90,6 @@ export const LoginPage = () => {
         </form>
       </Wrapper>
     </Container>
+    </div>
   );
 };

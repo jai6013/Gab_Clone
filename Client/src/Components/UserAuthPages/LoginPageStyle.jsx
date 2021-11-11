@@ -5,6 +5,7 @@ export const Container = styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
+    padding-bottom:50px;
    
 `
 
@@ -12,7 +13,7 @@ export const Title = styled.span`
     font-size:2.7rem;
     font-weight:800;
     height:40px;
-    width:60px
+    width:60px;
     color:#2ECC71 ;
     margin:15px auto;
     background-image: url(./logo.png);
@@ -23,12 +24,20 @@ export const Title = styled.span`
 export const Wrapper = styled.div`
     display:flex;
     flex-direction:column;
-    width:440px;
+    width:450px;
     margin:0 auto;
     background:#fff;
-    border-radius:12px;
     padding:15px;
+    border-radius:12px;
+    font-family: "Roboto", sans-serif;
+   
+    box-sizing:border-box;
+   
     @media(max-width:750px){
+        width:100%;
+       
+    };
+    @media(max-width:520px){
         width:100%;
        
     };
@@ -36,15 +45,18 @@ export const Wrapper = styled.div`
 
 export const InputWrapper = styled.div`
      width:100%;
-     margin:20px auto;
+     margin:20px 0;
+     box-sizing: border-box;
+
+
 `
 
 
 export const Heading = styled.h3`
     margin:30px auto;
-    font-size:20px;
+    font-size:18px;
     font-weight:500;
-    color:#1B2631;
+    color:#1B2639;
     text-align:center;
 `
 
@@ -62,7 +74,8 @@ export const InputBox = styled.input`
     border-right:1px solid #E5E8E8 ;
     border-bottom:1px solid #E5E8E8 ;
     outline:none;
-    padding:10px;
+    box-sizing: border-box;
+    padding: 0 10px;
     font-size:16px;
     font-weight:100;
     border-radius:10px;
