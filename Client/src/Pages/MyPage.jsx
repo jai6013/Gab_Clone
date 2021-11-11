@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Navbar } from "../Components/Navbar/Navbar";
-import BottomNav from "../Components/Navbar/BottomNav";
+import { Navbar } from "../Components/NavBar/NavBar";
+import BottomNav from "../Components/NavBar/BottomNav";
 import { Profile } from "../Components/Profile/Profile";
 import { AuthContext } from "../Contexts/AuthContext";
 import { Theme } from "../Styles/Theme";
