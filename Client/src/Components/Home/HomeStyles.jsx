@@ -117,6 +117,7 @@ export const PostPicDiv = styled.div`
 export const PostPicDivider = styled.div`
   width: 100%;
   height: 1px;
+  margin: 5px 0 5px 0;
   background: ${(props) => props.theme.colors.background1};
 `;
 
@@ -209,4 +210,22 @@ export const ProfileCardStat = styled.div`
   font-size: 16px;
   margin: 0 0 5px 0;
   color: ${(props) => props.theme.colors.primary};
+`;
+
+export const PostBtn = styled.button`
+  background-color: ${(props) => props.theme.colors.primary};
+  border: none;
+  outline: none;
+  color: #ffffff;
+  padding: 5px 15px 5px 15px;
+  font-size: 14px;
+  height: 30px;
+  width: 100%;
+  margin: 10px 0 0 0;
+  border-radius: 10px;
+
+  &:hover {
+    opacity: 50%;
+    cursor: pointer;
+  }
 `;

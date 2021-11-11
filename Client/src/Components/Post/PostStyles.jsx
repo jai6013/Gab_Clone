@@ -113,8 +113,8 @@ export const CommentBar = styled.div`
 `;
 
 export const CommentUserPicDiv = styled.div`
-  margin: 5px 5px 0 5px;
-  width: 30px;
+  margin: 10px 5px 0 5px;
+  width: 35px;
   height: 30px;
 `;
 
@@ -147,5 +147,30 @@ export const StatisticsSpan = styled.span`
   margin: 0 5px 0 5px;
   &:hover {
     cursor: pointer;
+  }
+`;
+
+export const CommentPostBtn = styled.button`
+  background-color: ${(props) => props.theme.colors.primary};
+  border: none;
+  outline: none;
+  color: #ffffff;
+  padding: 5px 15px 5px 15px;
+  font-size: 12px;
+  height: 30px;
+  margin: 10px 0 0 0;
+  border-radius: 10px;
+  position: relative;
+  left: -70px;
+  z-index: 1;
+  &:hover {
+    opacity: 50%;
+    cursor: pointer;
+  }
+  // display: none;
+  &:focus {
+    ${CommentInput} {
+      display: visible;
+    }
   }
 `;

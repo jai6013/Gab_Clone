@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ThemeContext } from "../../Contexts/ThemeContext";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { AiOutlineSearch, AiFillHome } from "react-icons/ai";
@@ -24,14 +24,29 @@ import {
   NavUserPic,
   NavLogin,
   NavSignup,
+  UserPop,
 } from "./NavbarStyles";
 import { useHistory } from "react-router";
+import { Popover } from "@mui/material";
 
 export const Navbar = ({ page }) => {
   const { handleTheme, theme } = useContext(ThemeContext);
   const { isLoggedIn, handleLogin, handleSignup, user } =
     useContext(AuthContext);
   const history = useHistory();
+  // Material UI POPUP
+  const [anchorEl, setAnchorEl] = useState(null);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+  // _______________________________________________________
   return (
     <>
       <NavDiv>
@@ -137,13 +152,30 @@ export const Navbar = ({ page }) => {
             </NavMenuItemText>
 
             <NavMenuRoundedItem
-              onClick={() => {
-                theme === "dark" && handleTheme();
-                handleLogin();
+              onClick={(e) => {
+                handleClick(e);
               }}
             >
               <NavUserPic src={user?.profile_pic} alt="user" />
             </NavMenuRoundedItem>
+            <UserPop>
+              <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+              >
+                <p>hello</p>
+              </Popover>
+            </UserPop>
           </NavMenuContainer>
           {!isLoggedIn && (
             <>
