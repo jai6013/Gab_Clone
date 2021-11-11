@@ -11,6 +11,9 @@ import { Signup } from "./Pages/Signup";
 import { ForgotPw } from "./Pages/ForgotPw";
 import { ResendConfirmPage } from "./Components/UserAuthPages/ResendConfirmPage";
 
+import NavBar from './Components/NavBar/NavBar';
+// import PopularPosts from './components/PopularPosts/PopularPosts';
+// import Button from '@mui/material/Button';
 function App() {
   return (
     <Switch>
