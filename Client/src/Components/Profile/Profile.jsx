@@ -81,7 +81,7 @@ export const Profile = ({
             <ProfileNavRight>
               <OutlineBtn>Edit Profile</OutlineBtn>
             </ProfileNavRight>
-          ) : followers?.some((friend) => friend === user?._id) ? (
+          ) : followers?.some((friend) => friend?._id === user?._id) ? (
             <ProfileNavRight>
               <OutlineBtn>Following</OutlineBtn>
             </ProfileNavRight>

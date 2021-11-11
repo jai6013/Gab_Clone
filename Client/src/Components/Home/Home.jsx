@@ -15,6 +15,7 @@ import {
   LeftSmallHeading,
   Middle,
   OffsetNav,
+  PostBtn,
   PostDiv,
   PostInput,
   PostPic,
@@ -289,6 +290,7 @@ export const Home = () => {
               </PostPicTop>
               <PostPicDivider />
               <PostInput placeholder="What's on your mind?" />
+              <PostBtn>Post</PostBtn>
             </PostDiv>
           )}
 
