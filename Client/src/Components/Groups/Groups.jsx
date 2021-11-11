@@ -35,6 +35,8 @@ import {
   RightSideCard,
 } from "./GroupStyles";
 import { GroupPost } from "../GroupPost/GroupPost";
+import { NoGroupJoined } from "../GroupPost/GroupPost";
+import { NoGroupInstructions } from "../GroupPost/NoGroupInstructions";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { useHistory } from "react-router";
 export const Groups = ({
@@ -284,7 +286,17 @@ export const Groups = ({
         </Left>
 
         <Middle>
-          {isLoggedIn && (
+
+        {
+            //  GROUP JOINING INSTRUCTIONS
+
+        }
+
+
+          <NoGroupJoined/>
+          {
+              
+              isLoggedIn && (
             <PostDiv>
               <PostPicTop>
                 <PostPicDiv>
@@ -294,7 +306,8 @@ export const Groups = ({
               <PostPicDivider />
               <PostInput placeholder="What's on your mind?" />
             </PostDiv>
-          )}
+          )
+        }
 
           {posts?.map((post) => (
             <GroupPost

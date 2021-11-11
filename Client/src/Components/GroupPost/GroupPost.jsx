@@ -1,4 +1,6 @@
+
 import React, { useContext } from "react";
+import { NoGroupInstructions } from "./NoGroupInstructions";
 import {
   CommentBar,
   CommentInput,
@@ -178,3 +180,15 @@ export const GroupPost = ({
     </PostDiv>
   );
 };
+
+
+export const NoGroupJoined=()=>{
+  const {isLoggedIn} = useContext(AuthContext);
+    return (
+        <div style={{backgroundColor:"white", width:"100%", borderRadius:"5px", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", paddingTop:"15px"}}>
+        {isLoggedIn && <NoGroupInstructions/>}
+        
+        </div>
+    )
+}
+
