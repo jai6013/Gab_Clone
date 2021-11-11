@@ -1,0 +1,18 @@
+.join_buttons{
+    height:43px;
+    width:146.5px;
+    padding: 7px 15px 7px 15px;
+    background-color: #21cf7a;
+    border-radius: 20%;
+}
+.join_buttons:first-child{
+    background-color: black;
+    border: 1px solid #21cf7a;
+    color: #21cf7a;
+}
+.join_buttons:nth-child(2){
+    background-color: #21cf7a;
+    /* border: 1px solid #21cf7a; */
+    border: none;
+    color: white;
+}

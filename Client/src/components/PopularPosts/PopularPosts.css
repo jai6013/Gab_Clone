@@ -1,0 +1,7 @@
+.popularPosts{
+  margin-left: 25%;
+}
+.popularPosts>p{
+  font-size: 19px;
+  font-weight: 600;
+}

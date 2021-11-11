@@ -7,6 +7,9 @@ import { NewsPage } from "./Pages/NewsPage";
 import { GroupsPage } from "./Pages/GroupsPage";
 import { ExplorePage } from "./Pages/ExplorePage";
 
+import NavBar from './components/navBar/NavBar';
+import PopularPosts from './components/PopularPosts/PopularPosts';
+// import Button from '@mui/material/Button';
 function App() {
   return (
     <Switch>

@@ -1,0 +1,40 @@
+.MenuBox{
+    width: 240px;
+    padding-top: 20px;
+    /* border: 2px solid red; */
+    margin-left: 4%;
+    background-color: #2D3436;
+    position:fixed;
+}
+.title{
+    font-size: 25px;
+    font-weight: 500;
+    color:white;
+}
+.menuLists{
+    padding-left:6px;
+
+}
+
+.list-item-child{
+    display: flex;
+    justify-content: flex-start;
+    width: 90%;
+    align-items: center;
+   color: white;
+  margin-bottom: 10px;
+  padding-left: 4px;
+  border-radius: 8px;
+}
+.list-item-child:hover{
+    background-color: #000000;
+}
+
+.list-item-child>h2{
+   margin: 0px;
+   padding: 0px;
+}
+
+.icons-small{
+    margin-right: 8px;
+}
