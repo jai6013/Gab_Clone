@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Navbar } from "../Components/NavBar/NavBar";
-import BottomNav from "../Components/NavBar/BottomNav";
+import { Navbar } from "../Components/Navbar/Navbar";
+import BottomNav from "../Components/Navbar/BottomNav";
 import { Profile } from "../Components/Profile/Profile";
 import { Theme } from "../Styles/Theme";
 
