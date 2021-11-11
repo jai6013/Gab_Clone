@@ -25,8 +25,7 @@ export const AuthContextProvider = ({ children }) => {
 
   // handleLogin dispatches login action
 
-  const handleLogin = async () => {
-    const data = { email: "srikanth@gab.com", password: "srikanth" };
+  const handleLogin = async (data) => {
     const loginAction = loginUser(data);
     dispatch(loginAction);
   };

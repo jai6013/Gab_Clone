@@ -6,6 +6,10 @@ import { MyPage } from "./Pages/MyPage";
 import { NewsPage } from "./Pages/NewsPage";
 import { GroupsPage } from "./Pages/GroupsPage";
 import { ExplorePage } from "./Pages/ExplorePage";
+import { Login } from "./Pages/Login";
+import { Signup } from "./Pages/Signup";
+import { ForgotPw } from "./Pages/ForgotPw";
+import { ResendConfirmPage } from "./Components/UserAuthPages/ResendConfirmPage";
 
 function App() {
   return (
@@ -27,6 +31,18 @@ function App() {
       </Route>
       <Route exact path="/groups">
         <GroupsPage />
+      </Route>
+      <Route exact path="/login">
+        <Login />
+      </Route>
+      <Route exact path="/signup">
+        <Signup />
+      </Route>
+      <Route exact path="/forgotpassword">
+        <ForgotPw />
+      </Route>
+      <Route exact path="/resend">
+        <ResendConfirmPage />
       </Route>
       <Route>
         <ErrorPage />
