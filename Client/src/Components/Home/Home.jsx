@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { MdNotifications } from "react-icons/md";
 import { IoChatbubblesSharp } from "react-icons/io5";
@@ -40,10 +40,28 @@ import {
 import { Post } from "../Post/Post";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { useHistory } from "react-router";
+import axios from "axios";
 export const Home = ({ page }) => {
-  const { user, posts, isLoggedIn } = useContext(AuthContext);
+  const { user, posts, isLoggedIn, token } = useContext(AuthContext);
   const history = useHistory();
-
+  const [post, setPost] = useState("");
+  const handlePost = async () => {
+    await axios
+      .post(
+        "https://secure-ravine-45527.herokuapp.com/posts",
+        {
+          content: post,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      });
+  };
   return (
     <div>
       <OffsetNav />
@@ -104,8 +122,12 @@ export const Home = ({ page }) => {
                 </PostPicDiv>
               </PostPicTop>
               <PostPicDivider />
-              <PostInput placeholder="What's on your mind?" />
-              <PostBtn>Post</PostBtn>
+              <PostInput
+                onChange={(e) => setPost(e.target.value)}
+                value={post}
+                placeholder="What's on your mind?"
+              />
+              <PostBtn onClick={handlePost}>Post</PostBtn>
             </PostDiv>
           )}
 

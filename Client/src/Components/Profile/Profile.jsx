@@ -44,7 +44,7 @@ export const Profile = ({
   isMyProfile,
 }) => {
   const { user } = useContext(AuthContext);
-
+  console.log(posts);
   return (
     <>
       <HeadSection>
@@ -134,6 +134,7 @@ export const Profile = ({
               comments={post?.comments?.length}
               id={post?._id}
               userid={post?.user_id?._id}
+              isLiked={post?.likes?.includes(user?._id)}
             />
           ))}
         </ProfileBodyRightDiv>

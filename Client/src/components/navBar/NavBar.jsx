@@ -26,7 +26,7 @@ import {
   NavSignup,
   UserPop,
 } from "./NavbarStyles";
-import { useHistory } from "react-router";
+import { Router, useHistory } from "react-router";
 import { Popover } from "@mui/material";
 import axios from "axios";
 
@@ -48,7 +48,7 @@ export const Navbar = ({ page }) => {
   };
 
   const handleSearch = async () => {
-    await axios.get(`https://secure-ravine-45527.herokuapp.com/users/search?`);
+    history.push(`/search?q=${q}`);
   };
 
   const open = Boolean(anchorEl);

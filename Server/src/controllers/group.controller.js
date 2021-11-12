@@ -37,6 +37,20 @@ router.get("/", authenticate, async (req, res) => {
 });
 // ------------------------------------------------------------------------
 
+// To search for groups
+router.get("/search", async (req, res) => {
+  try {
+    const query = new RegExp(req.query.q, "i");
+    const groups = await Group.find({ group_name: query });
+    res.status(200).json({ groups });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send(err);
+  }
+});
+
+// ----------------------------------------------------------------------------
+
 // To join/exit a group
 router.patch("/join/:id", authenticate, async (req, res) => {
   try {

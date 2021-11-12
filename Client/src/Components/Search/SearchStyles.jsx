@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const OffsetNav = styled.div`
   height: 80px;
@@ -77,24 +77,9 @@ export const IconDivText = styled.div`
 
 export const PostDiv = styled.div`
   background: ${(props) => props.theme.colors.inverted};
-  padding: 10px;
+  padding: 10px 0;
   margin: 10px 0 10px 0;
   border-radius: 10px;
-`;
-
-export const ReactionBar = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-`;
-
-export const ReactionItem = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-export const ReactionIcon = styled.div``;
-export const ReactionText = styled.div`
-  font-size: smaller;
 `;
 
 export const LeftSmallHeading = styled.div`
@@ -111,135 +96,157 @@ export const RightSideCard = styled.div`
   border-radius: 10px;
 `;
 
-export const PostPic = styled.img`
-  width: 100%;
-  border-radius: 50%;
-`;
-
-export const PostPicDiv = styled.div`
-  width: 6%;
-  height: 50%;
-`;
-
-export const PostPicDivider = styled.div`
-  width: 100%;
-  height: 1px;
-  margin: 5px 0 5px 0;
-  background: ${(props) => props.theme.colors.background1};
-`;
-
-export const PostPicTop = styled.div`
+export const SearchTitleDiv = styled.div`
   display: flex;
   flex-direction: row;
+`;
+
+export const SeeMoreDiv = styled.div`
+  font-size: 12px;
+  color: ${(props) => props.theme.colors.primary};
+  padding: 5px;
+  font-weight: bold;
+  border-radius: 5px;
+  &:hover {
+    cursor: pointer;
+    background: ${(props) => props.theme.colors.background1};
+  }
+`;
+
+export const SearchCards = styled.div`
+  border-top: 1px solid ${(props) => props.theme.colors.button};
+  border-bottom: 1px solid ${(props) => props.theme.colors.button};
+  padding: 5px 10px;
+  width: 100%;
+
+  ${(props) =>
+    props.head
+      ? ``
+      : `&:hover{
+    cursor:pointer;
+    background: ${props.theme.colors.background1};
+  }`}
+`;
+
+export const SearchCountDiv = styled.div`
+  font-size: 12px;
+  color: ${(props) => props.theme.colors.text2};
+  margin: 0 5px;
+`;
+
+export const ProfileTopDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: spave-between;
   height: 40px;
 `;
 
-export const PostInput = styled.input`
-  background: ${(props) => props.theme.colors.background2};
-  outline: none;
-  border: none;
-  border-radius: 10px;
-  margin: 7px 10px 0 10px;
-  padding: 0 0 0 10px;
-  width: 92%;
-  height: 90%;
-  font-size: 14px;
-  color: ${(props) => props.theme.colors.input};
+export const ProfilePicDiv = styled.div`
+  width: 40px;
 `;
 
-export const ProfileCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  border-radius: 10px;
-`;
-export const ProfileCardDiv = styled.div`
-  height: 50px;
-  display: flex;
-  flex-direction: row;
-`;
-
-export const CoverCardDiv = styled.div`
-  height: 100px;
-  display: flex;
-`;
-
-export const CoverCardImg = styled.img`
+export const ProfilePic = styled.img`
   height: 100%;
   width: 100%;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-`;
-
-export const ProfileCardPicDiv = styled.div`
-  width: 70px;
-  position: relative;
-  top: -25px;
-  margin-left: 15px;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-export const ProfileCardPic = styled.img`
-  width: 100%;
   border-radius: 50%;
-  border: 7px solid ${(props) => props.theme.colors.background2};
 `;
 
-export const ProfileCardName = styled.div`
+export const ProfileTitleDiv = styled.div`
   display: flex;
   flex-direction: column;
-  &:hover {
-    cursor: pointer;
-  }
+  margin: 0 0 0 20px;
+  width: 80%;
 `;
-export const ProfileCardNameDiv = styled.div`
+export const NameDiv = styled.div`
   font-size: 14px;
-  margin: 10px 0 0 15px;
+`;
+export const UsernameDiv = styled.div`
+  font-size: 12px;
+  color: ${(props) => props.theme.colors.text2};
+  margin: 5px 0 0 0;
 `;
 
-export const ProfileCardUsernameDiv = styled.div`
+export const BioDiv = styled.div`
+  margin: 0 0 0 60px;
   font-size: 12px;
-  margin: 5px 0 0 15px;
   color: ${(props) => props.theme.colors.text2};
 `;
 
-export const ProfileCardStatDiv = styled.div`
+export const FollowBtn = styled.button`
+  height: 30px;
+  width: 80px;
+  border-radius: 15px;
+  padding: 5px;
+  font-size: 12px;
+  border: 1px solid ${(props) => props.theme.colors.primary};
+  color: ${(props) =>
+    props.type === "Follow" ? props.theme.colors.primary : "#FFFFFF"};
+
+  background: ${(props) =>
+    props.type === "Following"
+      ? props.theme.colors.primary
+      : props.theme.colors.background2};
+
+  &:hover {
+    cursor: pointer;
+    ${(props) =>
+      props.type === "Following"
+        ? `opacity:50%;`
+        : `background:${props.theme.colors.primary}; color:#FFFFFF;`}
+  }
+`;
+
+export const GroupTopDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: spave-between;
+  height: 50px;
+`;
+
+export const GroupPicDiv = styled.div`
+  width: 70px;
+  height: 50px;
+`;
+
+export const GroupPic = styled.img`
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+`;
+export const GroupTitleDiv = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 10px 40px 0 10px;
-  &:hover {
-    cursor: pointer;
-  }
+  margin: 0 0 0 20px;
+  width: 80%;
 `;
-
-export const ProfileCardStatName = styled.div`
-  font-size: 12px;
-  color: ${(props) => props.theme.colors.text2};
-  &:hover {
-    text-decoration: underline;
-    cursor: pointer;
-  }
-`;
-export const ProfileCardStat = styled.div`
-  font-size: 16px;
-  margin: 0 0 5px 0;
+export const GroupNameDiv = styled.div`
+  font-size: 14px;
   color: ${(props) => props.theme.colors.primary};
 `;
+export const GroupCountDiv = styled.div`
+  font-size: 12px;
+  color: ${(props) => props.theme.colors.text2};
+  margin: 5px 0 0 0;
+`;
 
-export const PostBtn = styled.button`
-  background-color: ${(props) => props.theme.colors.primary};
-  border: none;
-  outline: none;
-  color: #ffffff;
-  padding: 5px 15px 5px 15px;
-  font-size: 14px;
+export const rotate = keyframes`
+from {
+  transform: rotate(0deg);
+}
+
+to {
+  transform: rotate(360deg);
+}
+`;
+
+export const Rotate = styled.div`
+  display: inline-block;
+  animation: ${rotate} 2s linear infinite;
   height: 30px;
+  width: 30px;
+  margin: 0 45% 0 45%;
+`;
+export const LoadingImg = styled.img`
+  height: 100%;
   width: 100%;
-  margin: 10px 0 0 0;
-  border-radius: 10px;
-
-  &:hover {
-    opacity: 50%;
-    cursor: pointer;
-  }
 `;
