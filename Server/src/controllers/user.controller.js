@@ -115,7 +115,15 @@ router.get("/", async (req, res) => {
 
 router.get("/me", authenticate, async (req, res) => {
   try {
-    return res.status(200).json(req.user);
+    const user = await User.findById(req?.user?._id)
+      .select("-password")
+      ?.populate("posts")
+      ?.populate("followers")
+      ?.populate("following")
+      ?.populate("groups")
+      .lean()
+      .exec();
+    return res.status(200).json({ user });
   } catch (err) {
     return res.status(500).send(err);
   }

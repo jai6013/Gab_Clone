@@ -14,7 +14,6 @@ export const AuthContextProvider = ({ children }) => {
   const { userState, postState } = useSelector((state) => state);
   const { isLoggedIn, token, user } = userState;
   const { posts, isLoading } = postState;
-  console.log(user);
   const dispatch = useDispatch();
   // handle like dispatches like/dislike action
 

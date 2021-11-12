@@ -9,7 +9,7 @@ export const GroupsPage = () => {
     <Theme>
       <Navbar page="groups" />
       <BottomNav page="groups" />
-      <Groups />
+      <Groups page="Groups" />
     </Theme>
   );
 };

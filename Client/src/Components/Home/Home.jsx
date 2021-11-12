@@ -6,6 +6,8 @@ import { BsGlobe2 } from "react-icons/bs";
 import { TiDocumentText } from "react-icons/ti";
 import {
   Container,
+  CoverCardDiv,
+  CoverCardImg,
   IconDiv,
   IconDivText,
   Left,
@@ -38,7 +40,7 @@ import {
 import { Post } from "../Post/Post";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { useHistory } from "react-router";
-export const Home = () => {
+export const Home = ({ page }) => {
   // const posts = [
   //   {
   //     isLiked: true,
@@ -233,45 +235,45 @@ export const Home = () => {
       <OffsetNav />
       <Container>
         <Left>
-          <LeftPanelHeading>Home</LeftPanelHeading>
+          <LeftPanelHeading>Explore</LeftPanelHeading>
           <LeftSmallHeading>Menu</LeftSmallHeading>
           <LeftNavDiv>
-            <LeftNavItem>
+            <LeftNavItem isSelected={page === "Home"}>
               <IconDiv>
                 <AiFillHome size="1rem" />
               </IconDiv>
               <IconDivText>Home</IconDivText>
             </LeftNavItem>
 
-            <LeftNavItem>
+            <LeftNavItem isSelected={page === "Notifications"}>
               <IconDiv>
                 <MdNotifications size="1rem" />
               </IconDiv>
               <IconDivText>Notifications</IconDivText>
             </LeftNavItem>
 
-            <LeftNavItem>
+            <LeftNavItem isSelected={page === "Chats"}>
               <IconDiv>
                 <IoChatbubblesSharp size="1rem" />
               </IconDiv>
               <IconDivText>Chats</IconDivText>
             </LeftNavItem>
 
-            <LeftNavItem>
+            <LeftNavItem isSelected={page === "Groups"}>
               <IconDiv>
                 <AiFillHome size="1rem" />
               </IconDiv>
               <IconDivText>Groups</IconDivText>
             </LeftNavItem>
 
-            <LeftNavItem>
+            <LeftNavItem isSelected={page === "Explore"}>
               <IconDiv>
                 <BsGlobe2 size="1rem" />
               </IconDiv>
               <IconDivText>Explore</IconDivText>
             </LeftNavItem>
 
-            <LeftNavItem>
+            <LeftNavItem isSelected={page === "News"}>
               <IconDiv>
                 <TiDocumentText size="1rem" />
               </IconDiv>
@@ -279,7 +281,6 @@ export const Home = () => {
             </LeftNavItem>
           </LeftNavDiv>
         </Left>
-
         <Middle>
           {isLoggedIn && (
             <PostDiv>
@@ -315,7 +316,10 @@ export const Home = () => {
           <Right>
             <RightSideCard>
               <ProfileCard>
-                <ProfileCardDiv background={user?.cover_pic}></ProfileCardDiv>
+                {/* <ProfileCardDiv background={user?.cover_pic}></ProfileCardDiv> */}
+                <CoverCardDiv>
+                  <CoverCardImg alt="cover" src={user?.cover_pic} />
+                </CoverCardDiv>
 
                 <ProfileCardDiv>
                   <ProfileCardPicDiv onClick={() => history.push("/me")}>

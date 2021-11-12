@@ -45,6 +45,9 @@ function App() {
       <Route exact path="/resend">
         <ResendConfirmPage />
       </Route>
+      <Route exact path="/posts/:postid">
+        <ErrorPage />
+      </Route>
       <Route>
         <ErrorPage />
       </Route>
