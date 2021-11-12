@@ -1,11 +1,18 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { AuthContext } from '../../Contexts/AuthContext'
-import ChatOnline from '../chatOnline/ChatOnline'
 import Conversation from '../Conversations/Conversation'
 import Message from '../Message/Message'
 import axios from 'axios'
 import {io} from 'socket.io-client'
 import "./messanger.css"
+import { IconDiv, IconDivText, Left, LeftNavDiv, LeftNavItem, LeftPanelHeading, LeftSmallHeading } from './MessangerStyles'
+import { AiFillHome } from 'react-icons/ai'
+import { MdNotifications } from 'react-icons/md'
+import { IoChatbubblesSharp } from 'react-icons/io5'
+import { BsGlobe2 } from 'react-icons/bs'
+import { TiDocumentText } from 'react-icons/ti'
+
+
 
 export default function Messanger() {
     const [conversations,setConversations] = useState([])
@@ -86,19 +93,71 @@ export default function Messanger() {
     useEffect(()=>{
         getMessages()
     },[currentChat])
-    return (
+    return (<>
+
+    <div className="mainContainer" >
+    <Left>
+          <LeftPanelHeading>Home</LeftPanelHeading>
+          <LeftSmallHeading>Menu</LeftSmallHeading>
+          <LeftNavDiv>
+            <LeftNavItem>
+              <IconDiv>
+                <AiFillHome size="1rem" />
+              </IconDiv>
+              <IconDivText>Home</IconDivText>
+            </LeftNavItem>
+
+            <LeftNavItem>
+              <IconDiv>
+                <MdNotifications size="1rem" />
+              </IconDiv>
+              <IconDivText>Notifications</IconDivText>
+            </LeftNavItem>
+
+            <LeftNavItem>
+              <IconDiv>
+                <IoChatbubblesSharp size="1rem" />
+              </IconDiv>
+              <IconDivText>Chats</IconDivText>
+            </LeftNavItem>
+
+            <LeftNavItem>
+              <IconDiv>
+                <AiFillHome size="1rem" />
+              </IconDiv>
+              <IconDivText>Groups</IconDivText>
+            </LeftNavItem>
+
+            <LeftNavItem>
+              <IconDiv>
+                <BsGlobe2 size="1rem" />
+              </IconDiv>
+              <IconDivText>Explore</IconDivText>
+            </LeftNavItem>
+
+            <LeftNavItem>
+              <IconDiv>
+                <TiDocumentText size="1rem" />
+              </IconDiv>
+              <IconDivText>News</IconDivText>
+            </LeftNavItem>
+          </LeftNavDiv>
+        </Left>
         <div className="messanger">
             <div className="chatMenu">
                 <div className="chatMenuWrapper">
                     <input type="text" placeholder="Search for friends" className="chatMenuInp" />
-                    <br />
+                    </div>
+                    <div className="allChat">ALL CHATS</div>
+                    <div>
+
                     {  conversations.map((c) => (
-                            <div onClick = {() => setCurrentChat(c)}>
+                        <div onClick = {() => setCurrentChat(c)}>
                             <Conversation  currentUser = {user} conversation = {c}/>
                             </div>
                         ))
                     }
-                </div>
+                    </div>
             </div>
             <div className="chatBox">
                 <div className="chatBoxWrapper">
@@ -124,11 +183,13 @@ export default function Messanger() {
             }
                 </div>
                 </div>
-            <div className="chatOnline">
+                </div>
+            {/* <div className="chatOnline">
                 <div className="chatOnlineWrapper">
                     <ChatOnline/>
                 </div>
-            </div>
+            </div> */}
         </div>
+        </>
     )
 }

@@ -14,6 +14,7 @@ import { Login } from "./Pages/Login";
 import { Signup } from "./Pages/Signup";
 import { ForgotPw } from "./Pages/ForgotPw";
 import { ResendConfirmPage } from "./Components/UserAuthPages/ResendConfirmPage";
+import { MessengerPage } from "./Pages/MessengerPage";
 
 // import Button from '@mui/material/Button';
 function App() {
@@ -50,7 +51,7 @@ function App() {
         <ResendConfirmPage />
       </Route>
       <Route exact path="/messanger">
-        <Messanger/>
+      <MessengerPage/>
       </Route>
       <Route>
         <ErrorPage />
