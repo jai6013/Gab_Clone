@@ -10,8 +10,8 @@ import { Login } from "./Pages/Login";
 import { Signup } from "./Pages/Signup";
 import { ForgotPw } from "./Pages/ForgotPw";
 import { ResendConfirmPage } from "./Components/UserAuthPages/ResendConfirmPage";
-import { MessengerPage } from "./Pages/MessengerPage";
-
+import { SearchResPage } from "./Pages/SearchResPage";
+import {MessengerPage} from './Pages/MessengerPage'
 // import Button from '@mui/material/Button';
 function App() {
   return (
@@ -51,6 +51,9 @@ function App() {
       </Route>
       <Route exact path="/posts/:postid">
         <ErrorPage />
+      </Route>
+      <Route exact path="/search">
+        <SearchResPage />
       </Route>
       <Route>
         <ErrorPage />

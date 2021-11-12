@@ -113,6 +113,20 @@ router.get("/", async (req, res) => {
 });
 // --------------------------------------------------------------------
 
+// To search for users
+router.get("/search", async (req, res) => {
+  try {
+    const query = new RegExp(req.query.q, "i");
+    const users = await User.find({ display_name: query });
+    res.status(200).json({ users });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send(err);
+  }
+});
+
+// ----------------------------------------------------------------------------
+
 router.get("/me", authenticate, async (req, res) => {
   try {
     const user = await User.findById(req?.user?._id)
