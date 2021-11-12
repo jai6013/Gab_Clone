@@ -1,6 +1,7 @@
-.mainContainer{
+/* .mainContainer{
     display: flex;
     align-items: flex-start;
+    background-color: red;
 }
 .messanger{
     height: 100vh;
@@ -17,9 +18,7 @@
 .chatBox{
     flex: 7;
 }
-/* .chatOnline{
-    flex: 3;
-} */
+
 .chatMenuWrapper{
     padding: 10px;
 }
@@ -48,4 +47,4 @@
     padding-top: 10px;
     padding-bottom: 10px;
     text-indent: 15px;
-}
+} */

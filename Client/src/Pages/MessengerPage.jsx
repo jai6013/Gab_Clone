@@ -4,6 +4,7 @@ import { Navbar } from '../Components/Navbar/NavBar'
 import { Theme } from '../Styles/Theme'
 
 export const MessengerPage = () => {
+
     return (
         <>
         <Theme>

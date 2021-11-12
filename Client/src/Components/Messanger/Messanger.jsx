@@ -22,7 +22,7 @@ export default function Messanger() {
     const socket = useRef()
     const {user} = useContext(AuthContext)    
     const [arrivalMessage, setArrivalMessage] = useState(null)
-    
+    console.log(user)
     const getConversations = async () =>{
         try{
             const res = await axios.get(`http://localhost:2222/conversations/${user._id}`)
@@ -96,7 +96,7 @@ export default function Messanger() {
     return (<>
 
     <div className="mainContainer" >
-    <Left>
+    {/* <Left>
           <LeftPanelHeading>Home</LeftPanelHeading>
           <LeftSmallHeading>Menu</LeftSmallHeading>
           <LeftNavDiv>
@@ -142,7 +142,7 @@ export default function Messanger() {
               <IconDivText>News</IconDivText>
             </LeftNavItem>
           </LeftNavDiv>
-        </Left>
+        </Left> */}
         <div className="messanger">
             <div className="chatMenu">
                 <div className="chatMenuWrapper">

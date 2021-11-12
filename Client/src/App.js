@@ -51,7 +51,7 @@ function App() {
         <ResendConfirmPage />
       </Route>
       <Route exact path="/messanger">
-      <MessengerPage/>
+      <Messanger/>
       </Route>
       <Route>
         <ErrorPage />
