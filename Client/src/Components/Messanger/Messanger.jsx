@@ -55,6 +55,9 @@ export default function Messanger() {
     }      
     setCurrentChat(c)
   }
+  const handleNewConversation =() =>{
+    
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = {
@@ -231,7 +234,7 @@ export default function Messanger() {
                 <br />
                <p>Choose one from your existing messages, or start a new one"</p>
                <br />
-               <button className = "chatSubmitButton" style={{width:"130px"}}>New message</button>
+               <button onClick={handleNewConversation} className = "chatSubmitButton" style={{width:"130px"}}>New message</button>
                 </div>
                 </>
               )}
