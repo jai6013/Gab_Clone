@@ -4,6 +4,7 @@ import { ErrorPage } from "./Pages/ErrorPage";
 import { UserPage } from "./Pages/UserPage";
 import { MyPage } from "./Pages/MyPage";
 import GroupPage from "./Pages/GroupPage";
+import Messanger from "./Components/Messanger/Messanger";
 
 
 function App() {
@@ -20,6 +21,9 @@ function App() {
       </Route>
       <Route exact path="/group">
         <GroupPage/>
+      </Route>
+      <Route exact path="/messanger">
+        <Messanger/>
       </Route>
       <Route>
         <ErrorPage />

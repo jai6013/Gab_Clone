@@ -1,0 +1,11 @@
+import React from 'react'
+
+export default function Message({message,own}) {
+    return (
+        <div className="message">
+            <div className="messageTop">
+                <p className="messageText">{message.text}</p>
+            </div>
+        </div>
+    )
+}
