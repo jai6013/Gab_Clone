@@ -1,15 +1,15 @@
 import React from "react";
-import { Home } from "../Components/Home/Home";
+import { Groups } from "../Components/Groups/Groups";
 import { Navbar } from "../Components/Navbar/NavBar";
 import BottomNav from "../Components/Navbar/BottomNav";
 import { Theme } from "../Styles/Theme";
 
-export const HomePage = () => {
+export const GroupsPage = () => {
   return (
     <Theme>
-      <Navbar page="home" />
-      <BottomNav page="home" />
-      <Home page="home" />
+      <Navbar page="groups" />
+      <BottomNav page="groups" />
+      <Groups />
     </Theme>
   );
 };

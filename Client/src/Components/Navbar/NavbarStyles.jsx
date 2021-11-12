@@ -164,3 +164,9 @@ export const NavSignup = styled.button`
     opacity: 50%;
   }
 `;
+
+export const UserPop = styled.div`
+  @media ${(props) => props.theme.breakpoints.sm} {
+    display: none;
+  }
+`;

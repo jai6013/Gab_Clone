@@ -1,14 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Navbar } from "../Components/Navbar/Navbar";
+import { Navbar } from "../Components/Navbar/NavBar";
+import BottomNav from "../Components/Navbar/BottomNav";
 import { Profile } from "../Components/Profile/Profile";
 import { Theme } from "../Styles/Theme";
 
 export const UserPage = () => {
   const { userid } = useParams();
   const [user, setUser] = useState();
-  const [timeline, setTimeline] = useState();
 
   const fetchData = async () => {
     await axios
@@ -21,12 +21,14 @@ export const UserPage = () => {
 
   useEffect(() => {
     fetchData();
+    console.log(user);
   }, []);
   return !user ? (
     <></>
   ) : (
     <Theme>
       <Navbar />
+      <BottomNav />
       <Profile
         cover_pic={user?.cover_pic}
         profile_pic={user?.profile_pic}

@@ -25,7 +25,7 @@ export const Middle = styled.div`
     margin-left: 0;
   }
   margin-left: 22%;
-  width: 44%;
+  width: 48%;
   padding: 10px;
 `;
 export const Right = styled.div`
@@ -34,8 +34,10 @@ export const Right = styled.div`
     width: 0%;
   }
   padding: 10px;
-  width: 32%;
+  width: 28%;
 `;
+
+
 
 export const LeftNavDiv = styled.div`
   display: flex;
@@ -59,6 +61,12 @@ export const LeftNavItem = styled.div`
 export const LeftPanelHeading = styled.div`
   margin: 10px 10px 30px 5px;
   font-size: larger;
+`;
+
+export const MiddleTopHeading=styled.div`
+margin: 0 10px 30px 5px;
+font-size: 20px;
+font-width:500;
 `;
 
 export const IconDiv = styled.div``;
@@ -97,12 +105,79 @@ export const LeftSmallHeading = styled.div`
 `;
 
 export const RightSideCard = styled.div`
-  width: 80%;
+  width: 95%;
   background: ${(props) => props.theme.colors.inverted};
-  padding: 10px;
+  padding: 10px 15px;
   margin: 10px 0 10px 0;
   border-radius: 10px;
 `;
+
+export const FeaturedGroups=styled.div `
+  width:100%;
+  background:#fff;
+  border-radius:10px;
+  display:flex;
+  background: ${(props) => props.theme.colors.inverted};
+  flex-direction:row;
+  padding:0 0 10px 0;
+  justify-content:space-between;
+`
+export const FeatureHeading=styled.h3  `
+    font-weight:600;
+    
+`
+export const ShowAll=styled.button `
+  background:none;
+  border:none;
+  height:25px;
+  width:70px;
+  border-radius:5px;
+  font-size:14px;
+  font-weight:600;
+  cursor-pointer:pointer;
+  color:#58D68D;
+  &: hover{
+    background:#F2F4F4 ;
+  }
+`
+export const FeatureWrapper=styled.div `
+  border-bottom:1px solid #E5E8E8;
+  height:70px;
+  padding:5px 0;
+  
+`
+export const GroupImage=styled.div `
+    width:100px;
+    height:50px;
+    margin:0px 10px 0px 0;
+    border-radius:5px;
+    float:left;
+    background: url(${(props)=>props.imgUrl}); 
+    background-position: center;
+    background-size:contain;
+    background-origin: content-box;
+`
+export const GroupName=styled.p`
+  font-size:14px;
+  font-weight:600;
+  padding-top:5px;
+  color:#58D68D;
+`
+export const GroupMembers=styled.p`
+  font-size:12px;
+  font-weight:500;
+  background: ${(props) => props.theme.colors.inverted};
+  padding:15px 0;
+`
+export const ShowAllButton=styled.button `
+    width:100%;
+    height:35px;
+    border:none;
+    margin-top:10px;
+    border-radius:10px;
+`
+
+
 
 export const PostPic = styled.img`
   width: 100%;
@@ -209,76 +284,4 @@ export const ProfileCardStat = styled.div`
   font-size: 16px;
   margin: 0 0 5px 0;
   color: ${(props) => props.theme.colors.primary};
-`;
-
-export const ShowAllDiv = styled.div`
-  font-size: 12px;
-  color: ${(props) => props.theme.colors.primary};
-  padding: 5px;
-  font-weight: bold;
-  border-radius: 5px;
-  &:hover {
-    cursor: pointer;
-    background: ${(props) => props.theme.colors.background1};
-  }
-`;
-
-export const GroupWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  border-radius: 5px;
-  padding: 5px;
-  &:hover {
-    cursor: pointer;
-    background: ${(props) => props.theme.colors.background1};
-  }
-`;
-
-export const GroupImgDiv = styled.div`
-  height: 50px;
-  width: 80px;
-  margin: 0 10px 0 0;
-`;
-
-export const GroupDetailsDiv = styled.div`
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-`;
-
-export const GroupImg = styled.img`
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
-`;
-
-export const GroupTitle = styled.div`
-  font-size: 12px;
-  font-weight: bold;
-  color: ${(props) => props.theme.colors.primary};
-`;
-
-export const GroupFollowersCount = styled.div`
-  color: ${(props) => props.theme.colors.text2};
-  font-size: 12px;
-  margin: 5px 0;
-`;
-
-export const AboutDiv = styled.div`
-  color: ${(props) => props.theme.colors.text2};
-  font-size: 12px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-`;
-
-export const AboutRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin: 5px 0 5px;
-`;
-
-export const AboutItem = styled.div`
-  margin: 0 5px 0 5px;
 `;

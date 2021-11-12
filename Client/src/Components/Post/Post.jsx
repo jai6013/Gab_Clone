@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import {
   CommentBar,
   CommentInput,
+  CommentPostBtn,
   CommentUserPic,
   CommentUserPicDiv,
   PostBody,
@@ -174,6 +175,7 @@ export const Post = ({
           <CommentUserPic src={profile_pic} />
         </CommentUserPicDiv>
         <CommentInput placeholder="What's on your mind?" />
+        <CommentPostBtn>Post</CommentPostBtn>
       </CommentBar>
     </PostDiv>
   );

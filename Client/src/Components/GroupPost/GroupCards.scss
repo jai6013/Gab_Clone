@@ -1,0 +1,47 @@
+._cardWrapper{
+    // border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    height: 64px;
+    width: 100%;
+    border-bottom: 1px solid rgb(218, 218, 218);
+    cursor: pointer;
+
+    &:hover{
+        background-color:rgb(245, 248, 250);
+    }
+
+    .left_around{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        img{
+            height: 53px;
+            width: 84px;
+            border-radius: 6px;
+            object-fit: contain;
+            // border: 1px solid red;
+        }
+        .titles{
+            display: flex;
+            flex-direction: column;
+           justify-content:flex-start;
+
+            ._gpName{
+                padding-left: 10px;
+                font-size: 14px;
+                font-style: 600;
+                color: #21CF7A;
+            }
+            ._membersCount{
+                padding-left: 10px;
+                padding-top: 10px;
+                font-size: 13px;
+            }
+        }
+    }
+}

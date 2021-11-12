@@ -181,13 +181,13 @@ export const Navbar = ({ page }) => {
             <>
               <NavLogin
                 isLoggedIn={isLoggedIn}
-                onClick={() => history.push("/login")}
+                onClick={history.push("/login")}
               >
                 Login
               </NavLogin>
               <NavSignup
                 isLoggedIn={isLoggedIn}
-                onClick={() => history.push("/signup")}
+                onClick={history.push("/signup")}
               >
                 Signup
               </NavSignup>

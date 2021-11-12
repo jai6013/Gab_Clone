@@ -14,7 +14,7 @@ export const AuthContextProvider = ({ children }) => {
   const { userState, postState } = useSelector((state) => state);
   const { isLoggedIn, token, user } = userState;
   const { posts, isLoading } = postState;
-
+  console.log(user);
   const dispatch = useDispatch();
   // handle like dispatches like/dislike action
 
@@ -25,8 +25,7 @@ export const AuthContextProvider = ({ children }) => {
 
   // handleLogin dispatches login action
 
-  const handleLogin = async () => {
-    const data = { email: "srikanth@gab.com", password: "srikanth" };
+  const handleLogin = async (data) => {
     const loginAction = loginUser(data);
     dispatch(loginAction);
   };

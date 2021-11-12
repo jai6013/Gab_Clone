@@ -4,12 +4,12 @@ import { Navbar } from "../Components/Navbar/NavBar";
 import BottomNav from "../Components/Navbar/BottomNav";
 import { Theme } from "../Styles/Theme";
 
-export const HomePage = () => {
+export const ExplorePage = () => {
   return (
     <Theme>
-      <Navbar page="home" />
-      <BottomNav page="home" />
-      <Home page="home" />
+      <Navbar page="explore" />
+      <BottomNav page="explore" />
+      <Home />
     </Theme>
   );
 };

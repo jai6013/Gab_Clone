@@ -5,7 +5,16 @@ import { IoChatbubblesSharp } from "react-icons/io5";
 import { BsGlobe2 } from "react-icons/bs";
 import { TiDocumentText } from "react-icons/ti";
 import {
+  AboutDiv,
+  AboutItem,
+  AboutRow,
   Container,
+  GroupDetailsDiv,
+  GroupFollowersCount,
+  GroupImg,
+  GroupImgDiv,
+  GroupTitle,
+  GroupWrapper,
   IconDiv,
   IconDivText,
   Left,
@@ -15,33 +24,14 @@ import {
   LeftSmallHeading,
   Middle,
   OffsetNav,
-  PostDiv,
-  PostInput,
-  PostPic,
-  PostPicDiv,
-  PostPicDivider,
-  PostPicTop,
-  ProfileCard,
-  ProfileCardDiv,
-  ProfileCardName,
-  ProfileCardNameDiv,
-  ProfileCardPic,
-  ProfileCardPicDiv,
-  ProfileCardStat,
-  ProfileCardStatDiv,
-  ProfileCardStatName,
-  ProfileCardUsernameDiv,
   Right,
   RightSideCard,
+  ShowAllDiv,
 } from "./GroupStyles";
 import { GroupPost } from "../GroupPost/GroupPost";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { useHistory } from "react-router";
-export const Groups = ({
-  profile_pic = "https://gab.com/avatars/original/missing.png",
-  name = "bvsrtemp",
-  username = "bvsr",
-}) => {
+export const Groups = () => {
   // const posts = [
   //   {
   //     isLiked: true,
@@ -230,7 +220,7 @@ export const Groups = ({
   // ];
   const { user, posts, isLoggedIn } = useContext(AuthContext);
   const history = useHistory();
-
+  console.log(user?.groups);
   return (
     <div>
       <OffsetNav />
@@ -284,18 +274,6 @@ export const Groups = ({
         </Left>
 
         <Middle>
-          {isLoggedIn && (
-            <PostDiv>
-              <PostPicTop>
-                <PostPicDiv>
-                  <PostPic src={user?.profile_pic} />
-                </PostPicDiv>
-              </PostPicTop>
-              <PostPicDivider />
-              <PostInput placeholder="What's on your mind?" />
-            </PostDiv>
-          )}
-
           {posts?.map((post) => (
             <GroupPost
               key={post?._id}
@@ -316,58 +294,54 @@ export const Groups = ({
         {isLoggedIn ? (
           <Right>
             <RightSideCard>
-              <ProfileCard>
-                <ProfileCardDiv background={user?.cover_pic}></ProfileCardDiv>
-
-                <ProfileCardDiv>
-                  <ProfileCardPicDiv onClick={() => history.push("/me")}>
-                    <ProfileCardPic
-                      src={
-                        user?.profile_pic ||
-                        "https://gab.com/avatars/original/missing.png"
-                      }
-                    />
-                  </ProfileCardPicDiv>
-                  <ProfileCardName onClick={() => history.push("/me")}>
-                    <ProfileCardNameDiv>
-                      {user?.display_name}
-                    </ProfileCardNameDiv>
-                    <ProfileCardUsernameDiv>
-                      @{user?.username}
-                    </ProfileCardUsernameDiv>
-                  </ProfileCardName>
-                </ProfileCardDiv>
-
-                <ProfileCardDiv>
-                  <ProfileCardStatDiv>
-                    <ProfileCardStat onClick={() => history.push("/me")}>
-                      {user?.posts?.length}
-                    </ProfileCardStat>
-                    <ProfileCardStatName onClick={() => history.push("/me")}>
-                      Gabs
-                    </ProfileCardStatName>
-                  </ProfileCardStatDiv>
-
-                  <ProfileCardStatDiv>
-                    <ProfileCardStat onClick={() => history.push("/me")}>
-                      {user?.followers?.length}
-                    </ProfileCardStat>
-                    <ProfileCardStatName onClick={() => history.push("/me")}>
-                      Followers
-                    </ProfileCardStatName>
-                  </ProfileCardStatDiv>
-
-                  <ProfileCardStatDiv>
-                    <ProfileCardStat onClick={() => history.push("/me")}>
-                      {user?.following?.length}
-                    </ProfileCardStat>
-                    <ProfileCardStatName onClick={() => history.push("/me")}>
-                      Following
-                    </ProfileCardStatName>
-                  </ProfileCardStatDiv>
-                </ProfileCardDiv>
-              </ProfileCard>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  padding: "5px",
+                }}
+              >
+                <div>Groups you're in</div>
+                <ShowAllDiv>Show all</ShowAllDiv>
+              </div>
             </RightSideCard>
+
+            <RightSideCard>
+              {user?.groups.map((group) => (
+                <GroupWrapper>
+                  <GroupImgDiv>
+                    <GroupImg src={group?.cover_photo} alt="group cover" />
+                  </GroupImgDiv>
+                  <GroupDetailsDiv>
+                    <GroupTitle>{group?.group_name}</GroupTitle>
+                    <GroupFollowersCount>
+                      {group?.members?.length} Members
+                    </GroupFollowersCount>
+                  </GroupDetailsDiv>
+                </GroupWrapper>
+              ))}
+            </RightSideCard>
+            <AboutDiv>
+              <AboutRow>
+                <AboutItem>Help</AboutItem>.<AboutItem>Security</AboutItem>.
+                <AboutItem>About</AboutItem>.<AboutItem>Investors</AboutItem>
+                <AboutItem>Terms of sale</AboutItem>.<AboutItem>DMCA</AboutItem>
+              </AboutRow>
+
+              <AboutRow>
+                <AboutItem>Term sof service</AboutItem>.
+                <AboutItem>Privacy policy</AboutItem>.
+                <AboutItem>Status</AboutItem>.<AboutItem>Logout</AboutItem>
+              </AboutRow>
+              <AboutRow>
+                <AboutItem>© 2021 Gab AI, Inc.</AboutItem>
+              </AboutRow>
+              <AboutRow>
+                <AboutItem>Gab Social is open source software</AboutItem>
+                <AboutItem>code.gab</AboutItem>
+              </AboutRow>
+            </AboutDiv>
           </Right>
         ) : (
           <></>
@@ -376,4 +350,3 @@ export const Groups = ({
     </div>
   );
 };
-

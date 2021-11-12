@@ -76,6 +76,7 @@ router.post(
       if (errors.length > 0) return res.status(403).json({ errors });
 
       let user = await User.findOne({ email: req.body.email }).exec();
+      console.log(user);
       if (!user)
         return res
           .status(204)
@@ -83,9 +84,13 @@ router.post(
 
       if (!user.checkPassword(req.body.password))
         return res.status(403).json({ message: "Invalid Password" });
-
       user = await User.findOne({ email: req.body.email })
         .select("-password")
+        ?.populate("posts")
+        ?.populate("followers")
+        ?.populate("following")
+        ?.populate("groups")
+        .lean()
         .exec();
       const token = newToken(user);
 
@@ -119,7 +124,12 @@ router.get("/me", authenticate, async (req, res) => {
 // To get a single user
 router.get("/:id", async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).lean().exec();
+    const user = await User.findById(req.params.id)
+      .populate("posts")
+      .populate("following")
+      .populate("followers")
+      .lean()
+      .exec();
     return res.status(200).json(user);
   } catch (err) {
     return res.status(400).send(err);
@@ -162,7 +172,7 @@ router.patch("/:id/follow", authenticate, async (req, res) => {
       return res.status(403).send("You can't follow yourself");
     const user = await User.findById(req.params.id);
     const loggedInUser = await User.findById(req?.user?._id);
-    if (!user.followers.includes(req?.user?._id)) {
+    if (!user?.followers.includes(loggedInUser?._id)) {
       await user.updateOne({ $push: { followers: req?.user?._id } });
       await loggedInUser.updateOne({ $push: { following: req?.params?.id } });
       return res.status(200).send("User has been followed");
@@ -182,7 +192,7 @@ router.patch("/:id/unfollow", authenticate, async (req, res) => {
       return res.status(403).send("You can't unfollow yourself");
     const user = await User.findById(req.params.id);
     const loggedInUser = await User.findById(req?.user?._id);
-    if (user.followers.includes(req?.user?._id)) {
+    if (user?.followers.includes(loggedInUser?._id)) {
       await user.updateOne({ $pull: { followers: req?.user?._id } });
       await loggedInUser.updateOne({ $pull: { following: req?.params?.id } });
       return res.status(200).send("User has been unfollowed");
