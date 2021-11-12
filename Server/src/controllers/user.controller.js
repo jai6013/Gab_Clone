@@ -76,6 +76,7 @@ router.post(
       if (errors.length > 0) return res.status(403).json({ errors });
 
       let user = await User.findOne({ email: req.body.email }).exec();
+      console.log(user);
       if (!user)
         return res
           .status(204)
@@ -83,9 +84,13 @@ router.post(
 
       if (!user.checkPassword(req.body.password))
         return res.status(403).json({ message: "Invalid Password" });
-
       user = await User.findOne({ email: req.body.email })
         .select("-password")
+        ?.populate("posts")
+        ?.populate("followers")
+        ?.populate("following")
+        ?.populate("groups")
+        .lean()
         .exec();
       const token = newToken(user);
 

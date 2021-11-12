@@ -5,7 +5,16 @@ import { IoChatbubblesSharp } from "react-icons/io5";
 import { BsGlobe2 } from "react-icons/bs";
 import { TiDocumentText } from "react-icons/ti";
 import {
+  AboutDiv,
+  AboutItem,
+  AboutRow,
   Container,
+  GroupDetailsDiv,
+  GroupFollowersCount,
+  GroupImg,
+  GroupImgDiv,
+  GroupTitle,
+  GroupWrapper,
   IconDiv,
   IconDivText,
   Left,
@@ -17,17 +26,12 @@ import {
   OffsetNav,
   Right,
   RightSideCard,
+  ShowAllDiv,
 } from "./GroupStyles";
 import { GroupPost } from "../GroupPost/GroupPost";
-import { NoGroupJoined } from "../GroupPost/GroupPost";
-
 import { AuthContext } from "../../Contexts/AuthContext";
 import { useHistory } from "react-router";
-export const Groups = ({
-  profile_pic = "https://gab.com/avatars/original/missing.png",
-  name = "bvsrtemp",
-  username = "bvsr",
-}) => {
+export const Groups = () => {
   // const posts = [
   //   {
   //     isLiked: true,
@@ -216,7 +220,7 @@ export const Groups = ({
   // ];
   const { user, posts, isLoggedIn } = useContext(AuthContext);
   const history = useHistory();
-
+  console.log(user?.groups);
   return (
     <div>
       <OffsetNav />
@@ -270,12 +274,6 @@ export const Groups = ({
         </Left>
 
         <Middle>
-          {
-            //  GROUP JOINING INSTRUCTIONS
-          }
-
-          <NoGroupJoined />
-
           {posts?.map((post) => (
             <GroupPost
               key={post?._id}
@@ -295,128 +293,55 @@ export const Groups = ({
         </Middle>
         {isLoggedIn ? (
           <Right>
-            <RightSideCard
-              style={{
-                marginLeft: "0",
-                paddingLeft: "0",
-                marginRight: "0",
-                paddingRight: "0",
-                paddingBottom: "0",
-              }}
-            >
-              <h1 style={{ marginLeft: "8px" }}>Sponsored</h1>
+            <RightSideCard>
               <div
                 style={{
-                  backgroundColor: "rgb(240,242,245)",
-                  marginTop: "8px",
-                  marginLeft: "0",
-                  paddingLeft: "0",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  padding: "5px",
                 }}
               >
-                <ul>
-                  <li style={{ display: "inline", marginRight: "2px" }}>
-                    &#8227;{" "}
-                    <a
-                      href="https://google.com"
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      Help
-                    </a>
-                  </li>
-                  <li style={{ display: "inline" }}>
-                    &#8227;{" "}
-                    <a
-                      href="https://google.com"
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      Security
-                    </a>
-                  </li>
-                  <li style={{ display: "inline" }}>
-                    &#8227;{" "}
-                    <a
-                      href="https://google.com"
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      About
-                    </a>
-                  </li>
-                  <li style={{ display: "inline" }}>
-                    &#8227;{" "}
-                    <a
-                      href="https://google.com"
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      Investors
-                    </a>
-                  </li>
-                  <li style={{ display: "inline" }}>
-                    &#8227;{" "}
-                    <a
-                      href="https://google.com"
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      Terms of Sale
-                    </a>
-                  </li>
-                  <li style={{ display: "inline" }}>
-                    &#8227;{" "}
-                    <a
-                      href="https://google.com"
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      DMCA
-                    </a>
-                  </li>
-                  <li style={{ display: "inline" }}>
-                    &#8227;{" "}
-                    <a
-                      href="https://google.com"
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      Terms of Service
-                    </a>
-                  </li>
-                  <li style={{ display: "inline" }}>
-                    &#8227;{" "}
-                    <a
-                      href="https://google.com"
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      Privacy Policy
-                    </a>
-                  </li>
-                  <li style={{ display: "inline" }}>
-                    &#8227;{" "}
-                    <a
-                      href="https://google.com"
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      Status
-                    </a>
-                  </li>
-                  <li style={{ display: "inline" }}>
-                    &#8227;{" "}
-                    <a
-                      href="https://google.com"
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      Logout
-                    </a>
-                  </li>
-                </ul>
+                <div>Groups you're in</div>
+                <ShowAllDiv>Show all</ShowAllDiv>
               </div>
             </RightSideCard>
+
+            <RightSideCard>
+              {user?.groups.map((group) => (
+                <GroupWrapper>
+                  <GroupImgDiv>
+                    <GroupImg src={group?.cover_photo} alt="group cover" />
+                  </GroupImgDiv>
+                  <GroupDetailsDiv>
+                    <GroupTitle>{group?.group_name}</GroupTitle>
+                    <GroupFollowersCount>
+                      {group?.members?.length} Members
+                    </GroupFollowersCount>
+                  </GroupDetailsDiv>
+                </GroupWrapper>
+              ))}
+            </RightSideCard>
+            <AboutDiv>
+              <AboutRow>
+                <AboutItem>Help</AboutItem>.<AboutItem>Security</AboutItem>.
+                <AboutItem>About</AboutItem>.<AboutItem>Investors</AboutItem>
+                <AboutItem>Terms of sale</AboutItem>.<AboutItem>DMCA</AboutItem>
+              </AboutRow>
+
+              <AboutRow>
+                <AboutItem>Term sof service</AboutItem>.
+                <AboutItem>Privacy policy</AboutItem>.
+                <AboutItem>Status</AboutItem>.<AboutItem>Logout</AboutItem>
+              </AboutRow>
+              <AboutRow>
+                <AboutItem>© 2021 Gab AI, Inc.</AboutItem>
+              </AboutRow>
+              <AboutRow>
+                <AboutItem>Gab Social is open source software</AboutItem>
+                <AboutItem>code.gab</AboutItem>
+              </AboutRow>
+            </AboutDiv>
           </Right>
         ) : (
           <></>

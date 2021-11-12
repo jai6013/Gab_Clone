@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Navbar } from "../Components/Navbar/NavBar";
 import BottomNav from "../Components/Navbar/BottomNav";
 import { Profile } from "../Components/Profile/Profile";
@@ -7,26 +6,7 @@ import { AuthContext } from "../Contexts/AuthContext";
 import { Theme } from "../Styles/Theme";
 
 export const MyPage = () => {
-  const { user, token } = useContext(AuthContext);
-  const [timeline, setTimeline] = useState();
-
-  const fetchData = async () => {
-    await axios
-      .get(`https://secure-ravine-45527.herokuapp.com/posts/user/timeline`, {
-        headers: { Authorization: "Bearer " + token },
-      })
-      .then((res) => {
-        console.log(res.data);
-        setTimeline(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+  const { user } = useContext(AuthContext);
   return (
     <>
       <Theme>

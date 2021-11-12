@@ -9,7 +9,6 @@ import { Theme } from "../Styles/Theme";
 export const UserPage = () => {
   const { userid } = useParams();
   const [user, setUser] = useState();
-  const [timeline, setTimeline] = useState();
 
   const fetchData = async () => {
     await axios

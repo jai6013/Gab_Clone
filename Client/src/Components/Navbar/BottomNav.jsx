@@ -1,11 +1,6 @@
 import "./BottomNav.scss";
-
-import { useContext } from "react";
-import { ThemeContext } from "../../Contexts/ThemeContext";
-import { AuthContext } from "../../Contexts/AuthContext";
 import { useHistory } from "react-router";
 
-import { HomeIcon } from "@mui/icons-material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import GroupsIcon from "@mui/icons-material/Groups";
 import LanguageIcon from "@mui/icons-material/Language";
@@ -16,9 +11,6 @@ import React from "react";
 import { MdNotifications, MdGroups, MdLightbulb } from "react-icons/md";
 
 function BottomNav({ page }) {
-  const { handleTheme, theme } = useContext(ThemeContext);
-  const { isLoggedIn, handleLogin, handleSignup, user } =
-    useContext(AuthContext);
   const history = useHistory();
 
   return (

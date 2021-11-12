@@ -179,10 +179,16 @@ export const Navbar = ({ page }) => {
           </NavMenuContainer>
           {!isLoggedIn && (
             <>
-              <NavLogin isLoggedIn={isLoggedIn} onClick={handleLogin}>
+              <NavLogin
+                isLoggedIn={isLoggedIn}
+                onClick={history.push("/login")}
+              >
                 Login
               </NavLogin>
-              <NavSignup isLoggedIn={isLoggedIn} onClick={handleSignup}>
+              <NavSignup
+                isLoggedIn={isLoggedIn}
+                onClick={history.push("/signup")}
+              >
                 Signup
               </NavSignup>
             </>
