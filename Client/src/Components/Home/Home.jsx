@@ -229,7 +229,7 @@ export const Home = ({ page }) => {
   // ];
   const { user, posts, isLoggedIn } = useContext(AuthContext);
   const history = useHistory();
-  console.log(user.user.profile_pic)
+  console.log(user?.user?.profile_pic)
   console.log(user)
   return (
     <div>

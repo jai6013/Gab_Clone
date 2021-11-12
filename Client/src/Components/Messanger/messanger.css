@@ -1,22 +1,23 @@
-/* .mainContainer{
+.mainContainer{
     display: flex;
     align-items: flex-start;
-    background-color: red;
 }
 .messanger{
     height: 100vh;
-    width: 60vw;
+    width: 65vw;
     display: flex;
     padding-top: 70px;
-    background-color: aqua;
+    background-color: white;
 }
 
 .chatMenu{
     flex: 4;
-    background-color: whitesmoke;
+    background-color: white;
+    border-right: 1px solid rgb(211, 209, 209); ;
 }
 .chatBox{
-    flex: 7;
+    flex: 8;
+    height: 90vh;
 }
 
 .chatMenuWrapper{
@@ -27,24 +28,97 @@
     padding: 10px;
     width: 100%;
     border-radius: 20px;
-    height: 40px;
-    border: 1px solid gainsboro;
+    height: 5.5vh;
+    border: 1px solid #ececed;
     outline: none;
 }
+.allChat{
+    border-top: 1px solid #ececed;
+    border-bottom: 1px solid #ececed;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-indent: 15px;
+}
+.conversationContainer{
+    overflow-y: scroll;
+    height: 76vh;
+}
+.imgUser{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-indent: 10px;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 5px;
+    border-bottom: 1px solid #ececed;
+}
+.imgUser > img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.imgUser:hover{
+    background-color: lightgray;
+    cursor: pointer;
+}
+
 .chatBoxBottom{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 5px;
+    padding: 10px;
+    border-top: 1px solid #ececed;
+    border-bottom: 1px solid #ececed;
+    margin-top: 15px;
 }
+
 .chatMessageInput{
     height: 40px;
-    width: 80%;
+    width: 85%;
+    padding: 10px;
+    font-size: 14px;
+    outline: none;
+    border-radius: 20px;
+    border: 1px solid #ececed;
+    border: 1px solid #ececed;
 }
-.allChat{
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-indent: 15px;
-} */
+.chatSubmitButton{
+    width: 80px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: #21cf7a;
+    color: white;
+}
+.chatBoxWrapper{
+    display: flex;   
+    flex-direction: column;
+    height: 82vh;
+}
+.chatBoxTop{
+    height: 100%;
+    overflow-y: scroll;
+    padding-right: 10px;
+}
+.headingPara{
+    margin-top: 40%;
+    text-align: center;
+}
+.cUTop{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid #ececed;
+    padding: 10px;
+}
+.cUTop > img{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}

@@ -3,10 +3,6 @@ import { Switch, Route } from "react-router-dom";
 import { ErrorPage } from "./Pages/ErrorPage";
 import { UserPage } from "./Pages/UserPage";
 import { MyPage } from "./Pages/MyPage";
-
-import Messanger from "./Components/Messanger/Messanger";
-
-
 import { NewsPage } from "./Pages/NewsPage";
 import { GroupsPage } from "./Pages/GroupsPage";
 import { ExplorePage } from "./Pages/ExplorePage";
@@ -49,6 +45,9 @@ function App() {
       </Route>
       <Route exact path="/resend">
         <ResendConfirmPage />
+      </Route>
+      <Route exact path="/messanger">
+        <MessengerPage />
       </Route>
       <Route exact path="/posts/:postid">
         <ErrorPage />
