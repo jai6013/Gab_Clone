@@ -28,9 +28,12 @@ import {
 } from "./NavbarStyles";
 import { useHistory } from "react-router";
 import { Popover } from "@mui/material";
+import axios from "axios";
 
 export const Navbar = ({ page }) => {
   const { handleTheme, theme } = useContext(ThemeContext);
+  const [q, setQ] = useState("");
+  const [res, setRes] = useState();
   const { isLoggedIn, handleLogin, handleSignup, user } =
     useContext(AuthContext);
   const history = useHistory();
@@ -42,6 +45,10 @@ export const Navbar = ({ page }) => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleSearch = async () => {
+    await axios.get(`https://secure-ravine-45527.herokuapp.com/users/search?`);
   };
 
   const open = Boolean(anchorEl);
@@ -59,8 +66,14 @@ export const Navbar = ({ page }) => {
           </NavLogoDiv>
 
           <SearchBar isLoggedIn={isLoggedIn}>
-            <SearchInp placeholder="Search for people or groups on gab" />
-            <SearchIcon>
+            <SearchInp
+              value={q}
+              onChange={(e) => {
+                setQ(e.target.value);
+              }}
+              placeholder="Search for people or groups on gab"
+            />
+            <SearchIcon onClick={handleSearch}>
               <AiOutlineSearch
                 size="1.5rem"
                 color={theme === "light" ? "#21CF7A" : "#FFFFFF"}

@@ -10,6 +10,7 @@ import { Login } from "./Pages/Login";
 import { Signup } from "./Pages/Signup";
 import { ForgotPw } from "./Pages/ForgotPw";
 import { ResendConfirmPage } from "./Components/UserAuthPages/ResendConfirmPage";
+import { SearchResPage } from "./Pages/SearchResPage";
 
 // import Button from '@mui/material/Button';
 function App() {
@@ -47,6 +48,9 @@ function App() {
       </Route>
       <Route exact path="/posts/:postid">
         <ErrorPage />
+      </Route>
+      <Route exact path="/search">
+        <SearchResPage />
       </Route>
       <Route>
         <ErrorPage />

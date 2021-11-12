@@ -8,7 +8,7 @@ import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import React from "react";
 
-import { MdNotifications, MdGroups, MdLightbulb } from "react-icons/md";
+import { MdGroups } from "react-icons/md";
 
 function BottomNav({ page }) {
   const history = useHistory();
@@ -16,12 +16,6 @@ function BottomNav({ page }) {
   return (
     <div className="_bottomNav">
       <div>
-        {/* <HomeIcon
-          fontSize="large"
-          color="disabled"
-          onClick={() => history.push("/")}
-          isSelected={"home" === page}
-        /> */}
         <MdGroups size="3rem" color="" />
       </div>
       <div>
