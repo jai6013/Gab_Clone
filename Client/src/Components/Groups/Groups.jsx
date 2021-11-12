@@ -15,28 +15,12 @@ import {
   LeftSmallHeading,
   Middle,
   OffsetNav,
-  PostDiv,
-  PostInput,
-  PostPic,
-  PostPicDiv,
-  PostPicDivider,
-  PostPicTop,
-  ProfileCard,
-  ProfileCardDiv,
-  ProfileCardName,
-  ProfileCardNameDiv,
-  ProfileCardPic,
-  ProfileCardPicDiv,
-  ProfileCardStat,
-  ProfileCardStatDiv,
-  ProfileCardStatName,
-  ProfileCardUsernameDiv,
   Right,
   RightSideCard,
 } from "./GroupStyles";
 import { GroupPost } from "../GroupPost/GroupPost";
 import { NoGroupJoined } from "../GroupPost/GroupPost";
-import { NoGroupInstructions } from "../GroupPost/NoGroupInstructions";
+
 import { AuthContext } from "../../Contexts/AuthContext";
 import { useHistory } from "react-router";
 export const Groups = ({
@@ -286,15 +270,11 @@ export const Groups = ({
         </Left>
 
         <Middle>
-
-        {
+          {
             //  GROUP JOINING INSTRUCTIONS
+          }
 
-        }
-
-
-          <NoGroupJoined/>
-        
+          <NoGroupJoined />
 
           {posts?.map((post) => (
             <GroupPost
@@ -315,25 +295,127 @@ export const Groups = ({
         </Middle>
         {isLoggedIn ? (
           <Right>
-            <RightSideCard style={{marginLeft:"0",paddingLeft:"0", marginRight:"0",paddingRight:"0", paddingBottom:"0"}}>
-           
-              <h1 style={{marginLeft:"8px"}}>Sponsored</h1>
-              <div style={{backgroundColor:"rgb(240,242,245)",marginTop:"8px", marginLeft:"0", paddingLeft:"0"}}>
-              <ul >
-              <li  style={{display:"inline", marginRight:"2px"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">Help</a></li>
-              <li  style={{display:"inline"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">Security</a></li>
-              <li  style={{display:"inline"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">About</a></li>
-              <li  style={{display:"inline"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">Investors</a></li>
-              <li  style={{display:"inline"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">Terms of Sale</a></li>
-              <li  style={{display:"inline"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">DMCA</a></li>
-              <li  style={{display:"inline"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">Terms of Service</a></li>
-              <li  style={{display:"inline"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">Privacy Policy</a></li>
-              <li  style={{display:"inline"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">Status</a></li>
-              <li  style={{display:"inline"}}>&#8227; <a href="https://google.com" rel="noreferrer" target="_blank">Logout</a></li>
-           </ul>
+            <RightSideCard
+              style={{
+                marginLeft: "0",
+                paddingLeft: "0",
+                marginRight: "0",
+                paddingRight: "0",
+                paddingBottom: "0",
+              }}
+            >
+              <h1 style={{ marginLeft: "8px" }}>Sponsored</h1>
+              <div
+                style={{
+                  backgroundColor: "rgb(240,242,245)",
+                  marginTop: "8px",
+                  marginLeft: "0",
+                  paddingLeft: "0",
+                }}
+              >
+                <ul>
+                  <li style={{ display: "inline", marginRight: "2px" }}>
+                    &#8227;{" "}
+                    <a
+                      href="https://google.com"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      Help
+                    </a>
+                  </li>
+                  <li style={{ display: "inline" }}>
+                    &#8227;{" "}
+                    <a
+                      href="https://google.com"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      Security
+                    </a>
+                  </li>
+                  <li style={{ display: "inline" }}>
+                    &#8227;{" "}
+                    <a
+                      href="https://google.com"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      About
+                    </a>
+                  </li>
+                  <li style={{ display: "inline" }}>
+                    &#8227;{" "}
+                    <a
+                      href="https://google.com"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      Investors
+                    </a>
+                  </li>
+                  <li style={{ display: "inline" }}>
+                    &#8227;{" "}
+                    <a
+                      href="https://google.com"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      Terms of Sale
+                    </a>
+                  </li>
+                  <li style={{ display: "inline" }}>
+                    &#8227;{" "}
+                    <a
+                      href="https://google.com"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      DMCA
+                    </a>
+                  </li>
+                  <li style={{ display: "inline" }}>
+                    &#8227;{" "}
+                    <a
+                      href="https://google.com"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      Terms of Service
+                    </a>
+                  </li>
+                  <li style={{ display: "inline" }}>
+                    &#8227;{" "}
+                    <a
+                      href="https://google.com"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      Privacy Policy
+                    </a>
+                  </li>
+                  <li style={{ display: "inline" }}>
+                    &#8227;{" "}
+                    <a
+                      href="https://google.com"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      Status
+                    </a>
+                  </li>
+                  <li style={{ display: "inline" }}>
+                    &#8227;{" "}
+                    <a
+                      href="https://google.com"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      Logout
+                    </a>
+                  </li>
+                </ul>
               </div>
-             
-              
             </RightSideCard>
           </Right>
         ) : (
@@ -343,4 +425,3 @@ export const Groups = ({
     </div>
   );
 };
-
