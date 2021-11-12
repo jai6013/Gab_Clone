@@ -48,6 +48,13 @@ export const LeftNavItem = styled.div`
   width: 80%;
   padding: 3px 0 3px 8px;
   margin: 3px 0 3px 0;
+
+  ${(props) =>
+    props.isSelected &&
+    `background:${props.theme.colors.inverted};
+     box-shadow:${props.theme.boxshadow};
+     border-radius:5px;
+  `}
   &:hover {
     cursor: pointer;
     background: ${(props) => props.theme.colors.inverted};

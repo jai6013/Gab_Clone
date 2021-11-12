@@ -9,7 +9,7 @@ export const HomePage = () => {
     <Theme>
       <Navbar page="home" />
       <BottomNav page="home" />
-      <Home page="home" />
+      <Home page="Home" />
     </Theme>
   );
 };

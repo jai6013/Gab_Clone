@@ -50,8 +50,8 @@ function App() {
       <Route exact path="/resend">
         <ResendConfirmPage />
       </Route>
-      <Route exact path="/messanger">
-      <Messanger/>
+      <Route exact path="/posts/:postid">
+        <ErrorPage />
       </Route>
       <Route>
         <ErrorPage />

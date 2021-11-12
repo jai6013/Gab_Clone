@@ -1,10 +1,9 @@
-import React, { useContext,useState,useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { MdNotifications } from "react-icons/md";
 import { IoChatbubblesSharp } from "react-icons/io5";
 import { BsGlobe2 } from "react-icons/bs";
 import { TiDocumentText } from "react-icons/ti";
-import {data} from "./groupdata"
 import axios from "axios";
 import {
   Container,
@@ -18,98 +17,88 @@ import {
   LeftSmallHeading,
   Middle,
   OffsetNav,
-  LeftDiv,
-  PostDiv,
-  PostInput,
-  PostPic,
-  PostPicDiv,
-  PostPicDivider,
-  PostPicTop,
-  ProfileCard,
-  ProfileCardDiv,
-  ProfileCardName,
-  ProfileCardNameDiv,
-  ProfileCardPic,
-  ProfileCardPicDiv,
-  ProfileCardStat,
-  ProfileCardStatDiv,
-  ProfileCardStatName,
-  ProfileCardUsernameDiv,
   Right,
   RightSideCard,
-  FeaturedGroups,
-  FeatureHeading,
-  ShowAll,
-  FeatureWrapper,
-  GroupImage,
-  GroupName,
-  GroupMembers,
-  ShowAllButton
+  ShowAllDiv,
+  GroupWrapper,
+  GroupImgDiv,
+  GroupImg,
+  GroupDetailsDiv,
+  GroupTitle,
+  GroupFollowersCount,
+  AboutDiv,
+  AboutRow,
+  AboutItem,
+  ShowAllButton,
 } from "./ExploreStyles";
 import { Post } from "../Post/Post";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { useHistory } from "react-router";
-export const Explore = ({
-  profile_pic = "https://gab.com/avatars/original/missing.png",
-  name = "bvsrtemp",
-  username = "bvsr",
-}) => {
- 
-  const { user, posts, isLoggedIn } = useContext(AuthContext);
+
+export const Explore = ({ page }) => {
+  const { user, posts, token } = useContext(AuthContext);
   const history = useHistory();
+  const [groupData, setGroupData] = useState([]);
 
-  const [groupData,setGroupData]=useState([]);
+  useEffect(() => {
+    axios
+      .get("https://secure-ravine-45527.herokuapp.com/groups", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        setGroupData(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-useEffect(()=>{
-  axios.get("https://secure-ravine-45527.herokuapp.com")
-  .then((res)=>console.log(res.data))
-  
-},[])
-
-  return (
-    <div>
+  return !groupData ? (
+    <></>
+  ) : (
+    <>
       <OffsetNav />
       <Container>
         <Left>
           <LeftPanelHeading>Explore</LeftPanelHeading>
           <LeftSmallHeading>Menu</LeftSmallHeading>
           <LeftNavDiv>
-            <LeftNavItem>
+            <LeftNavItem isSelected={page === "Home"}>
               <IconDiv>
                 <AiFillHome size="1rem" />
               </IconDiv>
               <IconDivText>Home</IconDivText>
             </LeftNavItem>
 
-            <LeftNavItem>
+            <LeftNavItem isSelected={page === "Notifications"}>
               <IconDiv>
                 <MdNotifications size="1rem" />
               </IconDiv>
               <IconDivText>Notifications</IconDivText>
             </LeftNavItem>
 
-            <LeftNavItem>
+            <LeftNavItem isSelected={page === "Chats"}>
               <IconDiv>
                 <IoChatbubblesSharp size="1rem" />
               </IconDiv>
               <IconDivText>Chats</IconDivText>
             </LeftNavItem>
 
-            <LeftNavItem>
+            <LeftNavItem isSelected={page === "Groups"}>
               <IconDiv>
                 <AiFillHome size="1rem" />
               </IconDiv>
               <IconDivText>Groups</IconDivText>
             </LeftNavItem>
 
-            <LeftNavItem>
+            <LeftNavItem isSelected={page === "Explore"}>
               <IconDiv>
                 <BsGlobe2 size="1rem" />
               </IconDiv>
               <IconDivText>Explore</IconDivText>
             </LeftNavItem>
 
-            <LeftNavItem>
+            <LeftNavItem isSelected={page === "News"}>
               <IconDiv>
                 <TiDocumentText size="1rem" />
               </IconDiv>
@@ -119,7 +108,7 @@ useEffect(()=>{
         </Left>
 
         <Middle>
-        <MiddleTopHeading>Popular posts across Gab</MiddleTopHeading>
+          <MiddleTopHeading>Popular posts across Gab</MiddleTopHeading>
 
           {posts?.map((post) => (
             <Post
@@ -138,23 +127,69 @@ useEffect(()=>{
             />
           ))}
         </Middle>
-       <Right>
-       <RightSideCard>
-       <FeaturedGroups>
-         <FeatureHeading>Featured Groups</FeatureHeading>
-         <ShowAll>Show All</ShowAll>
-       </FeaturedGroups>
-       {data.map((item,index)=>{
-         return <FeatureWrapper key={index}>
-         <GroupImage imgUrl={item.img}></GroupImage>
-         <GroupName>{item.name}</GroupName>
-         <GroupMembers>{item.members}</GroupMembers>
-         </FeatureWrapper>})}
-        <ShowAllButton>Show All Groups</ShowAllButton>
-       </RightSideCard>
-       </Right>
-       
+
+        <Right>
+          <RightSideCard>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                padding: "5px",
+              }}
+            >
+              <div>Featured groups</div>
+              <ShowAllDiv
+                onClick={() => {
+                  history.push("/groups/browse/featured");
+                }}
+              >
+                Show all
+              </ShowAllDiv>
+            </div>
+
+            {groupData.slice(0, 10)?.map((group) => (
+              <GroupWrapper
+                onClick={() => history.push(`/groups/${group?._id}`)}
+              >
+                <GroupImgDiv>
+                  <GroupImg src={group?.cover_photo} alt="group cover" />
+                </GroupImgDiv>
+                <GroupDetailsDiv>
+                  <GroupTitle>{group?.group_name}</GroupTitle>
+                  <GroupFollowersCount>
+                    {group?.members?.length} Members
+                  </GroupFollowersCount>
+                </GroupDetailsDiv>
+              </GroupWrapper>
+            ))}
+
+            <ShowAllButton onClick={() => history.push("/groups")}>
+              Show all
+            </ShowAllButton>
+          </RightSideCard>
+          <AboutDiv>
+            <AboutRow>
+              <AboutItem>Help</AboutItem>.<AboutItem>Security</AboutItem>.
+              <AboutItem>About</AboutItem>.<AboutItem>Investors</AboutItem>
+              <AboutItem>Terms</AboutItem>.<AboutItem>DMCA</AboutItem>
+            </AboutRow>
+
+            <AboutRow>
+              <AboutItem>Term sof service</AboutItem>.
+              <AboutItem>Privacy policy</AboutItem>.
+              <AboutItem>Status</AboutItem>.<AboutItem>Logout</AboutItem>
+            </AboutRow>
+            <AboutRow>
+              <AboutItem>© 2021 Gab AI, Inc.</AboutItem>
+            </AboutRow>
+            <AboutRow>
+              <AboutItem>Gab Social is open source software</AboutItem>
+              <AboutItem>code.gab</AboutItem>
+            </AboutRow>
+          </AboutDiv>
+        </Right>
       </Container>
-    </div>
+    </>
   );
 };

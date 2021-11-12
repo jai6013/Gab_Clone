@@ -13,6 +13,7 @@ export const lightTheme = {
     text2: "#4b4f55",
     input: "#000000",
     inverted: "#FFFFFF",
+    button: "#E2E8EC",
   },
 
   breakpoints: {
@@ -37,6 +38,7 @@ export const darkTheme = {
     text2: "#999",
     input: "#FFFFFF",
     inverted: "#000000",
+    button: "#343434",
   },
 
   breakpoints: {

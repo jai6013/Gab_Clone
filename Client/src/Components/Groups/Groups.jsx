@@ -31,240 +31,54 @@ import {
 import { GroupPost } from "../GroupPost/GroupPost";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { useHistory } from "react-router";
-export const Groups = () => {
-  // const posts = [
-  //   {
-  //     isLiked: true,
-  //     name: "name here",
-  //     username: "username",
-  //     profile_pic: "https://gab.com/avatars/original/missing.png",
-  //     time: "1 hr .",
-  //     postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
-  //     Ipsum has been the industry's standard dummy text ever since the 1500s,
-  //     when an unknown printer took a galley of type and scrambled it to make a
-  //     type specimen book. It has survived not only five centuries, but also
-  //     the leap into electronic typesetting, remaining essentially unchanged.
-  //     It was popularised in the 1960s with the release of Letraset sheets
-  //     containing Lorem Ipsum passages, and more recently with desktop
-  //     publishing software like Aldus PageMaker including versions of Lorem
-  //     Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-  //     Ipsum has been the industry's standard dummy text ever since the 1500s,
-  //     when an unknown printer took a galley of type and scrambled it to make a
-  //     type specimen book. It has survived not only five centuries, but also
-  //     the leap into electronic typesetting, remaining essentially unchanged.
-  //     It was popularised in the 1960s with the release of Letraset sheets
-  //     containing Lorem Ipsum passages, and more recently with desktop
-  //     publishing software like Aldus PageMaker including versions of Lorem
-  //     Ipsum.`,
-  //   },
-  //   {
-  //     isLiked: false,
-  //     name: "name here",
-  //     username: "username",
-  //     profile_pic: "https://gab.com/avatars/original/missing.png",
-  //     time: "1 hr .",
-  //     postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
-  //     Ipsum has been the industry's standard dummy text ever since the 1500s,
-  //     when an unknown printer took a galley of type and scrambled it to make a
-  //     type specimen book. It has survived not only five centuries, but also
-  //     the leap into electronic typesetting, remaining essentially unchanged.
-  //     It was popularised in the 1960s with the release of Letraset sheets
-  //     containing Lorem Ipsum passages, and more recently with desktop
-  //     publishing software like Aldus PageMaker including versions of Lorem
-  //     Ipsum.`,
-  //   },
-  //   {
-  //     isLiked: true,
-  //     name: "name here",
-  //     username: "username",
-  //     profile_pic: "https://gab.com/avatars/original/missing.png",
-  //     time: "1 hr .",
-  //     postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
-  //     Ipsum has been the industry's standard dummy text ever since the 1500s,
-  //     when an unknown printer took a galley of type and scrambled it to make a
-  //     type specimen book. It has survived not only five centuries, but also
-  //     the leap into electronic typesetting, remaining essentially unchanged.
-  //     It was popularised in the 1960s with the release of Letraset sheets
-  //     containing Lorem Ipsum passages, and more recently with desktop
-  //     publishing software like Aldus PageMaker including versions of Lorem
-  //     Ipsum.`,
-  //   },
-  //   {
-  //     isLiked: true,
-  //     name: "name here",
-  //     username: "username",
-  //     profile_pic: "https://gab.com/avatars/original/missing.png",
-  //     time: "1 hr .",
-  //     postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
-  //     Ipsum has been the industry's standard dummy text ever since the 1500s,
-  //     when an unknown printer took a galley of type and scrambled it to make a
-  //     type specimen book. It has survived not only five centuries, but also
-  //     the leap into electronic typesetting, remaining essentially unchanged.
-  //     It was popularised in the 1960s with the release of Letraset sheets
-  //     containing Lorem Ipsum passages, and more recently with desktop
-  //     publishing software like Aldus PageMaker including versions of Lorem
-  //     Ipsum.`,
-  //   },
-  //   {
-  //     isLiked: false,
-  //     name: "name here",
-  //     username: "username",
-  //     profile_pic: "https://gab.com/avatars/original/missing.png",
-  //     time: "1 hr .",
-  //     postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
-  //     Ipsum has been the industry's standard dummy text ever since the 1500s,
-  //     when an unknown printer took a galley of type and scrambled it to make a
-  //     type specimen book. It has survived not only five centuries, but also
-  //     the leap into electronic typesetting, remaining essentially unchanged.
-  //     It was popularised in the 1960s with the release of Letraset sheets
-  //     containing Lorem Ipsum passages, and more recently with desktop
-  //     publishing software like Aldus PageMaker including versions of Lorem
-  //     Ipsum.`,
-  //   },
-  //   {
-  //     isLiked: true,
-  //     name: "name here",
-  //     username: "username",
-  //     profile_pic: "https://gab.com/avatars/original/missing.png",
-  //     time: "1 hr .",
-  //     postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
-  //     Ipsum has been the industry's standard dummy text ever since the 1500s,
-  //     when an unknown printer took a galley of type and scrambled it to make a
-  //     type specimen book. It has survived not only five centuries, but also
-  //     the leap into electronic typesetting, remaining essentially unchanged.
-  //     It was popularised in the 1960s with the release of Letraset sheets
-  //     containing Lorem Ipsum passages, and more recently with desktop
-  //     publishing software like Aldus PageMaker including versions of Lorem
-  //     Ipsum.`,
-  //   },
-  //   {
-  //     isLiked: false,
-  //     name: "name here",
-  //     username: "username",
-  //     profile_pic: "https://gab.com/avatars/original/missing.png",
-  //     time: "1 hr .",
-  //     postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
-  //     Ipsum has been the industry's standard dummy text ever since the 1500s,
-  //     when an unknown printer took a galley of type and scrambled it to make a
-  //     type specimen book. It has survived not only five centuries, but also
-  //     the leap into electronic typesetting, remaining essentially unchanged.
-  //     It was popularised in the 1960s with the release of Letraset sheets
-  //     containing Lorem Ipsum passages, and more recently with desktop
-  //     publishing software like Aldus PageMaker including versions of Lorem
-  //     Ipsum.`,
-  //   },
-  //   {
-  //     isLiked: true,
-  //     name: "name here",
-  //     username: "username",
-  //     profile_pic: "https://gab.com/avatars/original/missing.png",
-  //     time: "1 hr .",
-  //     postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
-  //     Ipsum has been the industry's standard dummy text ever since the 1500s,
-  //     when an unknown printer took a galley of type and scrambled it to make a
-  //     type specimen book. It has survived not only five centuries, but also
-  //     the leap into electronic typesetting, remaining essentially unchanged.
-  //     It was popularised in the 1960s with the release of Letraset sheets
-  //     containing Lorem Ipsum passages, and more recently with desktop
-  //     publishing software like Aldus PageMaker including versions of Lorem
-  //     Ipsum.`,
-  //   },
-  //   {
-  //     isLiked: true,
-  //     name: "name here",
-  //     username: "username",
-  //     profile_pic: "https://gab.com/avatars/original/missing.png",
-  //     time: "1 hr .",
-  //     postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
-  //     Ipsum has been the industry's standard dummy text ever since the 1500s,
-  //     when an unknown printer took a galley of type and scrambled it to make a
-  //     type specimen book. It has survived not only five centuries, but also
-  //     the leap into electronic typesetting, remaining essentially unchanged.
-  //     It was popularised in the 1960s with the release of Letraset sheets
-  //     containing Lorem Ipsum passages, and more recently with desktop
-  //     publishing software like Aldus PageMaker including versions of Lorem
-  //     Ipsum.`,
-  //   },
-  //   {
-  //     isLiked: true,
-  //     name: "name here",
-  //     username: "username",
-  //     profile_pic: "https://gab.com/avatars/original/missing.png",
-  //     time: "1 hr .",
-  //     postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
-  //     Ipsum has been the industry's standard dummy text ever since the 1500s,
-  //     when an unknown printer took a galley of type and scrambled it to make a
-  //     type specimen book. It has survived not only five centuries, but also
-  //     the leap into electronic typesetting, remaining essentially unchanged.
-  //     It was popularised in the 1960s with the release of Letraset sheets
-  //     containing Lorem Ipsum passages, and more recently with desktop
-  //     publishing software like Aldus PageMaker including versions of Lorem
-  //     Ipsum.`,
-  //   },
-  //   {
-  //     isLiked: true,
-  //     name: "name here",
-  //     username: "username",
-  //     profile_pic: "https://gab.com/avatars/original/missing.png",
-  //     time: "1 hr .",
-  //     postBody: ` is simply dummy text of the printing and typesetting industry. Lorem
-  //     Ipsum has been the industry's standard dummy text ever since the 1500s,
-  //     when an unknown printer took a galley of type and scrambled it to make a
-  //     type specimen book. It has survived not only five centuries, but also
-  //     the leap into electronic typesetting, remaining essentially unchanged.
-  //     It was popularised in the 1960s with the release of Letraset sheets
-  //     containing Lorem Ipsum passages, and more recently with desktop
-  //     publishing software like Aldus PageMaker including versions of Lorem
-  //     Ipsum.`,
-  //   },
-  // ];
+
+export const Groups = ({ page }) => {
   const { user, posts, isLoggedIn } = useContext(AuthContext);
   const history = useHistory();
-  console.log(user?.groups);
   return (
     <div>
       <OffsetNav />
       <Container>
         <Left>
-          <LeftPanelHeading>Groups</LeftPanelHeading>
+          <LeftPanelHeading>Explore</LeftPanelHeading>
           <LeftSmallHeading>Menu</LeftSmallHeading>
           <LeftNavDiv>
-            <LeftNavItem>
+            <LeftNavItem isSelected={page === "Home"}>
               <IconDiv>
                 <AiFillHome size="1rem" />
               </IconDiv>
               <IconDivText>Home</IconDivText>
             </LeftNavItem>
 
-            <LeftNavItem>
+            <LeftNavItem isSelected={page === "Notifications"}>
               <IconDiv>
                 <MdNotifications size="1rem" />
               </IconDiv>
               <IconDivText>Notifications</IconDivText>
             </LeftNavItem>
 
-            <LeftNavItem>
+            <LeftNavItem isSelected={page === "Chats"}>
               <IconDiv>
                 <IoChatbubblesSharp size="1rem" />
               </IconDiv>
               <IconDivText>Chats</IconDivText>
             </LeftNavItem>
 
-            <LeftNavItem>
+            <LeftNavItem isSelected={page === "Groups"}>
               <IconDiv>
                 <AiFillHome size="1rem" />
               </IconDiv>
               <IconDivText>Groups</IconDivText>
             </LeftNavItem>
 
-            <LeftNavItem>
+            <LeftNavItem isSelected={page === "Explore"}>
               <IconDiv>
                 <BsGlobe2 size="1rem" />
               </IconDiv>
               <IconDivText>Explore</IconDivText>
             </LeftNavItem>
 
-            <LeftNavItem>
+            <LeftNavItem isSelected={page === "News"}>
               <IconDiv>
                 <TiDocumentText size="1rem" />
               </IconDiv>
@@ -303,13 +117,21 @@ export const Groups = () => {
                 }}
               >
                 <div>Groups you're in</div>
-                <ShowAllDiv>Show all</ShowAllDiv>
+                <ShowAllDiv
+                  onClick={() => {
+                    history.push("/groups/browse/member");
+                  }}
+                >
+                  Show all
+                </ShowAllDiv>
               </div>
             </RightSideCard>
 
             <RightSideCard>
-              {user?.groups.map((group) => (
-                <GroupWrapper>
+              {user?.groups?.map((group) => (
+                <GroupWrapper
+                  onClick={() => history.push(`/groups/${group?._id}`)}
+                >
                   <GroupImgDiv>
                     <GroupImg src={group?.cover_photo} alt="group cover" />
                   </GroupImgDiv>
