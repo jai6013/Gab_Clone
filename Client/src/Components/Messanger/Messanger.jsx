@@ -19,7 +19,7 @@ import { MdNotifications } from "react-icons/md";
 import { IoChatbubblesSharp } from "react-icons/io5";
 import { BsGlobe2 } from "react-icons/bs";
 import { TiDocumentText } from "react-icons/ti";
-import { useHistory,Link } from "react-router";
+import { useHistory, Link } from "react-router";
 
 export default function Messanger() {
   const [conversations, setConversations] = useState([]);
@@ -33,6 +33,7 @@ export default function Messanger() {
   const pic = useRef("");
   const fUser = useRef("");
   const [searchConversation, setSearchConversation] = useState("");
+  const history = useHistory();
   const getConversations = async () => {
     try {
       const res = await axios.get(
@@ -125,16 +126,8 @@ export default function Messanger() {
     getMessages();
   }, [currentChat]);
   useEffect(() => {
-<<<<<<< HEAD
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-=======
-    scrollRef.current?.scrollIntoView({behavior:"smooth"})
-}, [messages])
-
-const history = useHistory();
-
->>>>>>> be0a59f53487cb17b5c8aa7f19158123076b4b6d
   return (
     <>
       <div className="mainContainer">
@@ -142,7 +135,7 @@ const history = useHistory();
           <LeftPanelHeading>Chats</LeftPanelHeading>
           <LeftSmallHeading>Menu</LeftSmallHeading>
           <LeftNavDiv>
-            <LeftNavItem >
+            <LeftNavItem>
               <IconDiv>
                 <AiFillHome size="1rem" />
               </IconDiv>
@@ -167,21 +160,27 @@ const history = useHistory();
               <IconDiv>
                 <AiFillHome size="1rem" />
               </IconDiv>
-              <IconDivText onClick={() => history.push("/groups")}>Groups</IconDivText>
+              <IconDivText onClick={() => history.push("/groups")}>
+                Groups
+              </IconDivText>
             </LeftNavItem>
 
             <LeftNavItem>
               <IconDiv>
                 <BsGlobe2 size="1rem" />
               </IconDiv>
-              <IconDivText onClick={() => history.push("/explore")}>Explore</IconDivText>
+              <IconDivText onClick={() => history.push("/explore")}>
+                Explore
+              </IconDivText>
             </LeftNavItem>
 
             <LeftNavItem>
               <IconDiv>
                 <TiDocumentText size="1rem" />
               </IconDiv>
-              <IconDivText onClick={() => history.push("/news")}>News</IconDivText>
+              <IconDivText onClick={() => history.push("/news")}>
+                News
+              </IconDivText>
             </LeftNavItem>
           </LeftNavDiv>
         </Left>

@@ -102,6 +102,27 @@ router.post(
   }
 );
 
+// To notify
+
+router.patch("/notify", authenticate, async (req, res) => {
+  try {
+    const newNotification = {
+      isNew: true,
+      type: req.body.type,
+    };
+
+    await User.findByIdAndUpdate(req?.user?._id, {
+      $push: { notifications: newNotification },
+    });
+
+    return res.status(201).json({ message: "notification pushed" });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send(err);
+  }
+});
+// --------------
+
 // To get all users
 router.get("/", async (req, res) => {
   try {
