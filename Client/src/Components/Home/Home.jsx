@@ -39,7 +39,7 @@ import {
 } from "./HomeStyles";
 import { Post } from "../Post/Post";
 import { AuthContext } from "../../Contexts/AuthContext";
-import { useHistory } from "react-router";
+import { useHistory,Link } from "react-router";
 import axios from "axios";
 export const Home = ({ page }) => {
   const { user, posts, isLoggedIn, token } = useContext(AuthContext);
@@ -67,49 +67,49 @@ export const Home = ({ page }) => {
       <OffsetNav />
       <Container>
         <Left>
-          <LeftPanelHeading>Explore</LeftPanelHeading>
+          <LeftPanelHeading>Home</LeftPanelHeading>
           <LeftSmallHeading>Menu</LeftSmallHeading>
           <LeftNavDiv>
             <LeftNavItem isSelected={page === "Home"}>
               <IconDiv>
                 <AiFillHome size="1rem" />
               </IconDiv>
-              <IconDivText>Home</IconDivText>
+              <IconDivText onClick={() => history.push("/")}>Home</IconDivText>
             </LeftNavItem>
 
             <LeftNavItem isSelected={page === "Notifications"}>
               <IconDiv>
                 <MdNotifications size="1rem" />
               </IconDiv>
-              <IconDivText>Notifications</IconDivText>
+              <IconDivText >Notifications</IconDivText>
             </LeftNavItem>
 
             <LeftNavItem isSelected={page === "Chats"}>
               <IconDiv>
                 <IoChatbubblesSharp size="1rem" />
               </IconDiv>
-              <IconDivText>Chats</IconDivText>
+              <IconDivText onClick={() => history.push("/messanger")}>Chats</IconDivText>
             </LeftNavItem>
 
             <LeftNavItem isSelected={page === "Groups"}>
               <IconDiv>
                 <AiFillHome size="1rem" />
               </IconDiv>
-              <IconDivText>Groups</IconDivText>
+              <IconDivText onClick={() => history.push("/groups")}>Groups</IconDivText>
             </LeftNavItem>
 
             <LeftNavItem isSelected={page === "Explore"}>
               <IconDiv>
                 <BsGlobe2 size="1rem" />
               </IconDiv>
-              <IconDivText>Explore</IconDivText>
+              <IconDivText onClick={() => history.push("/explore")}>Explore</IconDivText>
             </LeftNavItem>
 
             <LeftNavItem isSelected={page === "News"}>
               <IconDiv>
                 <TiDocumentText size="1rem" />
               </IconDiv>
-              <IconDivText>News</IconDivText>
+              <IconDivText onClick={() => history.push("/news")}>News</IconDivText>
             </LeftNavItem>
           </LeftNavDiv>
         </Left>

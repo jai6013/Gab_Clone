@@ -40,14 +40,14 @@ export const Groups = ({ page }) => {
       <OffsetNav />
       <Container>
         <Left>
-          <LeftPanelHeading>Explore</LeftPanelHeading>
+          <LeftPanelHeading>Groups</LeftPanelHeading>
           <LeftSmallHeading>Menu</LeftSmallHeading>
           <LeftNavDiv>
             <LeftNavItem isSelected={page === "Home"}>
               <IconDiv>
                 <AiFillHome size="1rem" />
               </IconDiv>
-              <IconDivText>Home</IconDivText>
+              <IconDivText onClick={() => history.push("/")}>Home</IconDivText>
             </LeftNavItem>
 
             <LeftNavItem isSelected={page === "Notifications"}>
@@ -61,7 +61,7 @@ export const Groups = ({ page }) => {
               <IconDiv>
                 <IoChatbubblesSharp size="1rem" />
               </IconDiv>
-              <IconDivText>Chats</IconDivText>
+              <IconDivText onClick={() => history.push("/messanger")}>Chats</IconDivText>
             </LeftNavItem>
 
             <LeftNavItem isSelected={page === "Groups"}>
@@ -75,14 +75,14 @@ export const Groups = ({ page }) => {
               <IconDiv>
                 <BsGlobe2 size="1rem" />
               </IconDiv>
-              <IconDivText>Explore</IconDivText>
+              <IconDivText onClick={() => history.push("/explore")}>Explore</IconDivText>
             </LeftNavItem>
 
             <LeftNavItem isSelected={page === "News"}>
               <IconDiv>
                 <TiDocumentText size="1rem" />
               </IconDiv>
-              <IconDivText>News</IconDivText>
+              <IconDivText onClick={() => history.push("/news")}>News</IconDivText>
             </LeftNavItem>
           </LeftNavDiv>
         </Left>

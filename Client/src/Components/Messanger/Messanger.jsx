@@ -19,6 +19,7 @@ import { MdNotifications } from "react-icons/md";
 import { IoChatbubblesSharp } from "react-icons/io5";
 import { BsGlobe2 } from "react-icons/bs";
 import { TiDocumentText } from "react-icons/ti";
+import { useHistory,Link } from "react-router";
 
 export default function Messanger() {
   const [conversations, setConversations] = useState([]);
@@ -123,18 +124,21 @@ export default function Messanger() {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({behavior:"smooth"})
 }, [messages])
+
+const history = useHistory();
+
   return (
     <>
       <div className="mainContainer">
         <Left>
-          <LeftPanelHeading>Home</LeftPanelHeading>
+          <LeftPanelHeading>Chats</LeftPanelHeading>
           <LeftSmallHeading>Menu</LeftSmallHeading>
           <LeftNavDiv>
-            <LeftNavItem>
+            <LeftNavItem >
               <IconDiv>
                 <AiFillHome size="1rem" />
               </IconDiv>
-              <IconDivText>Home</IconDivText>
+              <IconDivText onClick={() => history.push("/")}>Home</IconDivText>
             </LeftNavItem>
 
             <LeftNavItem>
@@ -155,21 +159,21 @@ export default function Messanger() {
               <IconDiv>
                 <AiFillHome size="1rem" />
               </IconDiv>
-              <IconDivText>Groups</IconDivText>
+              <IconDivText onClick={() => history.push("/groups")}>Groups</IconDivText>
             </LeftNavItem>
 
             <LeftNavItem>
               <IconDiv>
                 <BsGlobe2 size="1rem" />
               </IconDiv>
-              <IconDivText>Explore</IconDivText>
+              <IconDivText onClick={() => history.push("/explore")}>Explore</IconDivText>
             </LeftNavItem>
 
             <LeftNavItem>
               <IconDiv>
                 <TiDocumentText size="1rem" />
               </IconDiv>
-              <IconDivText>News</IconDivText>
+              <IconDivText onClick={() => history.push("/news")}>News</IconDivText>
             </LeftNavItem>
           </LeftNavDiv>
         </Left>
