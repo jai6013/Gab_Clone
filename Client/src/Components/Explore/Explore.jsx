@@ -67,7 +67,7 @@ export const Explore = ({ page }) => {
               <IconDiv>
                 <AiFillHome size="1rem" />
               </IconDiv>
-              <IconDivText>Home</IconDivText>
+              <IconDivText onClick={() => history.push("/")}>Home</IconDivText>
             </LeftNavItem>
 
             <LeftNavItem isSelected={page === "Notifications"}>
@@ -81,28 +81,28 @@ export const Explore = ({ page }) => {
               <IconDiv>
                 <IoChatbubblesSharp size="1rem" />
               </IconDiv>
-              <IconDivText>Chats</IconDivText>
+              <IconDivText onClick={() => history.push("/messanger")}>Chats</IconDivText>
             </LeftNavItem>
 
             <LeftNavItem isSelected={page === "Groups"}>
               <IconDiv>
                 <AiFillHome size="1rem" />
               </IconDiv>
-              <IconDivText>Groups</IconDivText>
+              <IconDivText onClick={() => history.push("/groups")}>Groups</IconDivText>
             </LeftNavItem>
 
             <LeftNavItem isSelected={page === "Explore"}>
               <IconDiv>
                 <BsGlobe2 size="1rem" />
               </IconDiv>
-              <IconDivText>Explore</IconDivText>
+              <IconDivText >Explore</IconDivText>
             </LeftNavItem>
 
             <LeftNavItem isSelected={page === "News"}>
               <IconDiv>
                 <TiDocumentText size="1rem" />
               </IconDiv>
-              <IconDivText>News</IconDivText>
+              <IconDivText onClick={() => history.push("/news")}>News</IconDivText>
             </LeftNavItem>
           </LeftNavDiv>
         </Left>
