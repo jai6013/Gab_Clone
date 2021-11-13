@@ -64,7 +64,6 @@ export const Search = ({ q }) => {
   };
 
   const fetchData = async (q) => {
-    alert("claled");
     setData({ ...data, isLoading: true });
     let users;
     await axios

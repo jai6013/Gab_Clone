@@ -11,6 +11,7 @@ import { Signup } from "./Pages/Signup";
 import { ForgotPw } from "./Pages/ForgotPw";
 import { ResendConfirmPage } from "./Components/UserAuthPages/ResendConfirmPage";
 import { SearchResPage } from "./Pages/SearchResPage";
+import { GroupListPage } from "./Pages/GroupListPage";
 
 // import Button from '@mui/material/Button';
 function App() {
@@ -51,6 +52,12 @@ function App() {
       </Route>
       <Route exact path="/search">
         <SearchResPage />
+      </Route>
+      <Route exact path="/groups/browse/featured">
+        <GroupListPage />
+      </Route>
+      <Route exact path="/groups/browse/member">
+        <GroupListPage />
       </Route>
       <Route>
         <ErrorPage />
