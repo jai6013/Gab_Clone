@@ -186,9 +186,7 @@ export const Navbar = ({ page }) => {
               }}
             >
               <NavUserPic src={user?.profile_pic} alt="user" />
-              <div id="popups">
-                <PopUp />
-              </div>
+              <div id="popups">{/* <PopUp /> */}</div>
             </NavMenuRoundedItem>
 
             {/* <UserPop>

@@ -67,7 +67,7 @@ export const AuthContextProvider = ({ children }) => {
     } else {
       fetchPosts();
     }
-  }, [isLoggedIn]);
+  }, []);
 
   return (
     <AuthContext.Provider

@@ -8,8 +8,8 @@ const userController = require("./controllers/user.controller");
 const postController = require("./controllers/post.controller");
 const groupController = require("./controllers/group.controller");
 const commentController = require("./controllers/comment.controller");
-const conversationController = require("./controllers/conversation.controller")
-const messageController = require("./controllers/message.controller")
+const conversationController = require("./controllers/conversation.controller");
+const messageController = require("./controllers/message.controller");
 require("dotenv").config();
 // -----------------------------------------
 
@@ -33,7 +33,7 @@ app.use("/posts", postController);
 app.use("/groups", groupController);
 app.use("/comments", commentController);
 app.use("/conversations", conversationController);
-app.use("/messages", messageController)
+app.use("/messages", messageController);
 // ------------------------------------------
 
 // Start function of Express app

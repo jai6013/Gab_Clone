@@ -5,6 +5,6 @@ import { AuthContext } from "../Contexts/AuthContext";
 
 export const Signup = () => {
   const { isLoggedIn } = useContext(AuthContext);
-  if (isLoggedIn) return <Redirect to="/" />;
+  // if (isLoggedIn) return <Redirect to="/" />;
   return <SignUpPage />;
 };
