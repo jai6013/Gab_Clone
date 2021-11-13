@@ -107,12 +107,8 @@ export default function Messanger() {
     } catch (err) {
       console.log(err);
     }
-    await axios.patch("https://secure-ravine-45527.herokuapp.com/users/notify", {type:"message"},{headers:{Authorization: "Bearer " + token}})
-    .then((res) =>{
-      console.log(res)
-    }).catch((err)=>{
-      console.log(err)
-    })
+   await axios.patch("https://secure-ravine-45527.herokuapp.com/users/notify", {type:"message"},{headers:{Authorization: "Bearer " + token}})
+    
   };
 
   const getMessages = async () => {

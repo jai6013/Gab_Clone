@@ -11,8 +11,10 @@ import { Signup } from "./Pages/Signup";
 import { ForgotPw } from "./Pages/ForgotPw";
 import { ResendConfirmPage } from "./Components/UserAuthPages/ResendConfirmPage";
 import { SearchResPage } from "./Pages/SearchResPage";
-import {MessengerPage} from './Pages/MessengerPage'
-// import Button from '@mui/material/Button';
+import { GroupListPage } from "./Pages/GroupListPage";
+
+import { MessengerPage } from "./Pages/MessengerPage";
+// import Button from '@mui/material/Button';git
 function App() {
   return (
     <Switch>
@@ -54,6 +56,12 @@ function App() {
       </Route>
       <Route exact path="/search">
         <SearchResPage />
+      </Route>
+      <Route exact path="/groups/browse/featured">
+        <GroupListPage />
+      </Route>
+      <Route exact path="/groups/browse/member">
+        <GroupListPage />
       </Route>
       <Route>
         <ErrorPage />

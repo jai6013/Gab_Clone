@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   CommentBar,
   CommentInput,
@@ -31,10 +31,12 @@ import {
   MdIosShare,
   MdVerified,
 } from "react-icons/md";
-
+import { getFeedPosts } from "../../Redux/Posts/actions";
 import { IoMdGlobe } from "react-icons/io";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthContext";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 export const Post = ({
   isLiked = true,
   name = "name here",
@@ -49,8 +51,31 @@ export const Post = ({
   id,
   userid,
 }) => {
-  const { handleLike, isLoggedIn, isLoading } = useContext(AuthContext);
+  const { handleLike, isLoggedIn, isLoading, token } = useContext(AuthContext);
   const history = useHistory();
+  const [comment, setComment] = useState({});
+  const dispatch = useDispatch();
+
+  const handleComment = async (e, id) => {
+    const post_id = id;
+    const content = comment[id];
+    const newComment = { post_id, content };
+
+    await axios
+      .post(
+        "https://secure-ravine-45527.herokuapp.com/comments/newcomment",
+        newComment,
+        {
+          headers: { Authorization: "Bearer " + token },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        const action = getFeedPosts(token);
+        dispatch(action);
+      });
+  };
+
   return (
     <PostDiv>
       <PostTopSection
@@ -174,8 +199,16 @@ export const Post = ({
         <CommentUserPicDiv>
           <CommentUserPic src={profile_pic} />
         </CommentUserPicDiv>
-        <CommentInput placeholder="What's on your mind?" />
-        <CommentPostBtn>Post</CommentPostBtn>
+        <CommentInput
+          onChange={(e) =>
+            setComment({ ...comment, [e.target.id]: e.target.value })
+          }
+          id={id}
+          placeholder="What's on your mind?"
+        />
+        <CommentPostBtn id={id} onClick={(e) => handleComment(e, id)}>
+          Post
+        </CommentPostBtn>
       </CommentBar>
     </PostDiv>
   );
