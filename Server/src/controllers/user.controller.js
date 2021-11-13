@@ -111,7 +111,7 @@ router.patch("/notify", authenticate, async (req, res) => {
       type: req.body.type,
     };
 
-    await User.findByIdAndUpdate(req?.user?._id, {
+    await User.findByIdAndUpdate(req.body.fId, {
       $push: { notifications: newNotification },
     });
 

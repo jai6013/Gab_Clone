@@ -22,7 +22,9 @@ function PopUp({ page }) {
       <div
         className="papiGudiya"
         onClick={() => {
-          localStorage.removeItem();
+          localStorage.removeItem("token");
+          history.push("/login")
+          window.location.reload()
         }}
       >
         <p>LogOut</p>

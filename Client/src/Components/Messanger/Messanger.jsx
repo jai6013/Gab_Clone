@@ -36,6 +36,7 @@ export default function Messanger() {
   const [hide, setHide] = useState(true);
   const [searchedUser, setSearchedUser] = useState([]);
   const [addedConvRes, setAddedConvRes] = useState([])
+  const myFriend = useRef(null)
   console.log(messages)
 
   const handleFollowingSearch = (item) => {
@@ -76,6 +77,7 @@ export default function Messanger() {
   };
   const handleSetPic = async (c) => {
     const friendId = c.members.find((m) => m !== user._id);
+    myFriend.current = friendId;
     try {
       const res = await axios.get(`http://localhost:2222/users/${friendId}`);
       const { username, profile_pic } = res.data;
@@ -107,9 +109,12 @@ export default function Messanger() {
     } catch (err) {
       console.log(err);
     }
-   await axios.patch("https://secure-ravine-45527.herokuapp.com/users/notify", {type:"message"},{headers:{Authorization: "Bearer " + token}})
-    
   };
+  const getNotify = async() =>{
+    await axios.patch("http://localhost:2222/users/notify", {type:"message", fId: myFriend.current},{headers:{Authorization: "Bearer " + token}})
+    .then((res) => console.log(res))
+    .catch((err)=> console.log(err))
+  }
 
   const getMessages = async () => {
     try {
@@ -312,7 +317,12 @@ export default function Messanger() {
                       rows="10"
                       className="chatMessageInput"
                     ></textarea>
-                    <button onClick={handleSubmit} className="chatSubmitButton">
+                    <button onClick={(e) =>{
+
+                      handleSubmit(e)
+                      getNotify()
+                    }
+                    } className="chatSubmitButton">
                       Send
                     </button>
                   </div>
