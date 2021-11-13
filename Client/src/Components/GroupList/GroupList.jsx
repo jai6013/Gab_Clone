@@ -29,8 +29,7 @@ import {
   Right,
   RightSideCard,
   SearchCards,
-  SearchCountDiv,
-  SeeMoreDiv,
+  JoinGrpBtn,
   ShowAllDiv,
 } from "./GroupListStyles";
 import { AiFillHome } from "react-icons/ai";
@@ -42,7 +41,7 @@ import { AuthContext } from "../../Contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 export const GroupList = () => {
-  const { user, isLoggedIn, token } = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext);
   const history = useHistory();
   const [data, setData] = useState({ groups: [], isLoading: true });
 
@@ -58,6 +57,18 @@ export const GroupList = () => {
       });
   };
 
+  const handleJoin = async (group_id) => {
+    const headers = { Authorization: "Bearer " + token };
+    await axios
+      .patch(
+        `https://secure-ravine-45527.herokuapp.com/groups/join/${group_id}`,
+        {},
+        { headers }
+      )
+      .then((res) => {
+        alert(res);
+      });
+  };
   useEffect(() => {
     fetchData();
   }, []);
@@ -118,6 +129,7 @@ export const GroupList = () => {
           <>
             <Middle>
               <PostDiv>
+                Featured
                 {data?.groups?.map((group) => (
                   <>
                     <SearchCards key={group?._id} head={false}>
@@ -131,6 +143,26 @@ export const GroupList = () => {
                             {group?.members?.length} Followers
                           </GroupCountDiv>
                         </GroupTitleDiv>
+                        {console.log(group?.members?.includes(user?._id))}
+                        {group?.members?.includes(user?._id) ? (
+                          <JoinGrpBtn
+                            onClick={() => {
+                              handleJoin(group?._id);
+                            }}
+                            isJoined={true}
+                          >
+                            Member
+                          </JoinGrpBtn>
+                        ) : (
+                          <JoinGrpBtn
+                            onClick={() => {
+                              handleJoin(group?._id);
+                            }}
+                            isJoined={true}
+                          >
+                            Join
+                          </JoinGrpBtn>
+                        )}
                       </GroupTopDiv>
                     </SearchCards>
                   </>

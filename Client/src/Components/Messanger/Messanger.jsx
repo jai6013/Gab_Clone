@@ -27,15 +27,15 @@ export default function Messanger() {
   const [newMessage, setNewMessage] = useState("");
   const socket = useRef();
   const { user } = useContext(AuthContext);
-  const scrollRef = useRef()
+  const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
-  const pic = useRef("")
-  const fUser = useRef("")
-  const [searchConversation,setSearchConversation] = useState("")  
+  const pic = useRef("");
+  const fUser = useRef("");
+  const [searchConversation, setSearchConversation] = useState("");
   const getConversations = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:2222/conversations/${user._id}`
+        `https://secure-ravine-45527.herokuapp.com/conversations/${user._id}`
       );
       console.log(res.data);
       setConversations(res.data);
@@ -43,21 +43,21 @@ export default function Messanger() {
       console.log(err);
     }
   };
-  const handleSetPic = async(c) =>{
-    const friendId = c.members.find((m) => m !== user._id);     
+  const handleSetPic = async (c) => {
+    const friendId = c.members.find((m) => m !== user._id);
     try {
-      const res = await axios.get(`http://localhost:2222/users/${friendId}`);
-      const {username, profile_pic} =  res.data
-      pic.current = profile_pic
-      fUser.current = username
+      const res = await axios.get(
+        `https://secure-ravine-45527.herokuapp.com/conversations/${friendId}`
+      );
+      const { username, profile_pic } = res.data;
+      pic.current = profile_pic;
+      fUser.current = username;
     } catch (err) {
       console.log(err);
-    }      
-    setCurrentChat(c)
-  }
-  const handleNewConversation =() =>{
-    
-  }
+    }
+    setCurrentChat(c);
+  };
+  const handleNewConversation = () => {};
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = {
@@ -72,7 +72,10 @@ export default function Messanger() {
       text: newMessage,
     });
     try {
-      const res = await axios.post("http://localhost:2222/messages", message);
+      const res = await axios.post(
+        "https://secure-ravine-45527.herokuapp.com/conversations/messages",
+        message
+      );
       setMessages([...messages, res.data]);
       setNewMessage("");
     } catch (err) {
@@ -83,7 +86,7 @@ export default function Messanger() {
   const getMessages = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:2222/messages/${currentChat._id}`
+        `https://secure-ravine-45527.herokuapp.com/conversations/${currentChat._id}`
       );
       setMessages(res.data);
     } catch (err) {
@@ -121,8 +124,8 @@ export default function Messanger() {
     getMessages();
   }, [currentChat]);
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({behavior:"smooth"})
-}, [messages])
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
   return (
     <>
       <div className="mainContainer">
@@ -178,13 +181,15 @@ export default function Messanger() {
             <div className="chatMenuWrapper">
               <input
                 value={searchConversation}
-                onChange={(e)=> setSearchConversation(e.target.value)}
+                onChange={(e) => setSearchConversation(e.target.value)}
                 type="text"
                 placeholder="Search for friends"
                 className="chatMenuInp"
               />
             </div>
-            <div className="allChat">{searchConversation.length ? "SEARCH CHATS":"ALL CHATS"}</div>
+            <div className="allChat">
+              {searchConversation.length ? "SEARCH CHATS" : "ALL CHATS"}
+            </div>
             <div className="conversationContainer">
               {conversations.map((c) => (
                 <div onClick={() => handleSetPic(c)}>
@@ -194,23 +199,26 @@ export default function Messanger() {
             </div>
           </div>
           <div className="chatBox">
-      <div className="cUTop">
-      {
-        pic.current !== "" ? <img src={pic.current} alt=""/> : null
-      }
-      <span>{fUser.current}</span>
-    </div>
+            <div className="cUTop">
+              {pic.current !== "" ? <img src={pic.current} alt="" /> : null}
+              <span>{fUser.current}</span>
+            </div>
             <div className="chatBoxWrapper">
               {currentChat !== null ? (
                 <>
-            <div className="chatBoxTop">
+                  <div className="chatBoxTop">
                     {messages &&
                       messages.map((m) => (
                         <div ref={scrollRef}>
-                        <Message senderPic = {user.profile_pic} recieverPic = {pic.current} message={m} own={m.senderId === user._id ? true : false} />
+                          <Message
+                            senderPic={user.profile_pic}
+                            recieverPic={pic.current}
+                            message={m}
+                            own={m.senderId === user._id ? true : false}
+                          />
                         </div>
-                        ))}
-                        </div>
+                      ))}
+                  </div>
                   <div className="chatBoxBottom">
                     <textarea
                       onChange={(e) => setNewMessage(e.target.value)}
@@ -228,17 +236,24 @@ export default function Messanger() {
                 </>
               ) : (
                 <>
-                <div className="headingPara">
-
-                <h3>You don’t have a message selected</h3>
-                <br />
-               <p>Choose one from your existing messages, or start a new one"</p>
-               <br />
-               <button onClick={handleNewConversation} className = "chatSubmitButton" style={{width:"130px"}}>New message</button>
-                </div>
+                  <div className="headingPara">
+                    <h3>You don’t have a message selected</h3>
+                    <br />
+                    <p>
+                      Choose one from your existing messages, or start a new
+                      one"
+                    </p>
+                    <br />
+                    <button
+                      onClick={handleNewConversation}
+                      className="chatSubmitButton"
+                      style={{ width: "130px" }}
+                    >
+                      New message
+                    </button>
+                  </div>
                 </>
               )}
-
             </div>
           </div>
         </div>

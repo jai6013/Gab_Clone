@@ -384,3 +384,24 @@ export const SearchCountDiv = styled.div`
   color: ${(props) => props.theme.colors.text2};
   margin: 0 5px;
 `;
+
+export const JoinGrpBtn = styled.button`
+  width: 80px;
+  height: 30px;
+  border-radius: 15px;
+  border: ${(props) => props.theme.colors.primary} solid 1px;
+  font-size: 12px;
+  background: ${(props) => props.theme.colors.background2};
+  color: ${(props) => props.theme.colors.primary};
+
+  ${(props) =>
+    props.isJoined
+      ? `background:${props.theme.colors.primary};color: #ffffff;`
+      : `background:${props.theme.colors.background2};color: ${props.theme.colors.primary};`}
+
+  &:hover {
+    cursor: pointer;
+    background: ${(props) => props.theme.colors.primary};
+    color: #ffffff;
+  }
+`;
