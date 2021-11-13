@@ -51,7 +51,7 @@ export const SearchInp = styled.input`
 
 export const SearchIcon = styled.div`
   height: 80%;
-  margin: 9px 9px 9px;0
+  margin: 9px 9px 9px;
   
   padding-right: 10px;
 
