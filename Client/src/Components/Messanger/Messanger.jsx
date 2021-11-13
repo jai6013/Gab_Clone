@@ -19,6 +19,7 @@ import { MdNotifications } from "react-icons/md";
 import { IoChatbubblesSharp } from "react-icons/io5";
 import { BsGlobe2 } from "react-icons/bs";
 import { TiDocumentText } from "react-icons/ti";
+import styled from "styled-components";
 
 export default function Messanger() {
   const [conversations, setConversations] = useState([]);
@@ -26,12 +27,42 @@ export default function Messanger() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const socket = useRef();
-  const { user } = useContext(AuthContext);
-  const scrollRef = useRef()
+  const { user,token } = useContext(AuthContext);
+  const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
-  const pic = useRef("")
-  const fUser = useRef("")
-  const [searchConversation,setSearchConversation] = useState("")  
+  const pic = useRef("");
+  const fUser = useRef("");
+  const [searchConversation, setSearchConversation] = useState("");
+  const [hide, setHide] = useState(true);
+  const [searchedUser, setSearchedUser] = useState([]);
+  const [addedConvRes, setAddedConvRes] = useState([])
+  console.log(messages)
+
+  const handleFollowingSearch = (item) => {
+    const followingData = user.following;
+    for (var i = 0; i < followingData.length; i++) {
+      if (followingData[i].username === item.toLowerCase() || followingData[i].username === item.toUpperCase()) {
+        setSearchedUser([...searchedUser, followingData[i]])
+        console.log(searchedUser)
+      }
+    }
+  };
+ 
+   const handleAddUsersConversation = (m) =>{
+    setAddedConvRes([...addedConvRes,m])
+  }
+  const handleAddConv = async()=>{
+    setHide(true)
+    for(var i = 0; i<addedConvRes?.length; i++){
+      console.log(addedConvRes[i]._id)
+      let newConv = {
+        senderId:user._id,
+        receiverId:addedConvRes[i]._id
+      }
+      const res = await axios.post("http://localhost:2222/conversations", newConv)
+      setConversations([...conversations,res.data])
+    }
+  }
   const getConversations = async () => {
     try {
       const res = await axios.get(
@@ -43,21 +74,19 @@ export default function Messanger() {
       console.log(err);
     }
   };
-  const handleSetPic = async(c) =>{
-    const friendId = c.members.find((m) => m !== user._id);     
+  const handleSetPic = async (c) => {
+    const friendId = c.members.find((m) => m !== user._id);
     try {
       const res = await axios.get(`http://localhost:2222/users/${friendId}`);
-      const {username, profile_pic} =  res.data
-      pic.current = profile_pic
-      fUser.current = username
+      const { username, profile_pic } = res.data;
+      pic.current = profile_pic;
+      fUser.current = username;
     } catch (err) {
       console.log(err);
-    }      
-    setCurrentChat(c)
-  }
-  const handleNewConversation =() =>{
-    
-  }
+    }
+    setCurrentChat(c);
+  };
+  // const handleNewConversation = () => {};
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = {
@@ -78,6 +107,12 @@ export default function Messanger() {
     } catch (err) {
       console.log(err);
     }
+    await axios.patch("https://secure-ravine-45527.herokuapp.com/users/notify", {type:"message"},{headers:{Authorization: "Bearer " + token}})
+    .then((res) =>{
+      console.log(res)
+    }).catch((err)=>{
+      console.log(err)
+    })
   };
 
   const getMessages = async () => {
@@ -90,6 +125,16 @@ export default function Messanger() {
       console.log(err);
     }
   };
+  const Modal = styled.div`
+    visibility: ${hide ? "hidden" : "visible"};
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 2000;
+    background-color: rgba(128, 128, 128, 0.555);
+  `;
 
   useEffect(() => {
     socket.current = io("ws://localhost:2512");
@@ -121,10 +166,55 @@ export default function Messanger() {
     getMessages();
   }, [currentChat]);
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({behavior:"smooth"})
-}, [messages])
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   return (
     <>
+      <Modal>
+        <div className="modalBox">
+          <div className="modalTopTop">
+            <div className="modalTop">New Message</div>
+            <img
+              onClick={() => setHide(!hide)}
+              src="https://cdn-icons.flaticon.com/png/512/2723/premium/2723639.png?token=exp=1636786544~hmac=32286f631f75b972489a96fd65fa0b17"
+              alt=""
+              className="crossButton"
+            />
+          </div>
+          <div className="overFlow">
+            <div className="inputBoxSearch">
+              <input
+                type="text"
+                placeholder="Search for a User"
+                className="modalInput"
+                onChange={(e) => handleFollowingSearch(e.target.value)}
+              />
+            </div>
+            {searchedUser && searchedUser.map((m) =>
+              <>
+                <div className="modalSearchedResults">
+
+                <div className="imgUserAndIcon">
+                  {m.profile_pic !== "" ? (
+                    <img src={m.profile_pic} alt="" />
+                    ) : (
+                      <img
+                      src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                      alt="no"
+                      />
+                    )}
+                  <span>{m.username}</span>
+                </div>
+                <img onClick={()=> handleAddUsersConversation(m)} src="https://cdn-icons.flaticon.com/png/512/3303/premium/3303893.png?token=exp=1636791254~hmac=154dfc953d7cb0917721557491c35bf5" alt="no" className="addIcon" />
+                </div>
+              </>
+                    )   
+              }
+            <button className="modalButton" onClick={handleAddConv} >Next</button>
+          </div>
+        </div>
+      </Modal>
       <div className="mainContainer">
         <Left>
           <LeftPanelHeading>Home</LeftPanelHeading>
@@ -178,13 +268,15 @@ export default function Messanger() {
             <div className="chatMenuWrapper">
               <input
                 value={searchConversation}
-                onChange={(e)=> setSearchConversation(e.target.value)}
+                onChange={(e) => setSearchConversation(e.target.value)}
                 type="text"
                 placeholder="Search for friends"
                 className="chatMenuInp"
               />
             </div>
-            <div className="allChat">{searchConversation.length ? "SEARCH CHATS":"ALL CHATS"}</div>
+            <div className="allChat">
+              {searchConversation.length ? "SEARCH CHATS" : "ALL CHATS"}
+            </div>
             <div className="conversationContainer">
               {conversations.map((c) => (
                 <div onClick={() => handleSetPic(c)}>
@@ -194,23 +286,26 @@ export default function Messanger() {
             </div>
           </div>
           <div className="chatBox">
-      <div className="cUTop">
-      {
-        pic.current !== "" ? <img src={pic.current} alt=""/> : null
-      }
-      <span>{fUser.current}</span>
-    </div>
+            <div className="cUTop">
+              {pic.current !== "" ? <img src={pic.current} alt="" /> : null}
+              <span>{fUser.current}</span>
+            </div>
             <div className="chatBoxWrapper">
               {currentChat !== null ? (
                 <>
-            <div className="chatBoxTop">
+                  <div className="chatBoxTop">
                     {messages &&
                       messages.map((m) => (
                         <div ref={scrollRef}>
-                        <Message senderPic = {user.profile_pic} recieverPic = {pic.current} message={m} own={m.senderId === user._id ? true : false} />
+                          <Message
+                            senderPic={user.profile_pic}
+                            recieverPic={pic.current}
+                            message={m}
+                            own={m.senderId === user._id ? true : false}
+                          />
                         </div>
-                        ))}
-                        </div>
+                      ))}
+                  </div>
                   <div className="chatBoxBottom">
                     <textarea
                       onChange={(e) => setNewMessage(e.target.value)}
@@ -228,17 +323,24 @@ export default function Messanger() {
                 </>
               ) : (
                 <>
-                <div className="headingPara">
-
-                <h3>You don’t have a message selected</h3>
-                <br />
-               <p>Choose one from your existing messages, or start a new one"</p>
-               <br />
-               <button onClick={handleNewConversation} className = "chatSubmitButton" style={{width:"130px"}}>New message</button>
-                </div>
+                  <div className="headingPara">
+                    <h3>You don’t have a message selected</h3>
+                    <br />
+                    <p>
+                      Choose one from your existing messages, or start a new
+                      one"
+                    </p>
+                    <br />
+                    <button
+                      onClick={() => setHide(!hide)}
+                      className="chatSubmitButton"
+                      style={{ width: "130px" }}
+                    >
+                      New message
+                    </button>
+                  </div>
                 </>
               )}
-
             </div>
           </div>
         </div>
