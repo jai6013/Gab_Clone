@@ -37,7 +37,7 @@ export const loginUser = (payload) => (dispatch) => {
   const reqAction = addLoginRequest();
   dispatch(reqAction);
   axios
-    .post("https://secure-ravine-45527.herokuapp.com/users/signin", {
+    .post("http://localhost:2222/users/signin", {
       email,
       password,
     })
@@ -58,7 +58,7 @@ export const loginUser = (payload) => (dispatch) => {
 
 export const getLoggedinUser = (payload) => (dispatch) => {
   axios
-    .get("https://secure-ravine-45527.herokuapp.com/users/me", {
+    .get("http://localhost:2222/users/me", {
       headers: { Authorization: "Bearer " + payload },
     })
     .then((res) => {

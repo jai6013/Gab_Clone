@@ -118,7 +118,7 @@ router.patch("/:id/like", authenticate, async (req, res) => {
       res.status(200).json({ message: "like removed" });
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return res.status(500).send(err);
   }
 });
@@ -136,7 +136,7 @@ router.get("/:id", authenticate, async (req, res) => {
 
     return res.status(200).json(post);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return res.status(500).send(err);
   }
 });
@@ -159,23 +159,24 @@ router.get("/user/timeline", authenticate, async (req, res) => {
 
     return res.status(200).json(posts);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return res.status(500).send(err);
   }
 });
 // -------------------------------------------------------------------------
 // get feed posts
 router.get("/user/feed", authenticate, async (req, res) => {
+  console.log("feed");
   try {
     const { following } = await User.findById(req?.user?._id).lean().exec();
-    console.log(req.user);
+    // console.log(req);
     const posts = await Promise.all(
-      following.map((id) => Post.find({ user_id: id }).populate("user_id"))
+      following?.map((id) => Post.find({ user_id: id }).populate("user_id"))
     );
     const merged = [].concat.apply([], posts);
     return res.status(200).json(merged);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return res.status(500).send(err);
   }
 });

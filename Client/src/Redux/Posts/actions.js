@@ -55,7 +55,7 @@ export const getFeedPosts = (token) => (dispatch) => {
   const getPostAct = addGetPostsRequest();
   dispatch(getPostAct);
   axios
-    .get("https://secure-ravine-45527.herokuapp.com/posts/user/feed", {
+    .get("http://localhost:2222/posts/user/feed", {
       headers: {
         Authorization: "Bearer " + token,
       },
@@ -74,7 +74,7 @@ export const getHotPosts = () => (dispatch) => {
   const getPostAct = addGetPostsRequest();
   dispatch(getPostAct);
   axios
-    .get("https://secure-ravine-45527.herokuapp.com/posts/top20")
+    .get("http://localhost:2222/posts/top20")
     .then((res) => {
       const successAction = addGetPostsSuccess(res.data.posts);
       dispatch(successAction);
@@ -88,7 +88,7 @@ export const getHotPosts = () => (dispatch) => {
 export const createAPost = (payload) => (dispatch) => {
   const { token, post } = payload;
   axios
-    .post("https://secure-ravine-45527.herokuapp.com/posts", post, {
+    .post("http://localhost:2222/posts", post, {
       headers: {
         Authorization: "Bearer " + token,
       },
@@ -103,7 +103,7 @@ export const createAPost = (payload) => (dispatch) => {
 
 export const getTimeline = (payload) => (dispatch) => {
   axios
-    .get("https://secure-ravine-45527.herokuapp.com/posts/user/timeline")
+    .get("http://localhost:2222/posts/user/timeline")
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
 };

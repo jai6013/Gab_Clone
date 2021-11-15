@@ -33,7 +33,8 @@ import axios from "axios";
 export const Navbar = ({ page }) => {
   const { handleTheme, theme } = useContext(ThemeContext);
   const [q, setQ] = useState("");
-  const [res, setRes] = useState();
+  const [popup, setPopup] = useState(false); //
+  const [show, setShow] = useState(false);
   const { isLoggedIn, handleLogin, handleSignup, user } =
     useContext(AuthContext);
   const history = useHistory();
@@ -50,7 +51,11 @@ export const Navbar = ({ page }) => {
   const handleSearch = async () => {
     history.push(`/search?q=${q}`);
   };
-
+  const handleSetNot = async () => {
+    await axios.patch("http://localhost:2222/users/" + user._id, {
+      notifications: [],
+    });
+  };
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
   // _______________________________________________________
@@ -142,7 +147,7 @@ export const Navbar = ({ page }) => {
               <VerticalSeparater />
             </NavMenuItemText>
 
-            <NavMenuRoundedItem>
+            <NavMenuRoundedItem onClick={handleSetNot}>
               <NavRoundedDiv>
                 <MdNotifications size="1.5rem" color="#999999" />
               </NavRoundedDiv>
@@ -194,13 +199,17 @@ export const Navbar = ({ page }) => {
             <>
               <NavLogin
                 isLoggedIn={isLoggedIn}
-                onClick={history.push("/login")}
+                onClick={() => {
+                  history.push("/login");
+                }}
               >
                 Login
               </NavLogin>
               <NavSignup
                 isLoggedIn={isLoggedIn}
-                onClick={history.push("/signup")}
+                onClick={() => {
+                  history.push("/signup");
+                }}
               >
                 Signup
               </NavSignup>
