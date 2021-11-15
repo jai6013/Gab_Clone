@@ -28,7 +28,7 @@ function App() {
         <MyPage />
       </Route>
       <Route exact path="/news">
-        <NewsPage />
+        <NewsPage /> 
       </Route>
       <Route exact path="/explore">
         <ExplorePage />

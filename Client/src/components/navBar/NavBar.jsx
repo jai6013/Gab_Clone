@@ -26,21 +26,17 @@ import {
   NavSignup,
   UserPop,
 } from "./NavbarStyles";
-import { useHistory } from "react-router";
+import { Router, useHistory } from "react-router";
 import { Popover } from "@mui/material";
-import { useLocation } from "react-router-dom";
-import PopUp from "../PopUp";
 import axios from "axios";
 
 export const Navbar = ({ page }) => {
   const { handleTheme, theme } = useContext(ThemeContext);
   const [q, setQ] = useState("");
-  const [popup, setPopup] = useState(false); //
-  const [show,setShow] = useState(false)
+  const [res, setRes] = useState();
   const { isLoggedIn, handleLogin, handleSignup, user } =
     useContext(AuthContext);
   const history = useHistory();
-  const location = useLocation();
   // Material UI POPUP
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (event) => {
@@ -52,12 +48,9 @@ export const Navbar = ({ page }) => {
   };
 
   const handleSearch = async () => {
-    if (location.pathname !== "/search") history.push(`/search?q=${q}`);
-    else window.location.reload();
+    history.push(`/search?q=${q}`);
   };
-  const handleSetNot = async() =>{
-    await axios.patch("http://localhost:2222/users/"+ user._id, {notifications:[]})
-  }
+
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
   // _______________________________________________________
@@ -149,19 +142,15 @@ export const Navbar = ({ page }) => {
               <VerticalSeparater />
             </NavMenuItemText>
 
-            <NavMenuRoundedItem onClick={handleSetNot}>
-              <NavRoundedDiv >
+            <NavMenuRoundedItem>
+              <NavRoundedDiv>
                 <MdNotifications size="1.5rem" color="#999999" />
               </NavRoundedDiv>
             </NavMenuRoundedItem>
 
             <NavMenuRoundedItem>
               <NavRoundedDiv>
-                <IoChatbubblesSharp
-                  onClick={() => history.push("/messanger")}
-                  size="1.5rem"
-                  color="#999999"
-                />
+                <IoChatbubblesSharp size="1.5rem" color="#999999" />
               </NavRoundedDiv>
             </NavMenuRoundedItem>
 
@@ -175,31 +164,14 @@ export const Navbar = ({ page }) => {
               <VerticalSeparater />
             </NavMenuItemText>
 
-            {/* <NavMenuRoundedItem
-              onClick={(e) => {
-                handleClick(e);
-              }}
-            >
-              <NavUserPic src={user?.profile_pic} alt="user" />
-            </NavMenuRoundedItem> */}
             <NavMenuRoundedItem
               onClick={(e) => {
                 handleClick(e);
-                setPopup(!popup);
               }}
             >
               <NavUserPic src={user?.profile_pic} alt="user" />
-              {/* {
-                show ?
-
-                <div id="popups">
-                 <PopUp /> 
-              </div>:
-              null
-              } */}
             </NavMenuRoundedItem>
-
-            {/* <UserPop>
+            <UserPop>
               <Popover
                 id={id}
                 open={open}
@@ -216,7 +188,7 @@ export const Navbar = ({ page }) => {
               >
                 <p>hello</p>
               </Popover>
-            </UserPop> */}
+            </UserPop>
           </NavMenuContainer>
           {!isLoggedIn && (
             <>
