@@ -54,7 +54,7 @@ router.post(
       const token = newToken(user);
       return res.status(201).json({ token, user });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       return res.status(400).send(err);
     }
   }
@@ -76,7 +76,7 @@ router.post(
       if (errors.length > 0) return res.status(403).json({ errors });
 
       let user = await User.findOne({ email: req.body.email }).exec();
-      console.log(user);
+      // console.log(user);
       if (!user)
         return res
           .status(204)
@@ -86,17 +86,12 @@ router.post(
         return res.status(403).json({ message: "Invalid Password" });
       user = await User.findOne({ email: req.body.email })
         .select("-password")
-        ?.populate("posts")
-        ?.populate("followers")
-        ?.populate("following")
-        ?.populate("groups")
         .lean()
         .exec();
       const token = newToken(user);
-
       return res.status(200).json({ token, user });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       return res.status(400).send(err);
     }
   }
@@ -118,7 +113,7 @@ router.patch("/notify", authenticate, async (req, res) => {
 
     return res.status(201).json({ message: "notification pushed" });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return res.status(500).send(err);
   }
 });
@@ -142,7 +137,7 @@ router.get("/search", async (req, res) => {
     const users = await User.find({ display_name: query });
     res.status(200).json({ users });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return res.status(500).send(err);
   }
 });
@@ -153,12 +148,13 @@ router.get("/me", authenticate, async (req, res) => {
   try {
     const user = await User.findById(req?.user?._id)
       .select("-password")
-      ?.populate("posts")
-      ?.populate("followers")
-      ?.populate("following")
-      ?.populate("groups")
+      .populate("following")
+      .populate("followers")
+      .populate("posts")
+      .populate("groups")
       .lean()
       .exec();
+
     return res.status(200).json({ user });
   } catch (err) {
     return res.status(500).send(err);

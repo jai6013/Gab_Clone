@@ -28,7 +28,7 @@ export const LoginPage = () => {
   const [password, setPassword] = useState("");
   const { handleLogin, isLoggedIn } = useContext(AuthContext);
 
-  // if (isLoggedIn) return <Redirect to="/" />;
+  if (isLoggedIn) return <Redirect to="/" />;
 
   return (
     <div style={{ background: "#E5E8E8" }}>
@@ -73,7 +73,7 @@ export const LoginPage = () => {
             <LinkWrapper>
               <Box>
                 <BottomLinks>
-                  <Link to="/sign_up">Signup</Link>
+                  <Link to="/signup">Signup</Link>
                 </BottomLinks>
                 <BottomLinks>
                   <Link to="/reset_password">Forgot your password?</Link>

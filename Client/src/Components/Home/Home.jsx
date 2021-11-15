@@ -4,6 +4,7 @@ import { MdNotifications } from "react-icons/md";
 import { IoChatbubblesSharp } from "react-icons/io5";
 import { BsGlobe2 } from "react-icons/bs";
 import { TiDocumentText } from "react-icons/ti";
+import { getLoggedinUser } from "../../Redux/Auth/actions";
 import {
   Container,
   CoverCardDiv,
@@ -39,12 +40,14 @@ import {
 } from "./HomeStyles";
 import { Post } from "../Post/Post";
 import { AuthContext } from "../../Contexts/AuthContext";
-import { useHistory,Link } from "react-router";
+import { useHistory, Link } from "react-router";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 export const Home = ({ page }) => {
   const { user, posts, isLoggedIn, token } = useContext(AuthContext);
   const history = useHistory();
   const [post, setPost] = useState("");
+  const dispatch = useDispatch();
   const handlePost = async () => {
     await axios
       .post(
@@ -60,6 +63,8 @@ export const Home = ({ page }) => {
       )
       .then((res) => {
         console.log(res);
+        const action = getLoggedinUser(token);
+        dispatch(action);
       });
   };
   return (
@@ -81,35 +86,43 @@ export const Home = ({ page }) => {
               <IconDiv>
                 <MdNotifications size="1rem" />
               </IconDiv>
-              <IconDivText >Notifications</IconDivText>
+              <IconDivText>Notifications</IconDivText>
             </LeftNavItem>
 
             <LeftNavItem isSelected={page === "Chats"}>
               <IconDiv>
                 <IoChatbubblesSharp size="1rem" />
               </IconDiv>
-              <IconDivText onClick={() => history.push("/messanger")}>Chats</IconDivText>
+              <IconDivText onClick={() => history.push("/messanger")}>
+                Chats
+              </IconDivText>
             </LeftNavItem>
 
             <LeftNavItem isSelected={page === "Groups"}>
               <IconDiv>
                 <AiFillHome size="1rem" />
               </IconDiv>
-              <IconDivText onClick={() => history.push("/groups")}>Groups</IconDivText>
+              <IconDivText onClick={() => history.push("/groups")}>
+                Groups
+              </IconDivText>
             </LeftNavItem>
 
             <LeftNavItem isSelected={page === "Explore"}>
               <IconDiv>
                 <BsGlobe2 size="1rem" />
               </IconDiv>
-              <IconDivText onClick={() => history.push("/explore")}>Explore</IconDivText>
+              <IconDivText onClick={() => history.push("/explore")}>
+                Explore
+              </IconDivText>
             </LeftNavItem>
 
             <LeftNavItem isSelected={page === "News"}>
               <IconDiv>
                 <TiDocumentText size="1rem" />
               </IconDiv>
-              <IconDivText onClick={() => history.push("/news")}>News</IconDivText>
+              <IconDivText onClick={() => history.push("/news")}>
+                News
+              </IconDivText>
             </LeftNavItem>
           </LeftNavDiv>
         </Left>

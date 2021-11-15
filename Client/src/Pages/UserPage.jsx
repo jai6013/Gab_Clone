@@ -11,12 +11,10 @@ export const UserPage = () => {
   const [user, setUser] = useState();
 
   const fetchData = async () => {
-    await axios
-      .get(`https://secure-ravine-45527.herokuapp.com/users/${userid}`)
-      .then((res) => {
-        console.log(res.data);
-        setUser(res.data);
-      });
+    await axios.get(`http://localhost:2222/${userid}`).then((res) => {
+      console.log(res.data);
+      setUser(res.data);
+    });
   };
 
   useEffect(() => {

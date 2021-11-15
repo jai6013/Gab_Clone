@@ -49,7 +49,7 @@ export const SignUpPage = () => {
 
   const { handleLogin, isLoggedIn } = useContext(AuthContext);
 
-  // if (isLoggedIn) return <Redirect to="/" />;
+  if (isLoggedIn) return <Redirect to="/" />;
 
   return (
     <Container>
