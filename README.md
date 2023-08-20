@@ -1,4 +1,4 @@
-# Gab Clone
+![explorePage](https://github.com/jai6013/Gab_Clone/assets/86410092/d0b4174a-e40f-4961-b8ac-bea47f426a7e)# Gab Clone
 we have cloned the Gab social network website  https://gab.com/ . We have used MERN Stack for this project.
 ---
 ### Tech stacks used :
@@ -28,27 +28,26 @@ To create this clone following Tech stack is used by contributors.
 
 <hr/>
 
-
 #### Login Page:
-<img width="600px" src="https://i.im.ge/2021/11/13/oYfZaX.png"/>
+![loginPage](https://github.com/jai6013/Gab_Clone/assets/86410092/d1564f05-b939-4fcd-a6cf-25439b858257)
 
 #### Sign up Page:
-<img width="600px" src="https://i.im.ge/2021/11/13/oYfKy8.png"/>
+![SignUpPage](https://github.com/jai6013/Gab_Clone/assets/86410092/f5b48565-87fe-4fe3-a5c1-3741eddf2912)
 
 #### Landing Page:
-<img width="600px" src="https://i.im.ge/2021/11/13/oYfRB9.png"/>
+![landingPage](https://github.com/jai6013/Gab_Clone/assets/86410092/57de227d-3ca0-437b-8561-890a50b1f536)
 
 #### Home Page:
-<img width="600px" src="https://i.im.ge/2021/11/13/oYfk1M.png"/>
+![HomePage](https://github.com/jai6013/Gab_Clone/assets/86410092/2076bb83-2684-417d-8482-4bdd70e806fe)
 
 #### Explore Page:
-<img width="600px" src="https://i.im.ge/2021/11/13/oYfzmY.png"/>
+![explorePage](https://github.com/jai6013/Gab_Clone/assets/86410092/edc1389c-1b7f-4d0a-91de-1810643328d0)
 
 #### Chat Page:
-<img width="600px" src="https://i.im.ge/2021/11/13/oYfHZD.png"/>
+![chatPage](https://github.com/jai6013/Gab_Clone/assets/86410092/0be699fd-5758-43c9-94f7-3795b28dcda1)
 
 #### Profile Page:
-<img width="600px" src="https://i.im.ge/2021/11/13/oYfGaP.png"/>
+![profilePage](https://github.com/jai6013/Gab_Clone/assets/86410092/6f06dcd6-f876-4823-89f2-9b5a7b950cc8)
 
 <hr/>
 
